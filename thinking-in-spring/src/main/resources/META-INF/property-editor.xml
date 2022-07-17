@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+        https://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/util
+        https://www.springframework.org/schema/util/spring-util.xsd">
+	<bean class="cn.qingweico.conversion.CustomizedPropertyEditorRegistrar"/>
+	<!-- id 必须为 conversionService -->
+	<bean id="conversionService" class="org.springframework.context.support.ConversionServiceFactoryBean">
+		<property name="converters">
+			<util:set value-type="cn.qingweico.conversion.StringToPropertiesPropertyEditor"/>
+		</property>
+	</bean>
+	<util:properties id="addressProperties">
+		<prop key="home">street001</prop>
+		<prop key="company">street002</prop>
+	</util:properties>
+	<bean id="user" class="cn.qingweico.ioc.domain.User">
+		<!-- String >> Properties-->
+		<property name="address" value="home=street001;company=street002"/>
+		<!-- Properties >> String-->
+		<property name="addressToText" ref="addressProperties"/>
+	</bean>
+</beans>

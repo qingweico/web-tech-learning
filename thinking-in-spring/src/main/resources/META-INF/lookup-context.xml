@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+        https://www.springframework.org/schema/beans/spring-beans.xsd">
+	<bean id="user" class="cn.qingweico.ioc.domain.User">
+		<property name="id" value="1"/>
+		<property name="name" value="li"/>
+		<property name="city" value="HANGZHOU"/>
+		<property name="configFileLocation" value="META-INF/application.properties"/>
+		<property name="workCities" value="SHANGHAI, BEIJING"/>
+		<property name="lifeCities">
+			<list>
+				<value>SHANGHAI</value>
+				<value>HANGZHOU</value>
+			</list>
+		</property>
+	</bean>
+	<bean id="superUser" class="cn.qingweico.ioc.domain.SuperUser" primary="true" parent="user">
+		<property name="phone" value="010-2589-2134"/>
+	</bean>
+	<bean id="objectFactory" class="org.springframework.beans.factory.config.ObjectFactoryCreatingFactoryBean">
+		<property name="targetBeanName" value="user"/>
+	</bean>
+	<bean id="userHolder" class="cn.qingweico.ioc.injection.UserHolder" autowire="constructor"
+	      init-method="init" destroy-method="doDestroy">
+		<property name="desc" value="this is V0.0 desc"/>
+	</bean>
+</beans>
