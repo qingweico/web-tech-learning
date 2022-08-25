@@ -18,7 +18,7 @@ public class BeanConfigurationMetadata {
         BeanDefinitionBuilder beanDefinitionBuilder = BeanDefinitionBuilder.genericBeanDefinition(User.class);
         beanDefinitionBuilder.addPropertyValue("name", "li");
         AbstractBeanDefinition beanDefinition = beanDefinitionBuilder.getBeanDefinition();
-        // 附加属性 不影响Bean的 populate; Initialize
+        // 附加属性不影响Bean的 populate; Initialize
         beanDefinition.setAttribute("name", "attr");
         // 说明当前 Bean 来自于哪里(辅助作用)
         beanDefinition.setSource(BeanConfigurationMetadata.class);

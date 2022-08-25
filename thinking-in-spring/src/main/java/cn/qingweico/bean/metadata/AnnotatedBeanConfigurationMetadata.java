@@ -21,6 +21,7 @@ import java.util.Map;
 public class AnnotatedBeanConfigurationMetadata {
 
     // user.name 在 Java Properties 存在, 会覆盖掉配置文件中的配置
+
     @Bean
     public User externalUser(@Value("${user.id}") Long id,
                              @Value("${user.name}") String name,
