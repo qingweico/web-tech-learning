@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+        https://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/aop
+		https://www.springframework.org/schema/aop/spring-aop.xsd">
+	<aop:aspectj-autoproxy/>
+	<bean id="xmlAspectJPointcut" class="cn.qingweico.aop.pointcut.XmlAspectjPointcut"/>
+	<aop:config>
+		<aop:aspect id="xmlAopConfig" ref="xmlAspectJPointcut">
+			<aop:pointcut id="anyPublicMethod" expression="execution(public * *(..))"/>
+			<aop:before method="before" pointcut-ref="anyPublicMethod"/>
+		</aop:aspect>
+	</aop:config>
+	<bean id="echoService" class="cn.qingweico.aop.service.DefaultEchoService"/>
+	<bean id="echoServiceProxyFactoryBean" class="org.springframework.aop.framework.ProxyFactoryBean">
+		<property name="targetName" value="echoService"/>
+		<property name="interceptorNames" value="echoServiceMethodInterceptor"/>
+	</bean>
+	<!-- 配置拦截器 -->
+	<bean id="echoServiceMethodInterceptor" class="cn.qingweico.aop.interceptor.EchoServiceMethodInterceptor"/>
+</beans>

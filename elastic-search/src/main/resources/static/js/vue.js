@@ -6345,7 +6345,7 @@
 
     var hydrationBailed = false;
     // list of modules that can skip create hook during hydration because they
-    // are already rendered on the client or has no need for initialization
+    // are already rendered on the client or has no need for
     // Note: style is excluded because it relies on initial clone for future
     // deep updates (#7063).
     var isRenderedModule = makeMap('attrs,class,staticClass,staticStyle,key');

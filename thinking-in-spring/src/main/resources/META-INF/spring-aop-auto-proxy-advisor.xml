@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+        https://www.springframework.org/schema/beans/spring-beans.xsd">
+	<bean id="defaultEchoService" class="cn.qingweico.aop.service.DefaultEchoService"/>
+	<!-- 配置拦截器 -->
+	<!--Advice Bean 或者是 MethodInterceptor Bean	-->
+	<bean id="echoServiceMethodInterceptor" class="cn.qingweico.aop.interceptor.EchoServiceMethodInterceptor"/>
+
+
+	<!-- AutoProxy Bean	-->
+	<bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator"/>
+
+	<!-- Pointcut Bean -->
+	<bean id="echoServicePointcut" class="cn.qingweico.aop.pointcut.EchoServicePointcut">
+		<constructor-arg index="0" value="echo"/>
+		<constructor-arg index="1" value="cn.qingweico.aop.service.EchoService"/>
+	</bean>
+
+	<!-- PointcutAdvisor Bean -->
+	<bean class="org.springframework.aop.support.DefaultPointcutAdvisor">
+		<constructor-arg index="0" ref="echoServicePointcut"/>
+		<constructor-arg index="1" ref="echoServiceMethodInterceptor"/>
+	</bean>
+</beans>

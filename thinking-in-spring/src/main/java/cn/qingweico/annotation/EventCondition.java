@@ -1,0 +1,18 @@
+package cn.qingweico.annotation;
+
+import org.springframework.context.annotation.Condition;
+import org.springframework.context.annotation.ConditionContext;
+import org.springframework.core.env.Environment;
+import org.springframework.core.type.AnnotatedTypeMetadata;
+
+/**
+ * @author zqw
+ * @date 2022/9/24
+ */
+public class EventCondition implements Condition {
+    @Override
+    public boolean matches(ConditionContext context, AnnotatedTypeMetadata metadata) {
+        Environment environment = context.getEnvironment();
+        return environment.acceptsProfiles("even");
+    }
+}

@@ -22,7 +22,7 @@ public class CustomizedPropertyEditorExample {
         // setPropertyValues(PropertyValues) -> TypeConverter#convertIfNecessary
         // TypeConverterDelegate#convertIfNecessary -> PropertyEditor or ConversionService
 
-        // AbstractApplicationContext#finishBeanFactoryInitialization
+        // AbstractApplicationContext#finishBeanFactory
         // DefaultListableBeanFactory#doCreateBean
         // AbstractAutowireCapableBeanFactory#createBeanInstance
         // AbstractAutowireCapableBeanFactory#instantiateBean

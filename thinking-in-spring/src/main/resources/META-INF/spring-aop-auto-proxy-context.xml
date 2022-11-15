@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+        https://www.springframework.org/schema/beans/spring-beans.xsd">
+	<bean id="defaultEchoService" class="cn.qingweico.aop.service.DefaultEchoService"/>
+	<bean id="otherEchoService" class="cn.qingweico.aop.service.OtherEchoService"/>
+	<bean class="org.springframework.aop.framework.autoproxy.BeanNameAutoProxyCreator">
+		<!-- 所有以EchoService结尾的bean都会被拦截 -->
+		<property name="beanNames" value="*EchoService"/>
+		<property name="interceptorNames">
+			<list>
+				<value>echoServiceMethodInterceptor</value>
+			</list>
+		</property>
+	</bean>
+	<!-- 配置拦截器 -->
+	<bean id="echoServiceMethodInterceptor" class="cn.qingweico.aop.interceptor.EchoServiceMethodInterceptor"/>
+</beans>

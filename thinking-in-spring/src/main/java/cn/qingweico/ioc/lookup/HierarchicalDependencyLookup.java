@@ -8,7 +8,7 @@ import org.springframework.beans.factory.xml.XmlBeanDefinitionReader;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 /**
- * 层次性依赖查找
+ * --------------- 层次性依赖查找 ---------------
  *
  * @author zqw
  * @date 2021/11/13

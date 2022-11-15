@@ -7,6 +7,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Primary;
 
 /**
+ * 通过 {@link ObjectProvider} 进行依赖查找
+ *
  * @author zqw
  * @date 2021/11/12
  */
@@ -40,6 +42,7 @@ public class ObjProvider {
     }
 
     private static void lookupByObjectProvider(AnnotationConfigApplicationContext context) {
+        // ObjectProvider 继承至 ObjectFactory
         ObjectProvider<String> objectProperty = context.getBeanProvider(String.class);
         System.out.println("lookupByObjectProvider: " + objectProperty.getObject());
     }

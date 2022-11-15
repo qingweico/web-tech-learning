@@ -48,6 +48,7 @@ public class ApplicationListenerExample implements ApplicationEventPublisherAwar
     }
 
     // 基于 Spring 注解向 Spring 应用上下文注册事件
+
     @EventListener
     @Order(1)
     public void onApplicationEvent(ApplicationEvent event) {
@@ -56,6 +57,7 @@ public class ApplicationListenerExample implements ApplicationEventPublisherAwar
 
     // 可以分开; 支持多 ApplicationEvent 类型;
     // @Order中value越小优先级越高
+
     @EventListener
     @Order(2)
     public void onApplicationEventOrder2(ContextRefreshedEvent event) {
