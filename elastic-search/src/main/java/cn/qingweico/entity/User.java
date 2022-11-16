@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
 @Component
 @Data
 public class User {
+    private Long id;
     private String name;
-    private String password;
+
 }
