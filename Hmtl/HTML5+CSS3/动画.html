@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style type="text/css">
+        @keyframes myColor {
+            0% {background-color: red;}
+            30% {background-color: blue;}
+            60% {background-color: yellow;}
+            100% {background-color: purple;}
+        }
+        span{
+            line-height: 300px;
+        }
+        div{
+            width: 300px;
+            height: 300px;
+            margin: 0 auto;
+            border: 1px solid gray;
+            background-color:bisque;
+            box-shadow: 10px 10px 2px gray;
+            border-radius: 10px;
+            text-align: center;
+            font-size: large;
+        }
+        div:hover{
+            animation-name: myColor;
+            animation-duration: 3s;
+            animation-timing-function: linear;
+            animation-play-state: running;
+        }
+    </style>
+</head>
+<body>
+
+</body>
+<div><span>天下没有不散的宴席</span></div>
+</html>

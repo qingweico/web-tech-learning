@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<style>
+    #clock {
+        display: flex;
+        margin: 100px auto;
+        border: 1px dashed gray;
+        width: 50%;
+        font-size: 200px;
+        justify-content: center; /* 水平居中 */
+        align-items: center; /* 垂直居中 */
+        height: 50vh; /* 设置容器高度为视口高度，实现流式布局 */
+    }
+</style>
+<body>
+<div id="clock"></div>
+<script>
+    setInterval(function SetTime() {
+        let time = new Date();
+        let hour = time.getHours();
+        let minute = time.getMinutes();
+        let second = time.getSeconds();
+        minute = checkTime(minute);
+        second = checkTime(second);
+        document.getElementById("clock").innerHTML = (hour + ":" + minute + ":" + second);
+
+        function checkTime(i) {
+            if (i < 10) {
+                i = "0" + i;
+            }
+            return i;
+        }
+    });
+    setInterval(function () {
+        let arr = ["red", "yellowgreen", "yellow", "blue", "grey", "cyan", "purple", "pink", "deepskyblue"];
+        let randPos = Math.floor(Math.random() * (arr.length));
+        let randColor = arr[randPos];
+        document.getElementById("clock").style.cssText = "background-color" + ":" + randColor;
+    }, 1000);
+</script>
+</body>
+</html>

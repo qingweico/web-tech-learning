@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<style type="text/css">
+    .box1{
+        width: 400px;
+        height: 400px;
+        background-color: gray;
+    }
+</style>
+<body>
+<div   id="box" class="box1"></div>
+<img  id="msg"  src="../Image/a3.jpg" alt="">
+<script>
+    let boxDiv,msgDiv;
+    window.onload=function () {
+      boxDiv=document.getElementById("box");
+      msgDiv=document.getElementById("msg");
+
+    };
+    boxDiv.ondragenter=function (e) {
+        showObj(e);
+    };
+    boxDiv.ondragover=function (e) {
+        e.preventDefault();
+
+    };
+    boxDiv.ondrop=function (e) {
+        showObj(e);
+
+    };
+    function showObj(obj) {
+        let s="";
+        for(var k in obj){
+            s+=k+":"+obj[k]+"<br/>";
+        }
+    }
+    msgDiv.innerHTML=s;
+</script>
+</body>
+</html>

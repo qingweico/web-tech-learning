@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    var r=parseInt(Math.random()*10);
+    var i=0;
+            do{
+                i++;
+                var input;
+                input = parseInt(prompt("请输入一个数字:"));
+                if(input>r){
+                    alert("您猜大了，亲");
+                }
+                else if(input<r){
+                    alert("您猜小了,亲");
+                }
+                else {
+                    alert("恭喜您猜对了");
+                }
+            }while(input!==r);
+            alert("游戏结束!");
+    if(i>=7)
+    {
+        alert("您的智商好像有点问题啊");
+    }
+</script>
+</body>
+</html>

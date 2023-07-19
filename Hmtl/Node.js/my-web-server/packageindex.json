@@ -1,0 +1,8 @@
+{
+    "name": "file-explorer",
+    "description": "A commend-file file explorer",
+    "authors": "author",
+    "version": "0.0.1",
+    "main": "pathToMain",
+    "dependencies": {}
+}

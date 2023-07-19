@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript">
+        window.onload=function () {
+            var canvas = document.querySelector("canvas");
+            if (canvas.getContext) {
+                var ctx = canvas.getContext("2d");
+                // TODO:lineTo()
+                ctx.beginPath();
+                ctx.moveTo(50, 50);
+                ctx.lineTo(50, 150);
+                ctx.lineTo(150, 150);
+                ctx.moveTo(50, 150);
+                ctx.lineTo(150, 50);
+                ctx.stroke();
+                //  TODO:arcTo()
+                ctx.beginPath();
+                ctx.moveTo(50, 50);
+                ctx.lineTo(150, 50);
+                ctx.arcTo(200, 50, 200, 100, 50);
+                ctx.stroke();
+                  //TODO:arc()
+                ctx.beginPath();
+                ctx.arc(200, 150, 50,Math.PI, 1.5 * Math.PI, true);
+                ctx.stroke();
+                //TODO:rect()
+                ctx.beginPath();
+                ctx.rect(150,100,50,50);
+                ctx.stroke();
+                //TODO:fillRect();
+                ctx.beginPath();
+                ctx.fillRect(150, 100, 50, 50);
+                //TODO:strokeRect()
+                ctx.beginPath();
+                ctx.strokeRect(150,100,100,100);
+            }
+        }
+    </script>
+</head>
+<body>
+<canvas width="300" height="300">浏览器不支持画布canvas工具！</canvas>
+
+</body>
+</html>

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<style>
+    *{
+        font-size: 12px;
+    }
+    #button{
+        text-align: center;
+    }
+</style>
+<body>
+<form autocomplete="off">
+<table border="1">
+       <tr>
+           <th colspan="2">邮箱会员注册</th>
+       </tr>
+        <tr>
+            <td><label for="username">用户名:</label></td>
+            <td>
+                <input type="text" id="username">
+            </td>
+        </tr>
+        <tr>
+            <td><label for="password">密码：</label></td>
+            <td><input id="password" type="password"></td>
+        </tr>
+        <tr>
+            <td> <label for="againPassword">确认密码:</label></td>
+            <td>
+                <input id="againPassword" type="password">
+            </td>
+        </tr>
+        <tr>
+            <td>性别:</td>
+            <td>
+                <label> <input name="sex" type="radio" value="" checked/>男</label>
+                <label><input  name="sex" type="radio" value=""/>女</label>
+            </td>
+        </tr>
+        <tr>
+            <td> <label for="email">Email:</label></td>
+            <td>
+                <input id="email" type="email"><br>
+            </td>
+        </tr>
+         <tr>
+             <td> <label for="tel">Phone:</label></td>
+             <td>
+                  <input id="tel" type="tel">
+             </td>
+         </tr>
+         <tr>
+             <td> <label for="age"> 年龄:</label></td>
+             <td>
+                <input id="age" type="number">
+             </td>
+         </tr>
+         <tr>
+             <td> 专业:</td>
+             <td>
+                 <label>
+                    <select>
+                     <option  name="major" value="compute">compute</option>
+                     <option  name="major" value="math">math</option>
+                     <option  name="major" value="English">English</option>
+                 </select>
+                 </label>
+             </td>
+         </tr>
+    <tr>
+        <td><label>爱好:</label></td>
+        <td>
+           <label>  <input  name="hobby" type="checkbox" value="户外">户外</label>
+           <label>  <input  name="hobby" type="checkbox" value="音乐">音乐</label>
+           <label>  <input  name="hobby" type="checkbox" value="购物">购物</label>
+           <label>  <input  name="hobby" type="checkbox" value="其他">其他</label>
+        </td>
+    </tr>
+    <tr>
+        <td>所在地:</td>
+        <td>
+           <label>
+               <select>
+                   <option name="location">北京</option>
+                   <option name="location">广州</option>
+                   <option name="location">上海</option>
+                   <option name="location">深圳</option>
+               </select>
+           </label>
+        </td>
+    </tr>
+    <tr>
+        <td>备注:</td>
+        <td>
+            <label>
+               <textarea placeholder="请输入..."></textarea>
+            </label>
+        </td>
+    </tr>
+    <tr>
+        <td  id="button" colspan="2"><input type="submit" value="提交">&nbsp;&nbsp;&nbsp;&nbsp;<input type="reset" value="重置"></td>
+    </tr>
+</table>
+</form>
+</body>
+</html>

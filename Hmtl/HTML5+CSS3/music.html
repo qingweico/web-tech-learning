@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        #container{
+            position: absolute;
+            left: 100px;
+            top: 100px;
+        }
+        .input-item{
+            display: flex;
+        }
+        input{
+            display: inline;
+            width: 500px;
+            border: 0;
+            border-bottom: 2px solid gray;
+            margin-bottom: 20px;
+            padding: 10px;
+            font-size: 15px;
+            outline: none;
+        }
+        .input-item label {
+            position: absolute;
+            top: 0;
+            left: 0;
+            padding: 10px 0;
+            color: red;
+            pointer-events: none;
+            transition: all 0.5s;
+        }
+        .input-item input:focus + label,
+        .input-item input:valid + label {
+            top: -20px;
+            color: black;
+            font-size: 12px;
+        }
+        .leftBox {
+            float: left;
+            width: 400px;
+            height:400px;
+        }
+        ul{
+            overflow-y: auto;
+            height: 450px;
+        }
+        ul li{
+            display: inline-block;
+            list-style-type: none;
+            margin: 5px;
+            border:1px gray solid;
+            width:auto;
+            height: auto;
+            border-radius: 10px;
+            padding: 5px;
+            font-size: 10px;
+        }
+        ul li:hover{
+            cursor: pointer;
+        }
+        .middleBox{
+            float: left;
+            width: 400px;
+            height: 300px;
+            margin: 20px;
+        }
+        .middleBox img{
+            width: 400px;
+            height:300px;
+        }
+        a {
+            overflow: hidden;
+            position: relative;
+            display: inline-block;
+            height: 20px;
+            padding: 10px 20px;
+            color: #03e9f4;
+            text-decoration: none;
+            transition: all 0.5s;
+        }
+        a:hover {
+            color: #fff;
+            border-radius: 5px;
+            background-color: #03e9f4;
+            cursor: pointer;
+        }
+        a span {
+            position: absolute;
+        }
+        a span:first-child {
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(to right, transparent, black);
+            animation: move1 1s linear infinite;
+        }
+        a span:nth-child(2) {
+            right: 0;
+            top: -100%;
+            width: 2px;
+            height: 100%;
+            background: linear-gradient(transparent, black);
+            animation: move2 1s linear 0.25s infinite;
+        }
+        a span:nth-child(3) {
+            right: -100%;
+            bottom: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(to left, transparent, black);
+            animation: move3 1s linear 0.5s infinite;
+        }
+        a span:last-child {
+            left: 0;
+            bottom: -100%;
+            width: 2px;
+            height: 100%;
+            background: linear-gradient(black, transparent);
+            animation: move4 1s linear 0.75s infinite;
+        }
+        @keyframes move1 {
+            0% {
+                left: -100%;
+            }
+            50%,
+            100% {
+                left: 100%;
+            }
+        }
+        @keyframes move2 {
+            0% {
+                top: -100%;
+            }
+            50%,
+            100% {
+                top: 100%;
+            }
+        }
+        @keyframes move3 {
+            0% {
+                right: -100%;
+            }
+            50%,
+            100% {
+                right: 100%;
+            }
+        }
+        @keyframes move4 {
+            0% {
+                bottom: -100%;
+            }
+            50%,
+            100% {
+                bottom: 100%;
+            }
+        }
+        footer audio{
+            position: relative;
+            width: 400px;
+            float: left;
+            left: 20px;
+        }
+    </style>
+</head>
+<!--Vue-->
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<!--axios-->
+<script src="https://cdn.bootcdn.net/ajax/libs/axios/0.21.0/axios.js"></script>
+<!--Jquery-->
+<script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+
+<body>
+    <div id="container">
+        <header>
+            <div class="input-item">
+                <label>
+                    <input type="text" autocomplete="on" v-model="query"
+                           required size="60"  @click="changeStyle()">
+                </label>
+                <label>请输入你要听的音乐...</label>
+                <a @click="getMusic()" href="javascript:void(0)">搜索
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </a>
+            </div>
+
+        </header>
+    <div class="content">
+        <div class="leftBox">
+            <ul id="musicList"  class="todoList list-group">
+                <li class="list" v-for="item in musicList" @click="musicPlay(item.id)">
+                    {{item.name}}
+                </li>
+            </ul>
+        </div>
+      <div class="middleBox" v-show = "musicUrl !== ''">
+          <img :src="musicCover" alt="">
+      </div>
+    </div>
+        <footer v-show = "musicUrl !== '' ">
+            <audio :src="musicUrl"  controls loop autoplay></audio>
+        </footer>
+    </div>
+    <script>
+        const app = new Vue({
+            el: "#container",
+            data:{
+                query:'',
+                musicList:[],
+                musicUrl:'',
+                musicCover:''
+            },
+            methods:{
+                getMusic:function(){
+                    let that = this;
+                    axios.get("https://autumnfish.cn/search?keywords=" + this.query).then(
+                        (response) => {
+                            that.musicList = response.data.result.songs;
+                        },
+                        (err) => {
+                            console.log(err)
+                        }
+                    )
+                },
+                musicPlay:function(id){
+                    let that = this;
+                    axios.get("https://autumnfish.cn/song/url?id=" + id).then(
+                        (response) => {
+                           that.musicUrl = response.data.data[0].url;
+                        },(err) => {}
+                    )
+                    axios.get("https://autumnfish.cn/song/detail?ids=" + id).then(
+                        (response) => {
+                           that.musicCover = response.data.songs[0].al.picUrl;
+                        },(err) => {}
+                    )
+                },
+                changeStyle:function () {
+                    document.getElementsByTagName("input")[0].style.cssText = " border-bottom: 3px solid black;"
+                }
+            }
+        })
+    </script>
+</body>
+</html>

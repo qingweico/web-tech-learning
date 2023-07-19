@@ -1,0 +1,21 @@
+<html lang="en">
+<canvas id="id-HTML 5-canvas">
+    <script type="text/javascript">
+        console.log("get canvas id");
+        const canvas = document.getElementById('id-HTML 5-canvas');
+        console.log("get canvas   context");
+        const context = canvas.getContext("2d");
+        console.log("set canvsas context font");
+        context.fillstyle = '#666';
+        context.textBaseline = 'top';
+        context.font = 'normal 16px sans-serif';
+        context.fillText('---HTML 5+CSS3+JavaScript ---', 0, 10);
+        context.font = 'italic 24px sans-serif';
+        context.fillText('HTML 5 APP!', 0, 60);
+        context.font = 'bold 24px sans-serif';
+        context.fillText('HTML 5 APP', 0, 110);
+    </script>
+</canvas>
+
+
+</html>

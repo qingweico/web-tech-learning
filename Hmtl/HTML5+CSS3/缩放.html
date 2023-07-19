@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style type="text/css">
+        @keyframes myColor {
+            0% {  transform: scale(1.1);}
+            30% {  transform: scale(1.2);}
+            60% {  transform: scale(1.4);}
+            100% {  transform: scale(1.5);}
+        }
+        #main{
+            width: 72px;
+            height: 72px;
+            border: 1px dashed grey;
+            background-size: 72px 72px;
+            background-image: url(../Image/a1.jpg);
+            position: fixed;
+            margin: 0;
+            top: 200px;
+            left: 250px;
+        }
+        #main:hover{
+            animation-name: myColor;
+            animation-duration: 1s;
+            animation-timing-function: linear;
+            animation-iteration-count: 1
+        }
+    </style>
+</head>
+<body>
+<div id="main"></div>
+</body>
+</html>

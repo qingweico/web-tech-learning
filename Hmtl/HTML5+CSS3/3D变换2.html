@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style type="text/css">
+        *{
+            background-color: gray;
+        }
+        #stage{
+            width: 216px;
+            height: 72px;
+            margin: 100px auto;
+            border:1px dashed royalblue;
+            perspective: 100px;
+        }
+        .box{
+            display: block;
+            width: 72px;
+            height: 72px;
+            float: left;
+            transition: 1s linear;
+            transform-style: preserve-3d;
+            }
+        img{
+            width: 72px;
+            height: 72px;
+        }
+        .x:hover{
+            transform:rotateX(60deg);
+        }
+         .y:hover{
+            transform:rotateY(60deg);
+         }
+        .z:hover{
+            transform:rotateZ(60deg);
+        }
+    </style>
+</head>
+<body>
+<div id="stage">
+    <div class="box x">
+        <img src="" alt="...">
+    </div>
+    <div class="box y">
+        <img src="" alt="..">
+    </div>
+    <div class="box z">
+        <img src="" alt="...">
+    </div>
+</div>
+</body>
+</html>

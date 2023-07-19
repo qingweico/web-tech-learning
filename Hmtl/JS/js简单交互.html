@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+
+<style>
+     div{
+        width: 400px;
+        height: 200px;
+        border: 1px  dashed gray;
+        margin: 100px auto;
+        text-align: center;
+        font-size: 50px;
+        color: darkgreen;
+    }
+    #Set{
+        display: block;
+        position: relative;
+        margin: 100px  auto;
+        bottom: 100px;
+       
+    }
+    @media   only screen and  ( min-width: 500px)  {
+        body{
+            background-color: lightseagreen;
+        }
+       
+    }
+</style>
+<body>
+<h1>我的Web页面</h1>
+<p id="demo">一个段落</p>
+<button id="myFunction">尝试一下</button>
+<div>
+</div>
+<button id="Set">切换用户</button>
+<p>&copy;</p>
+<p>&reg;</p>
+<script>
+	window.onload=function(){
+        const okayButton = document.getElementById("myFunction");
+        okayButton.onclick=malfunction;
+		console.log(okayButton);
+		function malfunction () {
+		document.getElementById("demo").innerHTML="我的第一个Javascript函数";
+		 }
+	};
+    let con=document.getElementsByTagName("div")[0];
+    con.textContent="Hello World";
+    console.log(con);
+    function  setUserNames() {
+        let myName=prompt("请输入您的姓名:");
+        if(!myName){
+            setUserNames();
+        }
+        else{
+            localStorage.setItem("name",myName);
+            con.textContent="欢迎回来"+myName;
+        }
+    }
+
+    if(!localStorage.getItem("name")) {
+        setUserNames();
+    }
+    else{
+        let storedName= localStorage.getItem("name");
+        con.textContent="欢迎回来"+storedName;
+    }
+    document.getElementById("Set").onclick=function () {
+        setUserNames();
+    };
+ </script>
+</body>
+</html>

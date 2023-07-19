@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net
+/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha38
+4-BVYiiSIFeK1dGmJRAkycuHAHRg32OmU
+cww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.css">
+    <script src="../JQuery/JQuery.3.4.1.js"></script>
+    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js"
+            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+            crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.css">
+</head>
+<style>
+    img {
+        width: 500px;
+        height: 300px;
+    }
+
+    .imgOne {
+        width: 480px;
+        height: 300px;
+    }
+
+    #content {
+        background-color: #a8a8a8;
+        width: 100%;
+    }
+
+    #sub-footer {
+        background-color: black;
+        width: 100%;
+    }
+
+    .widget ul li {
+        list-style-type: none;
+    }
+
+    .link-list li a:hover {
+        text-decoration: none;
+        color: red;
+    }
+
+    .social-network li {
+        list-style-type: none;
+        display: inline;
+    }
+</style>
+<body>
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed"
+                    data-toggle="collapse" data-target=".navbar-collapse" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="https://www.baidu.com" target="_blank"><i
+                    class="icon-info-blocks material-icons">htmls</i>图文杂志</a>
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#" class="waves-effect waves-dark">主页</a></li>
+                <li class="dropdown">
+                    <a href="#" role="button" data-toggle="dropdown" class="dropdown-toggle"
+                       aria-haspopup="true" aria-expanded="false">主题<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">HTML</a></li>
+                        <li><a href="#">CSS</a></li>
+                        <li><a href="#">JavaScript</a></li>
+                        <li class="divider" role="separator"></li>
+                        <li><a href="#">php</a></li>
+                    </ul>
+                </li>
+                <li><a href="#">联系我们</a></li>
+                <li><a href="#">加入我们</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<!---------------------------------页眉--------------------------------->
+
+<section class="section-padding gray-bg">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="section-title text-center">
+                    <p class="text-right">第&nbsp;1&nbsp;页</p>
+                    <h2>美图赏析</h2>
+                    <p>编辑：佚名</p>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 col-lg-6">
+                <div class="about-text">
+                    <p>
+                        美食，顾名思义就是美味的食物，中国素有“烹饪之国”这个美誉。
+                        在中国这个大家庭里，我们有56个小家庭，每个家庭都有自己的特色美食。
+                    </p>
+                    <ul class="withArrow">
+                        <li><span class="fa fa-angle-right"></span>美食图片
+                        </li>
+                        <li><span class="fa fa-angle-right"></span>美食料理</li>
+                    </ul>
+                    <a href="#" class="btn btn-success btn-block waves-effect waves-dark">更多...</a>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="about-image">
+                    <img src="../Image/a2.jpg" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="section-padding gray-bg">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="section-title text-center">
+                    <p class="text-right">第&nbsp;2&nbsp;页</p>
+                    <h2>美食赏析</h2>
+                    <p>编辑:&nbsp;佚名&nbsp;</p>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="about-image">
+                    <img class="imgOne" src="../Image/a1.jpg" alt="">
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="about-text">
+                    <p>美食吃前有期待,吃后有回味，已不是简单的味觉享受，更是一种精神享受。
+                        世界各地美食文化博大精深，营养物质各不相同，品味更多美食，享受更多健康。
+                    </p>
+                </div>
+                <ul class="withArrow">
+                    <li><span class="fa fa-angle-right"></span>中国美食</li>
+                    <li><span class="fa fa-angle-right"></span>世界美食</li>
+                </ul>
+                <a href="#" class="btn btn-default btn-block">更多...</a>
+            </div>
+        </div>
+    </div>
+</section>
+<br>
+<br>
+<footer>
+    <div class="container" id="content">
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="widget">
+                    <h5 class="widgetheading">联系我们</h5>
+                    <address>
+                        <strong>中国<br>北京.<br></strong>
+                    </address>
+                    <p>
+                        <i class="icon-phone">(123)456-789</i><br>
+                        <i class="icon-phone">123456789</i><br>
+                        <i class="icon-envelope-alt">17796706221@163.com</i>
+                    </p>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="widget">
+                    <h5 class="widgetheading">友情链接</h5>
+                    <ul class="link-list">
+                        <li><a cLass="waves-effect waves-dark" href="#">美食中国</a></li>
+                        <li><a cLass="waves-effect waves-dark" href="#">美食欧洲</a></li>
+                        <li><a cLass="waves-effect waves-dark" href="#">美食非洲</a></li>
+                        <li><a cLass="waves-effect waves-dark" href="#">美食亚洲</a></li>
+                        <li><a cLass="waves-effect waves-dark" href="#">美食美洲</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="sub-footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="copyright">
+                        <p> Copyright &copy; 2017.&nbsp;&nbsp;图文杂志 All rights reserved.&nbsp;&nbsp;
+                        </p>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <ul class="social-network">
+                        <li><a class="waves-effect waves-dark" href="#" data-placement="top"
+                               title="Facebook"><i class="fa fa-facebook"></i></a></li>
+                        <li><a class="waves-effect waves-dark" href="#" data-placement="top" title="Twitter">
+                            <i class="fa fa-twitter"></i></a></li>
+                        <li><a class="waves-effect waves-dark" href="#" data-placement="left" title="Linkedin">
+                            <i class="fa fa-linkedin"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+</body>
+</html>

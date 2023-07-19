@@ -1,0 +1,90 @@
+body {
+    background-color: #161242;
+}
+#title {
+    width: 100%;
+    height: 10%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    /*弹性布局*/
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 40px;
+}
+#title .time {
+    position: absolute;
+    margin-left: 20px;
+    font-size: 24px;
+    font-weight: bold;
+    left: 0;
+}
+#upleft {
+    width: 30%;
+    height: 45%;
+    position: absolute;
+    top: 10%;
+    left: 0;
+}
+#bottom-left {
+    width: 30%;
+    height: 45%;
+    position: absolute;
+    top: 55%;
+    left: 0;
+}
+#upcenter {
+    width: 40%;
+    height: 25%;
+    position: absolute;
+    top: 10%;
+    left: 30%;
+    display: flex;
+    flex-wrap: wrap;
+}
+.item {
+    width: 33.33%;
+   
+}
+.number {
+    height: 60%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: gold;
+    font-size: 40px;
+    font-weight: bold;
+   
+}
+.content {
+    height: 40%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+}
+#bottom-center {
+    width: 40%;
+    height: 65%;
+    position: absolute;
+    top: 35%;
+    left: 30%;
+}
+#upright {
+    width: 30%;
+    height: 45%;
+    position: absolute;
+    top: 10%;
+    right: 0;
+}
+#bottom-right {
+    width: 30%;
+    height: 45%;
+    position: absolute;
+    top: 55%;
+    right: 0;
+}

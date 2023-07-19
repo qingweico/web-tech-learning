@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../js/playlist.js"></script>
+    <script src="../js/playlist_store.js"></script>
+    <style>
+        ul{
+            list-style-type: none;
+        }
+        ul li{
+            width: auto;
+            background-color:#f0f0f0;
+            font-size: 20px;
+            display: block;
+            position: relative;
+            left: -40px;
+            box-shadow:0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+            border-radius: 5px;
+            border:1px gray dotted;
+        }
+    </style>
+</head>
+<body>
+<label for="input_item">
+    <input type="text" id="input_item" size="100%" placeholder="add Some Song">
+</label>
+<input type="button" id="buttonClick" value="addSong">
+    <ul id="SongList">
+    </ul>
+</body>
+</html>

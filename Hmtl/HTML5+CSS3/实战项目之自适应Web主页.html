@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>项目实战之Web自适应主页</title>
+</head>
+<style type="text/css">
+    *{
+        font-family: 楷体;
+    }
+    header {
+     display:flex;
+     width:100%;
+}
+     #navMenu{
+        float:none;
+        position:relative;
+        margin:0 auto;
+        width:100%;
+        height:auto;
+        font-size:20px;
+        background-color:darkslateblue;
+}
+    #navMenu span.title{
+        float:left;
+        position:relative;
+        width:auto;
+        height:auto;
+        margin:0 auto;
+        padding: 20px;
+        font-size: 40px;
+        font-weight:bold;
+        color:deeppink;
+        text-align:center;
+    }
+
+     #navMenu ul{
+         list-style-type: none;
+
+     }
+     #navMenu ul li {
+         float: left;
+         position: relative;
+     }
+     #navMenu ul li a{
+         border-right: 1px  gold solid;
+         padding:20px;
+         display: block;
+         color: grey;
+         text-decoration:none;
+         text-align: center;
+     }
+     #navMenu ul li a:hover{
+         background: rgb(137, 192, 55);
+         }
+    #navMenu ul li ul {
+        display: none;
+      }
+    #navMenu ul li:hover ul {
+        display: block;
+        position: absolute;
+        top:60px;
+        min-width: 200px;
+        left: -41px;
+    }
+    #navMenu ul li:hover ul li a{
+        display: block;
+        background: blanchedalmond;
+        color:purple;
+        width: 110px;
+        text-align: center;
+        border-bottom: 1px solid greenyellow;
+        border-right: none;
+    }
+    #navMenu ul li:hover ul li a:hover{
+        background:blue;
+    }
+    .borderLeft{
+        border-left: 1px solid paleturquoise;
+    }
+    .top{
+        border-top: 1px solid white;
+    }
+    #navMenu span.login{
+        float:right;
+        position: relative;
+        width: auto;
+        height: auto;
+        margin:0 auto;
+        padding: 20px;
+        font-family: 楷体;
+        font-size: 12px;
+        color: chartreuse;
+        text-align: center;
+        visibility: visible;
+    }
+    #navMenu span.login a{
+        font-size: 12px;
+        color:white;
+        text-decoration: none;
+    }
+    #navMenu span.login a:hover{
+        color: cadetblue;
+    }
+
+
+
+
+
+
+
+    .content{
+        zoom: 1;
+    }
+    .content:after{
+        content: ".";
+        display: flex;
+        height: 0;
+        clear: both;
+        visibility: hidden;
+    }
+    .content .leftBox {
+        float: left;
+        width: 20%;
+        min-width: 192px;
+        height: auto;
+        margin: 5px;
+        background: #e8e8e8;
+        transition: width 1s ease;
+    }
+    .content .middleBox {
+        float: left;
+        width: 60%;
+        min-width: 320px;
+        height: auto;
+        margin: 5px;
+        background: #f0f0f0;
+        transition: width 1s ease;
+    }
+    .content .middleBox p{
+        margin: 8px;
+        padding: 4px;
+    }
+    .content .middleBox img {
+        width: 100px;
+        height: 100px;
+        margin: 8px;
+        padding: 4px;
+    }
+    .content .rightBox {
+        float: left;
+        width: 15%;
+        min-width: 128px;
+        height: auto;
+        margin: 5px;
+        background: #e8e8e8;
+        transition: width 1s ease;
+    }
+    .content .rightBox p{
+        margin: 4px;
+        padding: 2px;
+    }
+    .content .rightBox img{
+        width: 60px;
+        height: 60px;
+        margin: 4px;
+        padding: 2px;
+    }
+    .navLeft {
+        float: left;
+    }
+    .navLeft ul {
+        list-style-type: none;
+    }
+    ul.navLeftMenu {
+        width: auto;
+        padding: 8px 16px 8px 16px;
+    }
+    ul.navLeftMenu li {
+        margin:8px 0 8px 0;
+
+    }
+    ul.navLeftMenu li a {
+        background: #cbcbcb;
+        color: #666;
+        padding: 7px 15px 7px 15px;
+        width: 96px;
+        display: block;
+        text-decoration: none;
+    }
+    ul.navLeftMenu li a:hover{
+        background: #a8a8a8;
+        color: #fff;
+        padding: 7px 20px 7px 20px;
+    }
+    footer{
+        clear: both;
+        position: relative;
+        width: 100%;
+        margin: auto;
+        padding: 16px 0 16px 0;
+        bottom: 0;
+        text-align: center;
+        background-color: #eee;
+    }
+     /*
+    * media screen queries
+    */
+
+    @media  only screen and (min-width:1024px) {
+        .content{
+            width: auto;
+            height: auto;
+            margin: auto;
+        }
+    }
+    @media only screen and (min-width :800px) and (max-width :1024px){
+        body{
+            background-color: greenyellow;
+        }
+        #navMenu span.title{
+            width: 100%;
+            background-color:burlywood;
+        }
+        #navMenu span.loginLeft{
+            visibility: visible;
+        }
+        #navMenu span.login{
+            visibility: hidden;
+        }
+
+        .content{
+            width:100%;
+            height:auto;
+        }
+        .leftBox{
+            width: 30%;
+        }
+        .middleBox{
+            width: 65%;
+        }
+
+        .rightBox{
+            visibility: hidden;
+            width:0;
+        }
+    }
+    @media  only screen and (min-width:400px) and (amx-width:800px) {
+        #navMenu span.title{
+            width: 100%;
+            margin: auto;
+            background-color:royalblue;
+        }
+        #navMenu span.loginLeft{
+            width: 100%;
+            margin:auto;
+            visibility: visible;
+            background-color: #fff;
+        }
+        #navMenu span.login {
+            visibility: hidden;
+        }
+
+        .content{
+            width :100%;
+            height: auto;
+        }
+        .leftBox{
+            width:30%;
+        }
+        .middleBox{
+            width: auto;
+        }
+
+        .rightBox{
+            visibility: hidden;
+            width:0;
+        }
+    }
+    @media  only screen and (max-width:400px){
+            .leftBox .middleBox .rightBox{
+                float: left;
+                position: relative;
+                width:98%;
+                height: auto;
+            }
+
+        }
+</style>
+<body>
+<header>
+    <div id="navMenu">
+        <span class="title">这里是主页</span>
+        <ul>
+            <li class="borderLeft"><a href="#" target="_blank">主页</a> </li>
+            <li><a href="file://E:" target="_blank">学校概况</a> </li>
+            <li><a href="D:/" target="_blank">组织机构</a>
+              <ul>
+                  <li class="top"><a href="#" target="_blank">学生处</a></li>
+                  <li><a href="https://www.baidu.com" target="_blank">教务处</a></li>
+                  <li><a href="." target="_blank">党委书记办公室</a></li>
+              </ul>
+            </li>
+                <li><a href="." target="_blank">关于我们</a>
+                <ul>
+                   <li class="top"><a href="." target="_blank">招生情况</a></li>
+                    <li><a href="." target="_blank">校园美景</a></li>
+                    <li><a href="." target="_blank">校园生活</a></li>
+                </ul>
+              </li>
+        </ul>
+        <span class="login"><a href="https://www.taobao.com" target="_blank">学生登陆</a></span>
+    </div>
+</header>
+<br>
+<div class="content">
+    <div class="leftBox">
+        <div class="navLeft">
+            <ul class="navLeftMenu">
+                <li><a onclick="on_html5_click();">计算机系</a> </li>
+                <li><a onclick="on_css3_click();">天文系</a> </li>
+                <li><a onclick="on_js_click();">物理系</a> </li>
+                <li><a onclick="on_js_click()">中文系</a> </li>
+                <li><a onclick="on_css3_click()">AI智能系</a> </li>
+                <li><a onclick="on_js_click()">超级无敌系</a> </li>
+            </ul>
+        </div>
+    </div>
+<div class="middleBox">
+    <p>large image:</p>
+    <img id="id-image-large" src="../Image/a1.jpg" alt="image_large"/>
+</div>
+<div class="rightBox">
+    <p>small image:</p>
+    <img id="id-image-small" src="../Image/a2.jpg" alt="image_small" />
+</div>
+</div>
+<footer>
+    <p>copyright &copy;2017 king &amp;king.</p>
+</footer>
+<script>
+    function on_html5_click() {
+        document.getElementById("id-image-large") .setAttribute("src","../Image/a1.jpg");
+        document.getElementById("id-image-small") .setAttribute("src","../Image/a2.jpg");
+    }
+    function on_css3_click() {
+        document.getElementById("id-image-large") .setAttribute("src","../Image/a1.jpg");
+        document.getElementById("id-image-small") .setAttribute("src","../Image/a2.jpg");
+    }
+    function on_js_click() {
+        document.getElementById("id-image-large") .setAttribute("src","../Image/a1.jpg");
+        document.getElementById("id-image-small") .setAttribute("src","../Image/a2.jpg");
+    }
+</script>
+</body>
+</html>

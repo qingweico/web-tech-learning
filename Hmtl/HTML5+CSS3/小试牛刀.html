@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style type="text/css">
+        *{
+            font-family: 楷体;
+        }
+        header{
+            width: 100%;
+            background-color: #218867;
+            height: 100px;
+        }
+        span{
+            font-size: 50px;
+            color: mediumvioletred;
+            text-align: center;
+            position: relative;
+            float: left;
+            width: auto;
+            height: auto;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        #nav {
+            float: none;
+            position: relative;
+            height: auto;
+            width: 100%;
+            margin: 0 auto;
+            font-size: 20px;
+        }
+        #nav ul{
+        list-style-type: none;
+        }
+        #nav ul li{
+            float: left;
+            display: block;
+            border-right: 1px solid gold;
+            padding: 40px;
+            color: goldenrod;
+            text-decoration: none;
+            text-align: center;
+            position: relative;
+        }
+        .border-left{
+            border-left: 1px solid chartreuse;
+        }
+        #nav ul li:hover{
+            background-color: pink;
+        }
+        #nav ul li ul{
+            display:none;
+        }
+        #nav ul li:hover ul {
+        display: block;
+        position: absolute;
+        top:100px;
+        min-width: 100px;
+        left: -41px;
+    }
+    #nav ul li:hover ul li{
+        display: block;
+        background: blanchedalmond;
+        color:purple;
+        width: 110px;
+        text-align: center;
+        border-bottom: 1px solid greenyellow;
+        border-right: none;
+    }
+    #nav ul li:hover ul li:hover{
+        background:blue;
+    }
+
+    </style>
+</head>
+<body>
+<header>
+<div id="nav">
+    <span>😔</span>
+    <ul>
+        <li class="border-left">流水
+         <ul>
+            <li>1</li>
+             <li>2</li>
+             <li>3</li>
+         </ul></li>
+        <li>高山
+          <ul>
+              <li>4</li>
+              <li>5</li>
+              <li>6</li>
+          </ul></li>
+        <li>吾心似秋月</li>
+        <li>碧潭清皎洁</li>
+    </ul>
+</div>
+</header>
+
+</body>
+</html>

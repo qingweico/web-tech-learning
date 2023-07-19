@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        #code {
+            width: 500px;
+            height: 200px;
+            background-color: gray;
+            font-size: 150px;
+            letter-spacing: 5px;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+<script>
+    window.onload = function () {
+        document.getElementById("codeOne").onclick = function () {
+            let chars = ['a', 'b', 'c', '1', '2', '3'];
+            let randCode = "";
+            for (let i = 0; i < 3; i++) {
+                let randPos = Math.floor(Math.random() * (chars.length));
+                randCode += chars[randPos];
+            }
+            document.getElementById("code").innerHTML = randCode;
+        }
+    }
+</script>
+<div id="code"></div>
+<button id="codeOne">验证码</button>
+</body>
+</html>

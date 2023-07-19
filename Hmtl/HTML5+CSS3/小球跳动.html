@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<style type="text/css">
+    .zxw{
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        /*background-color: transparent;*/
+        background-color: black;
+        box-shadow:10px 10px 10px 20px red;
+        animation: release 3s infinite;
+    }
+  /*  @keyframes release{
+        0%{    box-shadow:10px 10px 10px 20px red;background-color: cadetblue;}
+        20%{    box-shadow:10px 10px 10px 40px black;background-color: floralwhite;}
+        30%{    box-shadow:10px 10px 10px 80 green;background-color: white;}
+        50%{    box-shadow:10px 10px 10px 100px #454545;background-color:khaki;}
+        70%{    box-shadow:10px 10px 10px 150px blueviolet;background-color: gray;}
+        100%{    box-shadow:10px 10px 10px 800px blue;background-color: burlywood;}
+    }*/
+    #ball {
+      width: 50px;
+      height: 50px;
+      margin:  300px auto;
+      position: absolute;
+      top:0;
+      border-radius: 50%;
+      background: linear-gradient(
+      95deg,
+      #ccffff,
+      #ffcccc
+     );
+     animation-name: fade;
+     animation-duration: 3s;
+     animation-fill-mode: forwards;
+     animation-iteration-count: infinite;
+     }
+      @keyframes fade {
+     10%{left: 100px;}
+     20%{left:200px;}
+     50% {left:100%;}
+}
+</style>
+<body>
+<div class="zxw"></div>
+<div class = "heart"></div>
+<div id="ball"></div>
+</body>
+</html>

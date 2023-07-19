@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style type="text/css">
+        p{
+            text-align: center;
+            font-family: 楷体;
+            font-size: 50px;
+            line-height: 100px;
+            color: #218867;
+        }
+        span[data-descr]{
+            position: relative;
+            text-decoration: none;
+            color: darkslateblue;
+            cursor: help;
+            font-size: 40px;
+        }
+        span[data-descr]:hover::after {
+            content: attr(data-descr);
+            position: absolute;
+            text-align: center;
+            left: 0;
+            top: 40px;
+            min-width: 200px;
+            border-radius: 10px;
+            border: 1px dashed thistle;
+            padding: 12px;
+            color: green;
+            font-size: 20px;
+            z-index: 1;
+        }
+    </style>
+</head>
+<body>
+<p>我们有一些<span data-descr="不乱于心">文字</span>有一些
+<span data-descr="不困于情">提示</span><br/>
+    把鼠标放上去<span data-descr="不畏将来，不念过往">看看</span>
+</p>
+
+</body>
+</html>

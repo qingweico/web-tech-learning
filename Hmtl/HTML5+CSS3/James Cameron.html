@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    *{
+        margin:0;
+        padding: 0;
+    }
+    header{
+        display: flex;
+        width: 950px;
+    }
+    nav{
+        float:left;
+        text-align: center;
+        padding: 20px;
+    }
+    a{
+        color: gray;
+        padding: 20px;
+        text-decoration: none;
+    }
+    .box{
+        background-image: url(./../Image/bj.jpg);
+        width: 290px;
+        height: 100px;
+    }
+    img{
+        display: block;
+        float: left;
+    }
+    #content{
+        display: block;
+        margin: 0 auto;
+        background-color:#535353;
+        height: 300px;
+        width: 950px;
+    }
+    .leftContent{
+        background-image: url(./../Image/img_left.jpg);
+        float: left;
+        width:700px;
+        height:300px;
+        text-align: right;
+        color:white;
+    }
+    .leftContent .core{
+        position: relative;
+        top:30px;
+        right: 30px;
+    }
+    .leftContent .name{
+        margin-bottom: 10px;
+        font-family: 'Times New Roman', Times, serif;
+        font-size: 20px;
+    }
+    .leftContent .cards ul li{
+        list-style-type: none;
+        color: red;
+        float:right;
+        padding: 10px;
+        border:2px solid red;
+        margin: 20px 4px 4px;
+        background-color: white;
+        width: 15px;
+        height: 15px;
+        text-align: center;
+    }
+    .rightContent{
+     position: relative;
+      float: left;
+      padding: 10px;
+      text-align: left;
+      color: white;
+      left: 30px;
+    }
+    .rightContent .main{
+         margin-top: 20px;
+    }
+    .rightContent .rest{
+        position: relative;
+        top:20px;
+    }
+    .rightContent ul li {
+        list-style-type: none;
+        line-height: 30px;
+    }
+    .rightContent p{
+        line-height: 25px;
+        font-size: 14px;
+    }
+    #Box{
+       display: block;
+       margin: 10px auto;
+       width: 950px;
+       background-color: dimgrey;
+       height: 280px;
+    }
+    .box{
+        float: left;
+        padding: 10px;
+        height: 220px;
+        flex: 1;
+        border-image: url(./../Image/logo.png);
+        margin: 20px 10px;
+
+    }
+    .box span{
+        display: block;
+        position: relative;
+        top: 20px;
+        font-size: 18px;
+        color: red;
+        font-family:sans-serif;
+        margin: 0 auto 40px;
+    }
+    .box hr{
+        width: 100%;
+        margin-bottom: 15px;
+    }
+    .box .introduction p{
+       text-align: center;
+    }
+    .leftBox{
+        margin-left: 20px;
+        margin-right: 15px;
+    }
+    .box .experience p{
+        text-align: center;
+    }
+    .box .works p{
+      text-align: center;
+    }
+    .middleBox{
+        margin-right: 15px;
+    }
+    .rightBox{
+        margin-right: 30px;
+    }
+    .box span{
+        text-align: center;
+
+    }
+    #foot{
+        display: inline-block;
+        margin: 10px auto;
+        position: relative;
+        left:350px;
+    }
+    a{
+        text-decoration: none;
+    }
+    footer h5{
+        text-align: center;
+        color: gray;
+    }
+    footer ul li{
+        list-style-type: none;
+        float: left;
+    }
+    footer ul a {
+        display: inline;
+        color: purple;
+        text-decoration: underline;
+        padding: 1px 30px;
+    }
+    footer ul .have{
+        border-right: 2px  gray solid;
+    }
+    footer ul .it a{
+        color:gray;
+    }
+</style>
+<body>
+    <header>
+        <span><img src="./../Image/logo.png"></span>
+        <nav>
+            <a href="#">首页</a>
+            <a href="#">个人简介</a>
+            <a href="#">成长故事</a>
+            <a href="#">感情经历</a>
+            <a href="#">代表作品</a>
+            <a href="#">影迷注册</a>
+        </nav>
+    </header>
+    <div id="content">
+        <div class="leftContent">
+         <div class="core">
+            <div class="name">
+                <p>James Cameron</p>
+                <h3>詹姆斯.卡梅隆</h3>
+               </div>
+               <div class="words">
+                   <p>记住永远不要用一个问题</p>
+                   <p>去搪塞另一个问题</p>
+               </div>
+               <div class="cards">
+                       <ul>
+                           <li>4</li>
+                           <li>3</li>
+                           <li>2</li>
+                           <li>1</li>
+                       </ul>
+               </div>
+
+         </div>
+         <table>
+             <tr>
+                 <th ></th>
+             </tr>
+         </table>
+        </div>
+        <div class="rightContent">
+            <div class="main">
+                <h3>内容介绍</h3>
+                <span>INTRODUCTION</span>
+            </div>
+            <ul>
+                <li>个人简介</li>
+                <li>成长故事</li>
+                <li>感情经历</li>
+                <li>代表作品</li>
+            </ul>
+            <div class="rest">
+                <P style="text-indent:2em;">他是人类电影史上不可或</p>
+                <p>缺的闪亮之星，指引并推动着</p>
+                <p>电影艺术的发展</P>
+            </div>
+        </div>
+    </div>
+    <div id="Box">
+        <div class="box leftBox">
+            <span>个人简介</span>
+            <hr>
+           <div class="introduction">
+            <p>早年经历</p>
+            <p>演艺经历</p>
+            <p>个人评价</p>
+            <p>人物评价</p>
+           </div>
+        </div>
+        <div class="box middleBox">
+            <span>感情经历</span>
+            <hr>
+            <div class="experience">
+                <p>莎朗.威廉斯(Sharon williams)</p>
+                <p>吉儿.安妮.赫德(Gale anne Hurd)</p>
+                <p>凯瑟琳.毕格罗(Kathryn Bigelow)</p>
+                <p>苏西.埃米斯(Suzy Amis)</p>
+            </div>
+        </div>
+        <div class="box rightBox">
+            <span>主要作品</span>
+            <hr>
+            <div class="works">
+                <p>终结者</p>
+                <p>真实的谎言</p>
+                <p>泰坦尼克</p>
+                <p>阿凡达</p>
+            </div>
+        </div>
+    </div>
+    <footer>
+       <div id="foot">
+        <ul>
+            <li class="have"><a href="#">联系我们</a></li>
+            <li class="have"><a href="#">收藏本站</a></li>
+            <li class="have"><a href="#">人才招聘</a></li>
+            <li class="have it"><a href="#">开源社区</a></li>
+            <li><a href="#">信息反馈</a></li>
+        </ul>
+       </div>
+       <h5></h5>
+    </footer>
+
+</body>
+</html>

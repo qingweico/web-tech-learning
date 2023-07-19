@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>img</title>
+</head>
+<style>
+</style>
+<body>
+<img src="../Image/a1.jpg" alt="" style="width: 50%; height: 50%"/>
+<script>
+    window.onload = function () {
+        let myImage = document.querySelector("img");
+        myImage.onclick = function () {
+            let mySrc = myImage.getAttribute('src');
+            if (mySrc === "../Image/a2.jpg") {
+                myImage.setAttribute('src', '../Image/a1.jpg');
+            } else {
+                myImage.setAttribute('src', '../Image/a2.jpg');
+            }
+        }
+    };
+</script>
+</body>
+</html>

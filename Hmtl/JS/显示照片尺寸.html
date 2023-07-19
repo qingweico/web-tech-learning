@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<p>HTML+css+javascript照片尺寸大小</p>
+<hr>
+<img src="../Image/a1.jpg" alt="无法加载照片" id="myImg" style="width: 50%; height: 50%">
+<div id="myImg-size">图片尺寸大小为:</div>
+<script>
+    function _get_img_NaturalDimensions(img) {
+        let nWidth, nHeight;
+        if (img.naturalWidth) {
+            nWidth = img.naturalWidth;
+            nHeight = img.naturalHeight;
+        }
+        return [nWidth, nHeight];
+    }
+
+    window.onload = function () {
+        let img = document.getElementById("myImg");
+        let showSpot = document.getElementById("myImg-size");
+        let showSize = _get_img_NaturalDimensions(img)[0] + "*" + _get_img_NaturalDimensions(img)[1];
+        showSpot.innerHTML += showSize;
+    }
+</script>
+</body>
+</html>

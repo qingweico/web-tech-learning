@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<script src="vue.js/vue.js"></script>
+<style>
+    table{
+        border:1px solid #e9e9e9;
+        border-collapse: collapse;
+        border-spacing: 0;
+    }
+    th{
+        background-color: #f7f7ff;
+        color:#5c6b77;
+        font-size: 16px;
+    }
+    th,td{
+        padding:8px 16px;
+        border:1px solid #e9e9ee;
+        text-align: left;
+    }
+
+</style>
+<body>
+    <div id = "app">
+        <table v-if = 'books.length !== 0'>
+            <thead>
+                <tr>
+                   <th>编号</th>
+                   <th>书籍名称</th>
+                   <th>出版日期</th>
+                   <th>价格</th>
+                   <th>购买数量</th>
+                   <th>操作</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for = "(item,index) in books">
+                    <td>{{item.id}}</td>
+                    <td>{{item.name}}</td>
+                    <td>{{item.publishTime}}</td>
+                    <td>{{item.price | showPrice}}</td>
+                    <td>
+                        <button @click = decrease(index)>-</button>
+                        {{item.purchaseCount}}
+                        <button @click = increase(index)>+</button>
+                    </td>
+                    <td>
+                        <button @click = remove(index)>移出</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='6' style="text-align:center;background-color: #e7e7e7;">总计:{{totalPrice | showPrice}}</td>
+                </tr>
+            </tbody>
+        </table>
+        <h1 v-else>您的购物车还是空的，请去商城逛逛吧</h1>
+       
+      
+    </div>
+    <script>
+        let app = new Vue({
+           el:"#app",
+           data:{
+               books:[
+                {
+                    id:1,
+                    name:"java核心技术卷",
+                    publishTime:"2006-5",
+                    price:"85",
+                    purchaseCount:1
+                },
+                {
+                    id:2,
+                    name:"On java8",
+                    publishTime:"2012-4",
+                    price:"185",
+                    purchaseCount:1
+                },
+                {
+                    id:3,
+                    name:"Thinking in java",
+                    publishTime:"2016-1",
+                    price:"54",
+                    purchaseCount:1
+                },
+                {
+                    id:4,
+                    name:"鸟哥的私房菜",
+                    publishTime:"2014-6",
+                    price:"129",
+                    purchaseCount:1
+                }
+               ]
+           },
+           methods:{
+               remove(index){
+                   this.books.splice(index,1);
+               },
+               increase(index){
+                 if(this.books[index].purchaseCount < 20){
+                    this.books[index].purchaseCount++;
+                 }
+                 else{
+                     alert("每个人最多购买20本哦")
+                 }
+               },
+               decrease(index){
+                  if(this.books[index].purchaseCount > 1){
+                    this.books[index].purchaseCount--;
+                  }
+                  else{
+                    if( confirm("是否不再购买此书?")){
+                        this.books.splice(index,1);
+                    }
+                  }
+               },
+           },
+           filters: {
+               showPrice(price){
+                   return '￥' + parseInt(price).toFixed(2);
+             }
+           },
+           computed:{
+            totalPrice(){
+                   var totalPrice = 0;
+                   for(item of this.books){
+                       totalPrice += item.price*item.purchaseCount;
+                   }
+                return totalPrice;
+               }
+           }
+        })
+    </script>
+</body>
+</html>

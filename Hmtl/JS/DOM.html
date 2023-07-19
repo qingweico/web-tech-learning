@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<style>
+    #id_div_outer{
+        width: 600px;
+        height: 200px;
+        background-color: #b833ff;
+    }
+    #id_div_inner{
+        width: 400px;
+        height: 100px;
+        background-color: #cbcbcb;
+        position: relative;
+        margin: auto 50px;
+        top: 50px;
+    }
+</style>
+<body><!---
+<form id="id-form"name="name-form" action="#" method="GET" target="_blank">
+    <label>空白表单</label>
+</form>-->
+<form id="id-form" name="name-form" action="#" method="GET" target="_blank">
+    <label for="forms">用户名:</label>
+    <input type="text" value="king" id="forms"><br>
+    <label for="password">密码:</label>
+     <input id="password" type="password" value="pwd"><br>
+    <input type="reset" value="重置">
+    <input type="submit" value="提交">
+</form>
+<form id="id-forms" name="names-form"  action="#" method="get">
+    <label for="username-label">用户名:</label>
+    <input type="text" id="username-label" value="" onchange="on_usernames_change(this.id)"><br><br>
+    <label for="gender-label">性别:</label>
+    <select id="gender-label" onchange="on_gender_change(this.id)">
+        <option value="male">male</option>
+        <option value="female">female</option>
+    </select><br><br>
+</form>
+<form id="id-text" name="name-text" action="#" method="get">
+    <label for="form-textarea">Text Area:</label>
+    <br>
+    <textarea id="form-textarea" onselect="on_areaText_change(this.id)"></textarea>
+</form>
+<form id="id-focus" name="name-focus" action="#" method="get">
+<label for="form-onfocus">焦点事件:</label>
+    <input id="form-onfocus" type="text" value="" onfocus="on_focus(this.id)" onblur="on_blur(this.id)">
+    <br><br>
+</form>
+<form id="id_submit" name="name_submit" action="#"  method="get" onreset="on_reset()" onsubmit="on_submit()">
+    <label for="label-submit">Text:</label>
+    <input  id="label-submit" type="text" value="" name="name_input">
+    <br><br>
+    <input type="reset" value="重置">
+    <input type="submit" value="提交">
+</form>
+<div id="id_div" ondblclick="on_click(this.id)">
+    鼠标点击事件
+</div>
+<div id="id_div_outer" class="div_outer" onmouseover="on_mouseover(this.id)" onmouseout="on_mouseout(this.id)">
+    <div id="id_div_inner" class="div_inner" onmouseover="on_mouseover(this.id)" onmouseout="on_mouseout(this.id)">
+    </div>
+</div>
+ <script>
+
+        //-----------------------------获取表单元素对象属性----------------------------
+    let frm = document.forms["name-form"];
+    console.log(frm.id);
+    console.log(frm.name);
+    console.log(frm.target);
+    console.log(frm.action);
+    console.log(frm.method);
+     //-------------------------------获取表单元素的方法--------------------------------
+    let frm_t=document.forms["name-form"];
+    let len=frm_t.length;
+    console.log(len);
+    for(let i=0;i<len;i++){
+        console.log(frm_t.elements[i].value);
+    }
+    //-------------------------------------------------------------------------------------
+    /* document.body.onload=function () {
+        alert("窗口加载事件");
+     };*/
+    //--------------------表单元素变化事件----------------------
+     function on_usernames_change(p) {
+        let id=document.getElementById(p);
+        console.log(id.value);
+        console.log("表单元素已改变");
+     }
+    function on_gender_change(thisid) {
+        let id=document.getElementById(thisid);
+        console.log(id.options[id.options.selectedIndex].value);
+        console.log("表单元素已改变");
+    }
+    //--------------------表单被选中事件-------------------
+     function on_areaText_change(thisid) {
+         let id=document.getElementById(thisid);
+         let selectText=id.value.slice(id.selectionStart,id.selectionEnd);
+         console.log(selectText);
+         console.log("表单被选中");
+     }
+     //--------------------表单元素焦点事件---------------
+      function  on_focus(thisid) {
+         let id=document.getElementById(thisid);
+         console.log("获取焦点");
+         console.log(id.value);
+      }
+      function on_blur(thisid) {
+         let id=document.getElementById(thisid);
+         console.log("失去焦点");
+         console.log(id.value);
+      }
+      //--------------------------表单重置与提交事件----------------------
+       function on_reset() {
+         console.log(name_submit.name_input.value);
+       }
+       function on_submit() {
+         console.log(name_submit.name_input.value);
+       }
+       //-------------------------------鼠标事件------------------------------
+     function  on_click(thisid) {
+         let id=document.getElementById(thisid).innerText;
+         console.log(id);
+     }
+     //-----------------------------------鼠标悬停与点击事件--------------------------------
+     function on_mouseover(thisid) {
+         let id=document.getElementById(thisid);
+         console.log("鼠标悬停在"+id.id);
+     }
+     function on_mouseout(thisid) {
+         let id=document.getElementById(thisid);
+         console.log("鼠标移出"+id.id);
+     }
+    </script>
+</body>
+</html>

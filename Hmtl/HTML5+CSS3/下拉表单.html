@@ -1,0 +1,45 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>文本域表单</title>
+</head>
+<style>
+    body{
+        background-color: pink;
+    }
+</style>
+<body>
+<form action="https://www.baidu.com" method="get" target="_self">
+   <table class="cssTable">
+       <caption>下拉列表表单</caption>
+           <tr>
+               <th>请选择你所在的国家:</th>
+           </tr>
+           <tr>
+                 <td><label for="select"></label>
+                     <select  id="select">
+                           <option>中国</option>
+                           <option>美国</option>
+                           <option>英国</option>
+                           <option>法国</option>
+                           <option>德国</option>
+                           <option>意大利</option>
+                       </select>
+                 </td>
+           </tr>
+       <tr>
+          <td>
+                <hr>
+          </td>
+       </tr>
+       <tr>
+           <td>
+                 <input type="reset" value="重置"/>
+                 <input type="submit"  value="提交"/>
+           </td>
+       </tr>
+   </table>
+</form>
+</body>
+</html>

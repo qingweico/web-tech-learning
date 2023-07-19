@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+前端编程语言 : &nbsp;&nbsp;
+<label for="id-select-switch"></label>
+<select id="id-select-switch" onchange="on_select_change(value);">
+    <option value="HTML5">HTML5</option>
+    <option value="CSS3">CSS3</option>
+    <option value="JS">JS</option>
+</select>
+<div id="id-div-switch">
+    请选择你喜欢的前端语言 :
+</div>
+<script>
+    let v_var = document.getElementById("id-div-switch");
+
+    function on_select_change(value) {
+        console.log(value);
+        switch (value) {
+            case "HTML5":
+                v_var.innerHTML = "您选择前端编程语言:" + value;
+                break;
+            case "CSS3":
+                v_var.innerHTML = "您选择前端编程语言:" + value;
+                break;
+            case "JS":
+                v_var.innerHTML = "您选择前端编程语言:" + value;
+                break;
+        }
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mall-Index</title>
+    <script src="https://lib.baomitu.com/jquery/1.12.4/jquery.js"></script>
+    <link rel="shortcut icon" type="image/x-icon" href="https://cdn.qingweico.cn/blog/fe4500031cb6f024b4d7.png" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <script src="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
+
+</head>
+<style>
+    @keyframes myColor {
+        100% {
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+        }
+    }
+
+    img {
+        height: 400px;
+    }
+
+    .thumbnail:hover {
+        animation-name: myColor;
+        animation-duration: 0.2s;
+        animation-timing-function: linear;
+        animation-play-state: running;
+        animation-fill-mode: forwards
+    }
+
+    .thumbnail .main-button {
+        display: none;
+    }
+
+    .thumbnail:hover .main-button {
+        display: block;
+    }
+
+    .thumbnail:hover .price {
+        display: none;
+    }
+
+    footer {
+        width: 100%;
+        height: 30px;
+        background-color: #2E2E2E;
+        text-align: center;
+        color: silver;
+        font-size: 15px;
+        bottom: 0;
+    }
+
+    footer p {
+        display: block;
+        position: relative;
+        top: 10px;
+        bottom: 0;
+    }
+</style>
+<body>
+<!--导航条-->
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                    data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">商城主页</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="#">全部 <span class="sr-only">(current)</span></a></li>
+                <li><a href="#">品牌周边</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                       aria-expanded="false">热门商品 <span class="caret"></span></a>
+                    <ul class="dropdown-menu" id="demo-navbar">
+                        <li><a href="#IPhoneX">IPhoneX</a></li>
+                        <li><a href="#nut">坚果3</a></li>
+                        <li><a href="#headset">降噪耳机</a></li>
+
+                    </ul>
+                </li>
+                <li><a href="#">加入我们</a></li>
+            </ul>
+            <form class="navbar-form navbar-left">
+                <div class="form-group">
+                    <label>
+                        <input type="text" class="form-control" placeholder="请输入您想要的商品...">
+                    </label>
+                </div>
+                <button type="submit" class="btn btn-default">搜索</button>
+
+            </form>
+            <button type="button" class="btn btn-primary navbar-btn navbar-right" data-toggle="modal"
+                    data-target="#exampleModal" data-whatever="@getbootstrap">登录
+            </button>
+            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                    aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title" id="exampleModalLabel">登陆</h4>
+                        </div>
+                        <div class="modal-body">
+                            <form>
+                                <div class="form-group">
+                                    <label for="username" class="control-label">用户名:</label>
+                                    <input type="text" class="form-control" id="username">
+                                </div>
+                                <div class="form-group">
+                                    <label for="password" class="control-label">密码:</label>
+                                    <input type="password" class="form-control" id="password">
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                            <button type="button" class="btn btn-primary">确定</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+</nav>
+
+<!--轮播图-->
+<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+    <!-- Indicators -->
+    <ol class="carousel-indicators">
+        <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+        <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+        <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+        <li data-target="#carousel-example-generic" data-slide-to="3"></li>
+        <li data-target="#carousel-example-generic" data-slide-to="4"></li>
+        <li data-target="#carousel-example-generic" data-slide-to="5"></li>
+    </ol>
+
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner" role="listbox">
+        <div class="item active">
+            <img src="image/iphone11-gallery2-2019.jpg" alt="...">
+            <div class="carousel-caption">
+
+            </div>
+        </div>
+        <div class="item">
+            <img src="image/iphone11-gallery4-2019.jpg" alt="...">
+            <div class="carousel-caption">
+
+            </div>
+        </div>
+
+        <div class="item">
+            <img src="image/Ccdiid.png" alt="...">
+            <div class="carousel-caption">
+
+            </div>
+        </div>
+        <div class="item">
+            <img src="image/9Y5MHc8sfhJLk3u.png" alt="...">
+            <div class="carousel-caption">
+
+            </div>
+        </div>
+        <div class="item">
+            <img src="image/iphone11-gallery1-2019.jpg" alt="...">
+            <div class="carousel-caption">
+
+            </div>
+        </div>
+        <div class="item">
+            <img src="image/iphone11-gallery3-2019.jpg" alt="...">
+            <div class="carousel-caption">
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Controls -->
+    <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+    </a>
+    <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+    </a>
+</div>
+
+
+<div class="container">
+    <div role="tabpanel">
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs" role="tablist" id="tab-list">
+            <li role="presentation" class="active"><a href="#IPhoneX" aria-controls="Chrome" role="tab"
+                                                      data-toggle="tab">IPhoneX</a></li>
+            <li role="presentation"><a href="#nut" aria-controls="Firefox" role="tab" data-toggle="tab">坚果3</a></li>
+            <li role="presentation"><a href="#headset" aria-controls="IE" role="tab" data-toggle="tab">降噪耳机</a></li>
+        </ul>
+
+        <!-- Tab panes -->
+        <div class="tab-content">
+            <div role="tabpanel" class="tab-pane active" id="IPhoneX">
+                <div class="row feature">
+                    <div class="col-md-7">
+                        <h2 class="">IPhone X</h2>
+                        <p>IPhone X 全面屏 全面绽放</p>
+                    </div>
+                    <div class="col-md-5">
+                        <img src="image/5b48a7f468bf2.png" alt="">
+
+                    </div>
+                </div>
+            </div>
+            <div role="tabpanel" class="tab-pane" id="nut">
+                <div class="row feature">
+                    <div class="col-md-5">
+                        <img src="image/timg.jpg" alt="">
+                    </div>
+                    <div class="col-md-7">
+                        <h2 class="">坚果3</h2>
+                        <p>坚果3 三面无边框 漂亮的不像实力派</p>
+                    </div>
+                </div>
+            </div>
+            <div role="tabpanel" class="tab-pane" id="headset">
+                <div class="row feature">
+                    <div class="col-md-7">
+                        <h2 class="">FIIL Diva Pro 全场景无线降噪耳机</h2>
+                        <p>智能语音交互、高清无损本地存储播放</p>
+                    </div>
+                    <div class="col-md-5">
+                        <img src="image/99c548bfc9848a8c95f4e4f7f2bc1095.png" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-6 col-md-3">
+            <div class="thumbnail">
+                <img src="image/b899d9b82c4bc2710492a26af021d484.jpg" alt="...">
+                <div class="caption">
+                    <h3 style="font-size: 15px;">坚果 3 TPU 软胶透明保护套</h3>
+                    <p>轻薄透明、完美贴合、TPU 环保材质</p>
+                    <p class="main-button"><a href="#" class="btn btn-primary" role="button">查看详情</a> <a href="#"
+                                                                                                         class="btn btn-default"
+                                                                                                         role="button">加入购物车</a>
+                    </p>
+                    <p class="price" style="font-size: 30px; color: red;">￥29.0</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6 col-md-3">
+            <div class="thumbnail">
+                <img src="image/10525c4b21f039fc8ccb42cd1586f5cd.jpg" alt="...">
+                <div class="caption">
+                    <h3 style="font-size: 15px;"> Smartisan 半入耳式耳机</h3>
+                    <p> 经典配色、专业调音、高品质麦克风</p>
+                    <p class="main-button"><a href="#" class="btn btn-primary" role="button">查看详情</a> <a href="#"
+                                                                                                         class="btn btn-default"
+                                                                                                         role="button">加入购物车</a>
+                    </p>
+                    <p class="price" style="font-size: 30px; color: red;">￥169.0</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6 col-md-3">
+            <div class="thumbnail">
+                <img src="image/5e4b1feddb13639550849f12f6b2e202.jpg" alt="...">
+                <div class="caption">
+                    <h3 style="font-size: 15px;">坚果 3 TPU 软胶保护套</h3>
+                    <p> TPU 环保材质、完美贴合、周到防护</p>
+                    <p class="main-button"><a href="#" class="btn btn-primary" role="button">查看详情</a>
+                        <a href="#" class="btn btn-default" role="button">加入购物车</a></p>
+                    <p class="price" style="font-size: 30px; color: red;">￥125.0</p>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col-sm-6 col-md-3">
+            <div class="thumbnail">
+                <img src="image/abb6986430536cd9365352b434f3c568.jpg" alt="...">
+                <div class="caption">
+                    <h3 style="font-size: 15px;">坚果 3 "足迹"背贴 乐高创始人出生</h3>
+                    <p>1891 年 4 月 7 日</p>
+                    <p class="main-button"><a href="#" class="btn btn-primary" role="button">查看详情</a> <a href="#"
+                                                                                                         class="btn btn-default"
+                                                                                                         role="button">加入购物车</a>
+                    </p>
+                    <p class="price" style="font-size: 30px; color: red;">￥79.0</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-6 col-md-3">
+            <div class="thumbnail">
+                <img src="image/daa975651d6d700c0f886718c520ee19.jpg" alt="...">
+                <div class="caption">
+                    <h3 style="font-size: 15px;">Smartisan Polo衫 经典款</h3>
+                    <p>一件表里如一的舒适 POLO 衫</p>
+                    <p class="main-button"><a href="#" class="btn btn-primary" role="button">查看详情</a>
+                        <a href="#"
+                           class="btn btn-default"
+                           role="button">加入购物车</a>
+                    </p>
+                    <p class="price" style="font-size: 30px; color: red;">￥249.0</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-6 col-md-3">
+            <div class="thumbnail">
+                <img src="image/804edf579887b3e1fae4e20a379be5b5.png" alt="...">
+                <div class="caption">
+                    <h3 style="font-size: 15px;">Smartisan T恤 任天堂发售“红白机”</h3>
+                    <p>100% 美国SUPIMA棉、舒适拉绒质地</p>
+                    <p class="main-button"><a href="#" class="btn btn-primary" role="button">查看详情</a> <a href="#"
+                                                                                                         class="btn btn-default"
+                                                                                                         role="button">加入购物车</a>
+                    </p>
+                    <p class="price" style="font-size: 30px; color: red;">￥149.0</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-6 col-md-3">
+            <div class="thumbnail">
+                <img src="image/2f9a0f5f3dedf0ed813622003f1b287b.jpg" alt="...">
+                <div class="caption">
+                    <h3 style="font-size: 15px;">Smartisan 帆布鞋</h3>
+                    <p>一双踏实、舒适的帆布鞋</p>
+                    <p class="main-button"><a href="#" class="btn btn-primary" role="button">查看详情</a> <a href="#"
+                                                                                                         class="btn btn-default"
+                                                                                                         role="button">加入购物车</a>
+                    </p>
+                    <p class="price" style="font-size: 30px; color: red;">￥199.0</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-6 col-md-3">
+            <div class="thumbnail">
+                <img src="image/71432ad30288fb860a4389881069b874.png" alt="...">
+                <div class="caption">
+                    <h3 style="font-size: 15px;">畅呼吸智能空气净化器除甲醛版</h3>
+                    <p>购新空净 赠价值 699 元活性炭滤芯</p>
+                    <p class="main-button"><a href="#" class="btn btn-primary" role="button">查看详情</a> <a href="#"
+                                                                                                         class="btn btn-default"
+                                                                                                         role="button">加入购物车</a>
+                    </p>
+                    <p class="price" style="font-size: 30px; color: red;">￥2999.0</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<footer>
+    <div>
+        <p> &copy; 2020 All Rights Reserved. </p>
+    </div>
+</footer>
+
+<script>
+    $('#demo-navbar a').click(function () {
+        let href = $(this).attr("href");
+        $("#tab-list a[href='" + href + "']").tab("show");
+    })
+</script>
+</body>
+</html>

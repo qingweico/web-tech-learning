@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title></title>
+    </head>
+    <!--首先HTML是基于SGML(标准通用标识语言)，而XHTML是基于XML(可扩展标识语言)-->
+        <style>
+            form{
+                width: 200px;
+                height: 200px;
+                margin: 100px auto;
+            }
+        </style>
+    <body>
+           <form autocomplete="on">
+               <fieldset>
+                   <legend>个人信息:</legend>
+                   <table>
+                       <tr>
+                           <td colspan="2">
+                               <label for="id-name" >Name</label>
+                               <input  id="id-name" type="text" autofocus="autofocus" ><br>
+                           </td>
+                       </tr>
+                       <tr>
+                           <td>
+                               <label for="id-telephone">Telephone</label>
+                               <input  id="id-telephone" type="text"><br>
+                           </td>
+                       </tr>
+                       <tr>
+                           <td>
+                             <label for="id-email">Email</label>
+                             <input id="id-email" type="text">
+                           </td>
+                       </tr>
+                   </table>
+               </fieldset>
+           </form>
+           <article>
+               <p>前端开发</p>
+               <h1>全栈工程师</h1>
+           </article>
+           <section>
+                <h1>W3C</h1>
+                <p>World Wide Web Consortium (W3C) 是万维网联盟...</p>
+            </section>
+            <aside>
+                    <h4>Epcot Center</h4>
+                    <p>The Epcot Center is a theme park in Disney World, Florida.</p>
+            </aside>
+              <video width="300px" height="200px" controls loop autoplay>
+                  <source src="E://ppt//1.mp4" type="video/mp4"> <!--插入视频--></video>
+            <progress value="30" max="100" ></progress>
+             <svg width="200" height="100px">               <!--SVG矢量图形-->
+                 <circle cx="20" cy="30" r="20" fill="blue"></circle>
+             </svg>
+             <svg>
+                    <rect width="150" height="150" fill="orange">
+                      <animate attributeName="x" from="0" to="900"        
+                        dur="1.0s" fill="freeze" repeatCount="indefinite">
+                      </animate><!--谷歌浏览器支持，但edge不支持-->
+                    </rect>
+             </svg>
+    </body>
+</html>

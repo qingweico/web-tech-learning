@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>爱奇艺个人中心</title>
+</head>
+<style>
+    *{
+        background-color: black;
+        margin: 0;
+        padding: 0;
+    }
+    .title {
+        float: none;
+        position: relative;
+        margin: 0 auto;
+        width: 100%;
+        height: 30px;
+        font-family: fantasy;
+        font-size: 20px;
+        background-color: grey;
+    }
+    .nave{
+        margin: 0 auto;
+    }
+    .head{
+        color: grey;
+        text-align:center;
+        display: inline;
+    }
+    body{
+        background-color: black;
+    }
+    .head:hover{
+      color:lawngreen;
+    }
+    tr th{
+        text-align: left ;
+        color: grey;
+    }
+    .border{
+        width: 250px;
+        height: 30px;
+    }
+    .border:hover{
+        background-color: white;
+        border-color: lawngreen;
+    }
+    .nave{
+        width: 250px;
+        height: 25px;
+        text-align: center;
+        background: lawngreen;
+    }
+    tr td a{
+        text-decoration: none;
+        color: #7cfc00;
+        font-size:12px;
+    }
+    .Load span{
+        width: 100%;
+        font-size: 10px;
+    }
+    .Load span a{
+        color: #7cfc00;
+        font-size: 10px;
+        text-decoration: none;
+    }
+    .btn{
+        width: 250px;
+        height: 25px;
+        background-color:lawngreen ;
+    }
+</style>
+<body>
+<script src="../JQuery/JQuery.3.4.1.js"></script>
+<script>
+    $(document).ready(function () {
+        $("input").focus(function () {              
+            $(this).css("background-color","white");
+        });
+        $(".border").blur(function () {
+            $(this).css("background-color","black");
+        });
+    });
+</script>
+<div class="title">爱奇艺个人中心</div>
+<br/>
+<div class="nave">
+<table>
+    <caption class="head">账号登陆</caption>
+    <tr>
+        <th>
+             <label for="id-number">账号:</label>
+             <input id="id-number" style="background-color: black" class="border form-control"
+             type="number" placeholder="请输入手机号或邮箱" >
+             <!--autofocus该属性自动为输入框获得焦点-->
+        </th>
+    </tr>
+    <tr>
+        <th>
+            <label for="id_password">密码:</label>
+            <input  id="id_password" style="background-color: black"    class="border " type="password" width="50px"
+                    placeholder="6-20位数字~字母或字符">
+        </th>
+    </tr>
+    <tr class="Load">
+        <th>
+            <span>登陆即代表您同意<a href="#">《用户服务协议》</a>和<a href="#">《隐私保护协议》</a></span>
+        </th>
+    </tr>
+    <tr>
+        <th>
+           <button class="btn">登录</button>
+        </th>
+    </tr>
+     <tr style="text-align: center">
+         <td>
+             <a href="http://www.baidu.com" target="_blank">新用户注册</a>
+             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+             <a href="http://www.baidu.com" target="_blank">找回密码</a>
+         </td>
+     </tr>
+</table>
+</div>
+</body>
+</html>
