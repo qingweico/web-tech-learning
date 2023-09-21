@@ -15,9 +15,9 @@ import java.lang.reflect.Method;
  * @author zqw
  * @date 2022/9/25
  */
-public class SpringIntroductionAdvisor implements EchoService {
+public class SpringIntroductionAdvisorImpl implements EchoService {
     public static void main(String[] args) {
-        SpringIntroductionAdvisor sia = new SpringIntroductionAdvisor();
+        SpringIntroductionAdvisorImpl sia = new SpringIntroductionAdvisorImpl();
         ProxyFactory proxyFactory = new ProxyFactory();
         proxyFactory.setTarget(sia);
         proxyFactory.addAdvisor(new DefaultIntroductionAdvisor(new MethodBeforeAdvice() {
