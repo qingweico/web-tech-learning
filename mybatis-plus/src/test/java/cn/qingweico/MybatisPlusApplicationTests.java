@@ -4,13 +4,10 @@ import cn.qingweico.entity.Goods;
 import cn.qingweico.mapper.GoodsMapper;
 import cn.qingweico.utils.Print;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-
-import java.awt.*;
 
 @SpringBootTest
 class MybatisPlusApplicationTests {
