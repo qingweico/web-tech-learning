@@ -41,4 +41,9 @@ public class ProducerClientTest {
         AbstractMessageSend orderlyMessage = new OrderlyMessage();
         orderlyMessage.sendMessage();
     }
+    @Test
+    public void tagMessage() throws InterruptedException {
+        AbstractMessageSend tagMessage = new TagMessage();
+        tagMessage.sendMessage();
+    }
 }

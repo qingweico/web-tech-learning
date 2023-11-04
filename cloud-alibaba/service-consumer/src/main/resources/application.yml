@@ -1,0 +1,8 @@
+server:
+  port: 8888
+provider:
+  ribbon:
+    # 随机算法
+    # NFLoadBalanceRuleClassName: com.netflix.Loadbalancer.RandomRule
+    # 权重算法
+   NFLoadBalanceRuleClassName: cn.qingweico.config.NacosWeightedRule
