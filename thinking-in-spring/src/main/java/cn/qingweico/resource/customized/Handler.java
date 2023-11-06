@@ -14,10 +14,12 @@ import java.nio.charset.StandardCharsets;
  * @date 2021/12/22
  */
 public class Handler extends sun.net.www.protocol.classpath.Handler {
-   // VM Options: -Djava.protocol.handler.pkgs=cn.qingweico.resource
-   public static void main(String[] args) throws IOException {
-      URL url = new URL("customized:///META-INF/user.properties");
-      InputStream inputStream = url.openStream();
-      System.out.println(StreamUtils.copyToString(inputStream, StandardCharsets.UTF_8));
-   }
+    /**
+     * VM Options: -Djava.protocol.handler.pkgs=cn.qingweico.resource
+     */
+    public static void main(String[] args) throws IOException {
+        URL url = new URL("customized:///META-INF/user.properties");
+        InputStream inputStream = url.openStream();
+        System.out.println(StreamUtils.copyToString(inputStream, StandardCharsets.UTF_8));
+    }
 }

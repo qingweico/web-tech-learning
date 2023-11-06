@@ -1,0 +1,10 @@
+server:
+  port: 8080
+cache:
+  redis:
+    database: 1
+    cluster: ""
+    host: 127.0.0.1
+    port: 6379
+    password:
+    serializer: cn.qingweico.serializer.JacksonRedisSerializer

@@ -4,8 +4,8 @@
        xsi:schemaLocation="
         http://www.springframework.org/schema/beans
         https://www.springframework.org/schema/beans/spring-beans.xsd">
-	<bean id="defaultEchoService" class="cn.qingweico.aop.service.DefaultEchoService"/>
-	<bean id="otherEchoService" class="cn.qingweico.aop.service.OtherEchoService"/>
+	<bean id="defaultEchoService" class="cn.qingweico.aop.service.DefaultEchoServiceImpl"/>
+	<bean id="otherEchoService" class="cn.qingweico.aop.service.OtherEchoServiceImpl"/>
 	<bean class="org.springframework.aop.framework.autoproxy.BeanNameAutoProxyCreator">
 		<!-- 所有以EchoService结尾的bean都会被拦截 -->
 		<property name="beanNames" value="*EchoService"/>

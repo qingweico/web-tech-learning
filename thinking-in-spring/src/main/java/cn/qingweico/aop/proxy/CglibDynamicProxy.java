@@ -1,6 +1,6 @@
 package cn.qingweico.aop.proxy;
 
-import cn.qingweico.aop.service.DefaultEchoService;
+import cn.qingweico.aop.service.DefaultEchoServiceImpl;
 import cn.qingweico.aop.service.EchoService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cglib.proxy.Enhancer;
@@ -17,7 +17,7 @@ import java.lang.reflect.Method;
 public class CglibDynamicProxy {
     public static void main(String[] args) {
         Enhancer enhancer = new Enhancer();
-        Class<?> superClass = DefaultEchoService.class;
+        Class<?> superClass = DefaultEchoServiceImpl.class;
         enhancer.setSuperclass(superClass);
         // 指定拦截接口
         enhancer.setInterfaces(new Class[]{EchoService.class});

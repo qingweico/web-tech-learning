@@ -1,7 +1,7 @@
 package cn.qingweico.aop.pointcut;
 
 import cn.qingweico.aop.interceptor.EchoServiceMethodInterceptor;
-import cn.qingweico.aop.service.DefaultEchoService;
+import cn.qingweico.aop.service.DefaultEchoServiceImpl;
 import cn.qingweico.aop.service.EchoService;
 import org.springframework.aop.framework.ProxyFactory;
 import org.springframework.aop.support.ComposablePointcut;
@@ -19,7 +19,7 @@ public class ApiPointcut {
         ComposablePointcut composablePointcut = new ComposablePointcut(EchoServiceEchoMethodPointcut.INSTANCE);
         composablePointcut.intersection(pointcut.getClassFilter());
         composablePointcut.intersection(pointcut.getMethodMatcher());
-        DefaultEchoService defaultEchoService = new DefaultEchoService();
+        DefaultEchoServiceImpl defaultEchoService = new DefaultEchoServiceImpl();
         ProxyFactory proxyFactory = new ProxyFactory(defaultEchoService);
         // 将 Pointcut 适配成 Advisor
         DefaultPointcutAdvisor advisor = new DefaultPointcutAdvisor(pointcut, new EchoServiceMethodInterceptor());

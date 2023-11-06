@@ -1,0 +1,14 @@
+server:
+  port: 8080
+spring:
+  data:
+    mongodb:
+      # db.createUser({
+      #    user: "rw",
+      #    pwd: "rw",
+      #    roles: [
+      #        { role: "readWrite", db: "rw_test" }
+      #    ]
+      #})
+      uri: mongodb://rw:rw@106.12.136.221:27017/?authSource=root&authMechanism=SCRAM-SHA-1
+      database: rw_test

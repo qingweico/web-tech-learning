@@ -11,7 +11,7 @@ import javax.annotation.PreDestroy;
  * @author zqw
  * @date 2021/11/11
  */
-@SuppressWarnings({"unused", "deprecation"})
+@SuppressWarnings({"unused"})
 public class DefaultUserFactory implements UserFactory, InitializingBean, DisposableBean {
 
     // ################################ Bean 初始化方法 ################################

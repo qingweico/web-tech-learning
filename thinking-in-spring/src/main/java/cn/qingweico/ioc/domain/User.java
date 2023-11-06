@@ -35,7 +35,7 @@ public class User implements BeanNameAware {
     public static User createUser() {
         User user = new User();
         user.setId(1L);
-        user.setName("zhou");
+        user.setName("zqw");
         return user;
     }
 

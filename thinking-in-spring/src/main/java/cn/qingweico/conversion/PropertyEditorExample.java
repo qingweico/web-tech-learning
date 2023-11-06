@@ -1,13 +1,13 @@
 package cn.qingweico.conversion;
 
-import cn.qingweico.bean.BeanInfoExample;
+import cn.qingweico.bean.JavaBeansPropertyDescriptor;
 
 import java.beans.PropertyEditor;
 
 /**
  * @author zqw
  * @date 2021/12/30
- * @see BeanInfoExample
+ * @see JavaBeansPropertyDescriptor
  */
 public class PropertyEditorExample {
     public static void main(String[] args) {

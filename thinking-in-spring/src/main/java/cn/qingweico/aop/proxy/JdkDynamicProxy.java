@@ -1,19 +1,23 @@
 package cn.qingweico.aop.proxy;
 
 
-import cn.qingweico.aop.service.DefaultEchoService;
+import cn.qingweico.aop.service.DefaultEchoServiceImpl;
 import cn.qingweico.aop.service.EchoService;
 import lombok.extern.slf4j.Slf4j;
 
 import java.lang.reflect.Proxy;
 
 /**
+ * 基于 JDK 的动态代理
+ *
  * @author zqw
  * @date 2022/7/20
  */
 @Slf4j
 public class JdkDynamicProxy {
-    // 需要被代理的对象
+    /**
+     * 需要被代理的对象
+     */
     private Object needToProxiedObject;
     /**
      * 生成代理对象
@@ -38,7 +42,7 @@ public class JdkDynamicProxy {
 
     public static void main(String[] args) {
         JdkDynamicProxy jdkProxy = new JdkDynamicProxy();
-        EchoService service = (EchoService) jdkProxy.newProxy(new DefaultEchoService());
+        EchoService service = (EchoService) jdkProxy.newProxy(new DefaultEchoServiceImpl());
         String result = service.echo("Jdk Dynamic Proxy");
         System.out.println(result);
         service.print("Jdk Dynamic Proxy");

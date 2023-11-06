@@ -4,7 +4,7 @@
        xsi:schemaLocation="
         http://www.springframework.org/schema/beans
         https://www.springframework.org/schema/beans/spring-beans.xsd">
-	<bean id="defaultEchoService" class="cn.qingweico.aop.service.DefaultEchoService"/>
+	<bean id="defaultEchoService" class="cn.qingweico.aop.service.DefaultEchoServiceImpl"/>
 	<!-- 配置拦截器 -->
 	<!--Advice Bean 或者是 MethodInterceptor Bean	-->
 	<bean id="echoServiceMethodInterceptor" class="cn.qingweico.aop.interceptor.EchoServiceMethodInterceptor"/>

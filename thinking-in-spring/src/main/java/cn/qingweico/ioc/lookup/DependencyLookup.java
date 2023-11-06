@@ -12,12 +12,14 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import java.util.Map;
 
 /**
+ * 依赖查找
+ *
  * @author zqw
  * @date 2021/11/7
  */
 @Slf4j
 public class DependencyLookup {
-    private static final BeanFactory context = new ClassPathXmlApplicationContext("META-INF/lookup-context.xml");
+    static BeanFactory context = new ClassPathXmlApplicationContext("META-INF/lookup-context.xml");
 
     public static void main(String[] args) {
         lookupRealtime();
@@ -35,17 +37,20 @@ public class DependencyLookup {
 
     @SuppressWarnings("unchecked")
     public static void lookupInLazy() {
+        // FactoryBean 和 ObjectFactory 的区别
         ObjectFactory<User> objectFactory = context.getBean("objectFactory", ObjectFactory.class);
         User user = objectFactory.getObject();
         log.info("lazy: {}", user);
     }
 
     public static void lookupByType() {
+        // 按照类型查找单个对象
         User user = context.getBean(User.class);
         log.info("lookupByType[Single Type]: {}", user);
     }
 
     public static void lookupCollectionByType(BeanFactory beanFactory) {
+        // 按照类型查找集合对象
         if (beanFactory instanceof ListableBeanFactory) {
             ListableBeanFactory listableBeanFactory = (ListableBeanFactory) beanFactory;
             // id为key,ioc中的对象为value

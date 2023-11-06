@@ -1,7 +1,7 @@
 package cn.qingweico.aop.aspect;
 
 import cn.qingweico.aop.interceptor.EchoServiceMethodInterceptor;
-import cn.qingweico.aop.service.DefaultEchoService;
+import cn.qingweico.aop.service.DefaultEchoServiceImpl;
 import cn.qingweico.aop.service.EchoService;
 import org.springframework.aop.framework.ProxyFactory;
 
@@ -13,7 +13,7 @@ import org.springframework.aop.framework.ProxyFactory;
  */
 public class ApiProxyFactory {
     public static void main(String[] args) {
-        DefaultEchoService defaultEchoService = new DefaultEchoService();
+        DefaultEchoServiceImpl defaultEchoService = new DefaultEchoServiceImpl();
         ProxyFactory proxyFactory = new ProxyFactory();
         proxyFactory.setTarget(defaultEchoService);
         proxyFactory.addAdvice(new EchoServiceMethodInterceptor());

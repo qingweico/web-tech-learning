@@ -6,7 +6,7 @@
         https://www.springframework.org/schema/beans/spring-beans.xsd">
 	<bean id="user" class="cn.qingweico.ioc.domain.User">
 		<property name="id" value="1"/>
-		<property name="name" value="li"/>
+		<property name="name" value="zqw"/>
 		<property name="city" value="HANGZHOU"/>
 		<property name="configFileLocation" value="META-INF/application.properties"/>
 		<property name="workCities" value="SHANGHAI, BEIJING"/>
