@@ -1,0 +1,9 @@
+swagger:
+  base-package: cn.qingweico
+  title: 20231111-Swagger-Qingweico
+  name: qingweico
+  url: https://qingweico.cn
+  email: 17796706221@163.com
+  version: 20231111
+  enable: false
+  description: 20231111-Swagger-Qingweico

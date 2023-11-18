@@ -124,7 +124,7 @@ class BootElasticApplicationTests {
             user.setId(i + 1L);
             user.setName("user" + (i + 1));
             request.add(new IndexRequest("user")
-                    .id("" + (i + 1))
+                    .id(String.valueOf(i + 1))
                     // 设置_source 的类型, 可以为String, 对象, JSON等; 这里为String
                     .source(JSON.toJSONString(user), XContentType.JSON));
         }
