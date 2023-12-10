@@ -10,7 +10,7 @@
     </parent>
     <groupId>cn.qingweico</groupId>
     <artifactId>cloud-alibaba</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>20231017</version>
     <name>cloud-alibaba</name>
     <description>cloud-alibaba</description>
     <packaging>pom</packaging>

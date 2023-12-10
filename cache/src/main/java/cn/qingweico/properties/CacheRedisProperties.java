@@ -11,7 +11,6 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 @ConfigurationProperties(prefix = "cache.redis")
 public class CacheRedisProperties {
     String host;
-    String cluster;
     String password;
     Integer database;
     Integer port;

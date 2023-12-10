@@ -2,12 +2,14 @@ package cn.qingweico;
 
 import cn.hutool.core.date.DateUtil;
 import cn.qingweico.client.RedisClient;
+import cn.qingweico.delayTask.DelayQueueManager;
+import cn.qingweico.delayTask.DelayTask;
+import cn.qingweico.delayTask.RedisBroadcastDelayTask;
 import cn.qingweico.serializer.JacksonRedisSerializer;
 import cn.qingweico.serializer.JdkRedisSerializer;
 import cn.qinwweico.entity.User;
 import cn.qinwweico.util.RandomDataUtil;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.StringUtils;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -16,7 +18,10 @@ import org.springframework.data.redis.core.script.DefaultRedisScript;
 import org.springframework.scripting.support.ResourceScriptSource;
 
 import java.io.IOException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.UUID;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.TimeUnit;
 
@@ -33,6 +38,9 @@ public class RedisApplicationTests {
 
     @Autowired
     private ExecutorService pool;
+
+    @Autowired
+    private DelayQueueManager delayQueueManager;
 
     @Test
     void strType() {
@@ -52,7 +60,6 @@ public class RedisApplicationTests {
                     .address(RandomDataUtil.address())
                     .build();
             System.out.println(redisClient.set("user[" + i + "]", user));
-            ;
         }
     }
 
@@ -71,7 +78,6 @@ public class RedisApplicationTests {
                 .address(RandomDataUtil.address())
                 .build();
         System.out.println(redisClient.set("user[" + 10 + "]", user, 10, TimeUnit.SECONDS, new JdkRedisSerializer()));
-        ;
         System.out.println(redisClient.get("user[10]", User.class, new JdkRedisSerializer()));
     }
 
@@ -191,5 +197,19 @@ public class RedisApplicationTests {
             keys.add("user[" + i + "]");
         }
         System.out.println(redisClient.mget(keys.toArray(new String[]{}), User.class));
+    }
+
+    @Test
+    void delayMessage() throws IOException {
+        final long DELAY_MILLIS = 5 * 1000;
+        long now = System.currentTimeMillis();
+        long delay = now + DELAY_MILLIS;
+        delayQueueManager.put
+                (new DelayTask
+                        (new RedisBroadcastDelayTask("EmailChannel", String.valueOf(delay)),
+                                delay));
+
+
+        System.out.println(System.in.read());
     }
 }

@@ -2,7 +2,6 @@ package cn.qingweico.client;
 
 import cn.qingweico.serializer.RedisSerializer;
 import io.lettuce.core.KeyValue;
-import org.apache.commons.lang3.StringUtils;
 
 import java.util.List;
 import java.util.Set;
@@ -20,13 +19,7 @@ public interface RedisClient {
      * @return RedisClient
      */
     static RedisClient getInstance(RedisProperties redisProperties) {
-        RedisClient redisClient;
-        if (StringUtils.isNotBlank(redisProperties.getCluster())) {
-            redisClient = new ClusterRedisClient(redisProperties);
-        } else {
-            redisClient = new SingleRedisClient(redisProperties);
-        }
-        return redisClient;
+        return new SingleRedisClient(redisProperties);
     }
 
     /**

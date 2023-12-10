@@ -9,7 +9,6 @@ import lombok.Data;
 @Data
 public class RedisProperties {
     String host;
-    String cluster;
     String password;
     Integer database;
     Integer port;

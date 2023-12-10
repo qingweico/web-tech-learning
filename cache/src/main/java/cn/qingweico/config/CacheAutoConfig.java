@@ -24,7 +24,6 @@ public class CacheAutoConfig {
         RedisProperties redisProperties = new RedisProperties();
         redisProperties.setDatabase(cacheRedisProperties.getDatabase());
         redisProperties.setHost(cacheRedisProperties.getHost());
-        redisProperties.setCluster(cacheRedisProperties.getCluster());
         redisProperties.setPassword(StringUtils.isBlank(cacheRedisProperties.getPassword()) ? null : cacheRedisProperties.getPassword());
         redisProperties.setPort(cacheRedisProperties.getPort());
         redisProperties.setSerializer(cacheRedisProperties.getSerializer());

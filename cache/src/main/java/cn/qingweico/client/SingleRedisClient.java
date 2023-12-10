@@ -15,7 +15,6 @@ import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
 
 import java.util.*;
@@ -163,11 +162,11 @@ public class SingleRedisClient implements RedisClient {
         try {
             RedisCommands<byte[], byte[]> sync = connection.sync();
 
-            final byte[][] bkeys = new byte[keys.length][];
+            final byte[][] byteKeys = new byte[keys.length][];
             for (int i = 0; i < keys.length; i++) {
-                bkeys[i] = getKeySerializer().serialize(keys[i]);
+                byteKeys[i] = getKeySerializer().serialize(keys[i]);
             }
-            return sync.del(bkeys);
+            return sync.del(byteKeys);
         } catch (SerializationException e) {
             throw e;
         } catch (Exception e) {

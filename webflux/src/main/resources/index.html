@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>SseBrowser</title>
+</head>
+<body>
+<script>
+    let sse = new EventSource("SSE");
+
+    sse.addEventListener("sse", (e) => {
+        console.log(e.data)
+        if (e.data === '3') {
+            sse.close()
+        }
+    })
+
+</script>
+</body>
+</html>
