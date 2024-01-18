@@ -96,7 +96,7 @@ public class WebSocketServer {
                 String str = JSON.toJSONString(json);
                 sendInfo(str, clientId);
             } catch (Exception e) {
-                e.printStackTrace();
+                log.error(e.getMessage());
             }
         }
     }
@@ -109,7 +109,7 @@ public class WebSocketServer {
     public void onError(Session session, Throwable error) {
         log.error("request uri: {}", session.getRequestURI());
         log.error("客户端 {} 错误, 原因: {}", this.clientId, error.getMessage());
-        error.printStackTrace();
+        log.error(error.getMessage());
     }
 
     /**

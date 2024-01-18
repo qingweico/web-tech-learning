@@ -22,7 +22,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.UUID;
-import java.util.concurrent.ExecutorService;
+import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -35,9 +35,6 @@ public class RedisApplicationTests {
 
     @Autowired
     private RedisClient redisClient;
-
-    @Autowired
-    private ExecutorService pool;
 
     @Autowired
     private DelayQueueManager delayQueueManager;
@@ -166,9 +163,8 @@ public class RedisApplicationTests {
         args.add(2);
         for (int i = 0; i < 100; i++) {
             int finalI = i;
-            pool.execute(() -> log.info("第 {} 次, {}", finalI, redisClient.eval(script, keys, args)));
+            CompletableFuture.runAsync(() -> log.info("第 {} 次, {}", finalI, redisClient.eval(script, keys, args)));
         }
-        pool.shutdown();
         // Simple block
         System.out.println(System.in.read());
     }
