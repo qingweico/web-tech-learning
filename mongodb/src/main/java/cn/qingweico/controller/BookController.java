@@ -7,7 +7,7 @@ import cn.qingweico.core.wrapper.Wrappers;
 import cn.qingweico.entity.Book;
 import cn.qingweico.entity.model.BookModel;
 import cn.qingweico.service.BookService;
-import cn.qingweico.utils.ApiResponse;
+import cn.qinwweico.model.ApiResponse;
 import org.springframework.beans.BeanUtils;
 import org.springframework.web.bind.annotation.*;
 
@@ -26,47 +26,36 @@ public class BookController {
     private BookService userService;
 
     @PostMapping("/save")
-    public ApiResponse<Object> save(@RequestBody BookModel um) {
+    public ApiResponse save(@RequestBody BookModel um) {
         Book user = new Book();
         BeanUtils.copyProperties(um, user);
         user.setCreateTime(DateUtil.now());
         user.setUpdateTime(DateUtil.now());
-        return ApiResponse.builder()
-                .data(userService.save(user))
-                .build();
+        return ApiResponse.ok(userService.save(user));
     }
 
     @PostMapping("/update")
-    public ApiResponse<Object> update(@RequestBody BookModel um) {
+    public ApiResponse update(@RequestBody BookModel um) {
         Book user = new Book();
         BeanUtils.copyProperties(um, user);
         user.setUpdateTime(DateUtil.now());
-        return ApiResponse.builder()
-                .data(userService.updateById(user))
-                .build();
+        return ApiResponse.ok(userService.updateById(user));
     }
 
     @DeleteMapping("/delete/{id}")
-    public ApiResponse<Object> deleteById(@PathVariable String id) {
-        return ApiResponse.builder()
-                .data(userService.removeById(id))
-                .build();
+    public ApiResponse deleteById(@PathVariable String id) {
+        return ApiResponse.ok(userService.removeById(id));
     }
 
     @GetMapping("/get/{id}")
-    public ApiResponse<Object> getById(@PathVariable String id) {
-        return ApiResponse.builder()
-                .data(userService.getById(id))
-                .build();
+    public ApiResponse getById(@PathVariable String id) {
+        return ApiResponse.ok(userService.getById(id));
     }
 
     @PostMapping("/page")
-    public ApiResponse<Object> queryList(@RequestBody BookModel um) {
-        LambdaQueryWrapper<Book> query = Wrappers.<Book>lambdaQuery()
-                .eq(Objects.nonNull(um.getName()), Book::getName, um.getName());
+    public ApiResponse queryList(@RequestBody BookModel um) {
+        LambdaQueryWrapper<Book> query = Wrappers.<Book>lambdaQuery().eq(Objects.nonNull(um.getName()), Book::getName, um.getName());
         Page<Book> page = userService.page(query, um.getPageNo(), um.getPageSize());
-        return ApiResponse.builder()
-                .data(page)
-                .build();
+        return ApiResponse.ok(page);
     }
 }

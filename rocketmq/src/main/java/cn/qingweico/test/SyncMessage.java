@@ -1,5 +1,6 @@
 package cn.qingweico.test;
 
+import lombok.extern.slf4j.Slf4j;
 import org.apache.rocketmq.client.producer.DefaultMQProducer;
 import org.apache.rocketmq.client.producer.SendResult;
 import org.apache.rocketmq.common.message.Message;
@@ -11,6 +12,7 @@ import org.apache.rocketmq.common.message.Message;
  * @author zqw
  * @date 2023/10/14
  */
+@Slf4j
 public class SyncMessage extends AbstractMessageSend {
 
     public void doSendMessage(DefaultMQProducer producer) {
@@ -19,7 +21,7 @@ public class SyncMessage extends AbstractMessageSend {
             SendResult sendResult = producer.send(message);
             System.out.println(sendResult.getSendStatus());
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error(e.getMessage());
         }
     }
 

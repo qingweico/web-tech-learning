@@ -7,6 +7,8 @@ import org.springframework.context.ApplicationEvent;
  * @date 2022/1/25
  */
 public class ApplicationEventExtension extends ApplicationEvent {
+    private static final long serialVersionUID = 3745938386736230279L;
+
     /**
      * Create a new {@code ApplicationEvent}.
      *

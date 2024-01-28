@@ -1,5 +1,6 @@
 package cn.qingweico.test;
 
+import lombok.extern.slf4j.Slf4j;
 import org.apache.rocketmq.client.producer.DefaultMQProducer;
 import org.apache.rocketmq.common.message.Message;
 
@@ -12,6 +13,7 @@ import java.util.UUID;
  * @author zqw
  * @date 2023/10/16
  */
+@Slf4j
 public class TagMessage extends AbstractMessageSend {
     @Override
     void doSendMessage(DefaultMQProducer producer) {
@@ -22,7 +24,7 @@ public class TagMessage extends AbstractMessageSend {
             producer.send(m1);
             producer.send(m2);
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error(e.getMessage());
         }
     }
 }

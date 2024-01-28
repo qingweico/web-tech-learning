@@ -54,7 +54,7 @@ public class DynamicResourceMessageSource extends AbstractMessageSource implemen
                 dirPath.register(watchService, StandardWatchEventKinds.ENTRY_MODIFY);
                 processMessagePropertiesChanged(watchService);
             } catch (IOException e) {
-                e.printStackTrace();
+                logger.error(e);
             }
         }
     }

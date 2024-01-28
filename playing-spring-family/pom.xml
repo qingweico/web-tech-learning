@@ -14,7 +14,7 @@
 	<name>playing-spring-family</name>
 	<description>playing-spring-family</description>
 	<properties>
-		<java.version>11</java.version>
+		<java.version>8</java.version>
 	</properties>
 	<dependencies>
 		<dependency>

@@ -6,7 +6,6 @@ import org.apache.commons.lang3.concurrent.LazyInitializer;
 
 import java.util.Date;
 import java.util.Locale;
-import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
 /**
@@ -16,8 +15,6 @@ import java.util.concurrent.ThreadLocalRandom;
  * @date 2022/06/20
  */
 public class RandomDataUtil {
-    private final static Random R = new Random();
-    private final static ThreadLocalRandom TLR = ThreadLocalRandom.current();
 
     private static Faker faker = null;
     private static Faker localFaker = null;
@@ -86,7 +83,7 @@ public class RandomDataUtil {
     public static String address(boolean isChinese) {
         String ret;
         if (isChinese) {
-            ret = new Faker(Locale.CHINA).address().fullAddress();
+            ret = localFaker.address().fullAddress();
         } else {
             ret = faker.address().fullAddress();
         }
@@ -101,23 +98,10 @@ public class RandomDataUtil {
         return name(false);
     }
 
-    public static int ri() {
-        return R.nextInt(100);
+    public static String zeroOrOne() {
+        return String.valueOf(ThreadLocalRandom.current().nextInt(2));
     }
-
-    public static int ri(int bound) {
-        return R.nextInt(bound);
-    }
-
-    public static double rd() {
-        return TLR.nextDouble();
-    }
-
-    public static float rf(int bound) {
-        return TLR.nextFloat() * bound;
-    }
-
-    public static boolean tf() {
-        return R.nextBoolean();
+    public static int nextInt(int bound) {
+        return ThreadLocalRandom.current().nextInt(bound);
     }
 }

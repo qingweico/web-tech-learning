@@ -6,8 +6,9 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
+import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.DelayQueue;
-import java.util.concurrent.ExecutorService;
+
 
 /**
  * @author zqw
@@ -17,9 +18,6 @@ import java.util.concurrent.ExecutorService;
 @Slf4j
 public class DelayQueueManager implements CommandLineRunner {
     private final DelayQueue<DelayTask> delayQueue = new DelayQueue<>();
-
-    private @Resource
-    ExecutorService pool;
 
     @Resource
     private RedisClient redisClient;
@@ -59,7 +57,7 @@ public class DelayQueueManager implements CommandLineRunner {
     public void run(String... args) {
         log.info("初始化日志延时队列");
         Runnable r = this::executeThread;
-        pool.execute(r);
+        CompletableFuture.runAsync(r);
     }
 
     /**

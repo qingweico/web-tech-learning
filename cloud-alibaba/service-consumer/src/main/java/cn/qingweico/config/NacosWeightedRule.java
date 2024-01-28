@@ -40,7 +40,7 @@ public class NacosWeightedRule extends AbstractLoadBalancerRule {
             log.info("负载均衡, 选择的实例是 {}, 端口号是 {}", instance, instance.getPort());
             return new NacosServer(instance);
         } catch (NacosException e) {
-            e.printStackTrace();
+            log.error("NacosException : {}", e.getMessage());
             return null;
         }
     }

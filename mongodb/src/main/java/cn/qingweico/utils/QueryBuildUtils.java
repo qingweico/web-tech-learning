@@ -79,7 +79,7 @@ public class QueryBuildUtils {
         }
 
         // 04 构建查询列
-        if (Objects.nonNull(arg.getFields()) && arg.getFields().size() > 0) {
+        if (Objects.nonNull(arg.getFields()) && !arg.getFields().isEmpty()) {
             Field fields = query.fields();
             arg.getFields().forEach(item -> fields.include(item.getCol()));
         }
@@ -115,7 +115,7 @@ public class QueryBuildUtils {
     private static Criteria[] buildCondition(ConditionWrapper arg) {
 
         Criteria criteria = new Criteria();
-        if (Objects.isNull(arg) || Objects.isNull(arg.getConditions()) || arg.getConditions().size() == 0) {
+        if (Objects.isNull(arg) || Objects.isNull(arg.getConditions()) || arg.getConditions().isEmpty()) {
             return new Criteria[]{criteria};
         }
         List<Condition> conditions = arg.getConditions();
@@ -124,7 +124,7 @@ public class QueryBuildUtils {
         Criteria[] critters = new Criteria[conditions.size()];
         for (int index = 0; index < conditions.size(); index++) {
             Condition condition = conditions.get(index);
-            if (Objects.nonNull(condition.getConditionWrapper()) && Objects.isNull(condition.getCol()) && condition.getConditionWrapper().getConditions().size() > 0) {
+            if (Objects.nonNull(condition.getConditionWrapper()) && Objects.isNull(condition.getCol()) && !condition.getConditionWrapper().getConditions().isEmpty()) {
                 Criteria curCriteria = new Criteria();
                 Condition first = condition.getConditionWrapper().getConditions().get(0);
                 if (first.getConditionType() == ConditionType.OR) {

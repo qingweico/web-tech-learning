@@ -54,7 +54,7 @@
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<version>${spring-boot.version}</version>
 				<configuration>
-					<mainClass>cn.qingweico.Boot3EnvApplication</mainClass>
+					<mainClass>cn.qingweico.boot3.Boot3EnvApplication</mainClass>
 					<skip>true</skip>
 				</configuration>
 				<executions>
