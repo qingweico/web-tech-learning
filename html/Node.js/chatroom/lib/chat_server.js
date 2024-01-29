@@ -4,7 +4,7 @@ var guestNumber  =1;
 var nickNames = {};
 var namesUsed = [];
 var currentRoom = {};
-//启动SOcket.IO服务器
+//启动Socket.IO服务器
 exports.listen = function(server){
     io = socketio.listen(server);
     io.set('log level', 1);

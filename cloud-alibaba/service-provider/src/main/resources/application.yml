@@ -7,4 +7,6 @@ spring:
     nacos:
       discovery:
         # 配置 Nacos 地址
+        # https://github.com/alibaba/nacos/releases
+        # 启动 startup.cmd -m standalone
         server-addr: 127.0.0.1:8848

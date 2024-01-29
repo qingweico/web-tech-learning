@@ -6,7 +6,7 @@
         <groupId>cn.qingweico</groupId>
         <artifactId>cloud-alibaba</artifactId>
         <version>20231017</version>
-        <relativePath/> <!-- lookup parent from repository -->
+        <relativePath/>
     </parent>
     <artifactId>service-provider</artifactId>
     <version>0.0.1-SNAPSHOT</version>

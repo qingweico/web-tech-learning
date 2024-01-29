@@ -4,14 +4,14 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>cn.qingweico</groupId>
     <artifactId>ali-face-recognition</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>20230423</version>
     <name>ali-face-recognition</name>
     <description>ali-face-recognition</description>
     <properties>
-        <java.version>1.8</java.version>
+        <java.version>8</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <spring-boot.version>2.4.2</spring-boot.version>
+        <spring-boot.version>2.7.0</spring-boot.version>
     </properties>
     <dependencies>
         <dependency>
@@ -38,14 +38,14 @@
             <version>3.11.1</version>
         </dependency>
         <dependency>
-            <groupId>com.baomidou</groupId>
-            <artifactId>mybatis-plus-boot-starter</artifactId>
-            <version>3.4.2</version>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
         </dependency>
     </dependencies>
     <dependencyManagement>
         <dependencies>
             <dependency>
+                <!-- 用于管理 Spring Boot 项目中所需的各种依赖库的版本 -->
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-dependencies</artifactId>
                 <version>${spring-boot.version}</version>

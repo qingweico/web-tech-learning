@@ -1,6 +1,17 @@
-server:
-  port: 8080
 spring:
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/test?useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&serverTimezone=GMT%2b8
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: 990712
+    hikari:
+      # 最大连接数 默认值为10
+      maximum-pool-size: 30
+      # 最小空闲连接数 默认值为10
+      minimum-idle: 30
+      connection-timeout: 30000
+      max-lifetime: 1800000
+      idle-timeout: 600000
   data:
     mongodb:
       # db.createUser({
@@ -12,3 +23,6 @@ spring:
       #})
       uri: mongodb://rw:rw@106.12.136.221:27017/?authSource=root&authMechanism=SCRAM-SHA-1
       database: rw_test
+face:
+  file:
+    path: C://face

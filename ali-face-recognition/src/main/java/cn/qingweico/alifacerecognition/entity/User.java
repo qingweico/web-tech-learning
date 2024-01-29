@@ -1,6 +1,5 @@
 package cn.qingweico.alifacerecognition.entity;
 
-import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.*;
 import lombok.experimental.Accessors;
 
@@ -17,7 +16,6 @@ import java.io.Serializable;
 @AllArgsConstructor
 @Builder
 @Accessors(chain = true)
-@TableName("t_user")
 public class User implements Serializable {
     private static final long serialVersionUID = 8059511295718875912L;
     private String id;

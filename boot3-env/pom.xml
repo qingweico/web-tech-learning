@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>cn.qingweico</groupId>
 	<artifactId>boot3-env</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>20230624</version>
 	<name>boot3-env</name>
 	<description>boot3-env</description>
 	<properties>

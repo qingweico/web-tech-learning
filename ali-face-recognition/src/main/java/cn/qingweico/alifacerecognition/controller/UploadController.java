@@ -9,6 +9,7 @@ import com.mongodb.client.gridfs.model.GridFSFile;
 import com.mongodb.client.model.Filters;
 import org.apache.commons.lang3.StringUtils;
 import org.bson.types.ObjectId;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -27,16 +28,9 @@ public class UploadController {
     @Resource
     private GridFSBucket gridFsBucket;
 
-    private static final String FACE_PIC_PATH;
+    @Value("${face.file.path}")
+    private String faceFilePath;
 
-    static {
-        String os = System.getProperty("os.name");
-        if ("Windows 10".equals(os)) {
-            FACE_PIC_PATH = "C://facePic";
-        } else {
-            FACE_PIC_PATH = "/home/java/facePic";
-        }
-    }
     @PostMapping("/uploadToGridFs")
     public ApiResponse uploadToGridFs(@RequestBody GridFs gridFs) throws IOException {
 
@@ -86,7 +80,7 @@ public class UploadController {
         }
         String fileName = gridFs.getFilename();
         // 获取文件流; 保存到本地或者服务器的临时目录
-        File picFile = new File(FACE_PIC_PATH + "/" + fileName);
+        File picFile = new File(faceFilePath + "/" + fileName);
         // 创建文件输出流
         OutputStream os = Files.newOutputStream(picFile.toPath());
         // 下载到服务器或者本地

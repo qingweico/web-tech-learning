@@ -1,6 +1,6 @@
 package cn.qingweico.alifacerecognition.config;
 
-import com.mongodb.MongoClient;
+import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.gridfs.GridFSBucket;
 import com.mongodb.client.gridfs.GridFSBuckets;
@@ -18,9 +18,12 @@ public class GridFsConfig {
     @Value("${spring.data.mongodb.database}")
     private String mongodb;
 
-
+    /**
+     * @param mongoClient {@link com.mongodb.client.MongoClient} other than {@link com.mongodb.MongoClient}
+     * @return GridFSBucket
+     */
     @Bean
-    public GridFSBucket getGridFsBucket(MongoClient mongoClient) {
+    public GridFSBucket gridFsBucket(MongoClient mongoClient) {
         MongoDatabase mongodbDatabase = mongoClient.getDatabase(mongodb);
         return GridFSBuckets.create(mongodbDatabase);
     }
