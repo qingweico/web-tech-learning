@@ -12,3 +12,5 @@ spring:
       #})
       uri: mongodb://rw:rw@106.12.136.221:27017/?authSource=root&authMechanism=SCRAM-SHA-1
       database: rw_test
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
