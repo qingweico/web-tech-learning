@@ -5,7 +5,7 @@ import cn.qingweico.entity.FriendLink;
 import cn.qingweico.entity.model.PostParams;
 import cn.qingweico.repo.FriendLinkRepository;
 import cn.qingweico.service.FriendLinkService;
-import cn.qinwweico.model.PagedResult;
+import cn.qingweico.model.PagedResult;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.domain.*;
 import org.springframework.data.mongodb.core.MongoTemplate;

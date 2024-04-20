@@ -6,8 +6,8 @@ import cn.qingweico.core.wrapper.LambdaQueryWrapper;
 import cn.qingweico.core.wrapper.Wrappers;
 import cn.qingweico.entity.Book;
 import cn.qingweico.entity.model.BookModel;
+import cn.qingweico.model.ApiResponse;
 import cn.qingweico.service.BookService;
-import cn.qinwweico.model.ApiResponse;
 import org.springframework.beans.BeanUtils;
 import org.springframework.web.bind.annotation.*;
 

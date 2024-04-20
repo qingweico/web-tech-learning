@@ -25,4 +25,8 @@ spring:
       database: rw_test
 face:
   file:
-    path: C://face
+    path: c:\app\face\
+
+mybatis-plus:
+  global-config:
+    banner: false

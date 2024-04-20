@@ -2,11 +2,11 @@ package cn.qingweico.controller;
 
 import cn.qingweico.entity.FriendLink;
 import cn.qingweico.entity.model.PostParams;
+import cn.qingweico.model.ApiResponse;
 import cn.qingweico.service.impl.FriendLinkServiceImpl;
-import cn.qinwweico.model.ApiResponse;
-import cn.qinwweico.model.PagedResult;
-import cn.qinwweico.util.Global;
-import cn.qinwweico.util.RandomDataUtil;
+import cn.qingweico.model.PagedResult;
+import cn.qingweico.util.Global;
+import cn.qingweico.util.RandomDataUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 

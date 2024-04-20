@@ -1,7 +1,7 @@
 package cn.qingweico.service;
 
 import cn.qingweico.entity.model.PostParams;
-import cn.qinwweico.model.PagedResult;
+import cn.qingweico.model.PagedResult;
 
 import java.util.List;
 
