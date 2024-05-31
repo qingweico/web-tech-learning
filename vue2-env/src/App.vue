@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <FaceLogin></FaceLogin>
+    <FaceLogin />
   </div>
 </template>
 
@@ -11,7 +11,6 @@ export default {
   name: 'App',
   components: {
     FaceLogin,
-
     }
 }
 </script>

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h2 style="text-align: center">人脸信息管理</h2>
+    <h2 style="text-align: center;margin-top: 20px">人脸信息管理</h2>
     <el-dialog :close-on-click-modal="false" :before-close="closeDialog" :visible="showDialog" :title="cuStatus === 1 ? '新增' : '编辑'" width="800px">
       <el-form ref="form" :model="form" :rules="formRules" size="small" label-width="120px">
         <el-form-item label="用户名" prop="username">
@@ -216,7 +216,7 @@ export default {
       this.$refs.form.validate((valid) => {
         if (valid) {
           this.buttonLoading = true
-          axios.post('http://localhost:8080/user/cu', this.form).then(res => {
+          axios.post('http://localhost:8081/user/cu', this.form).then(res => {
             const {data} = res
             if (data.success) {
               this.$message.success('添加成功')
@@ -236,7 +236,7 @@ export default {
       this.$refs.form.validate((valid) => {
         if (valid) {
           this.buttonLoading = true
-          axios.post('http://localhost:8080/user/cu', this.form).then(res => {
+          axios.post('http://localhost:8081/user/cu', this.form).then(res => {
             const {data} = res
             if (data.success) {
               this.$message.success('修改成功')
@@ -269,7 +269,7 @@ export default {
         page: this.currentPage,
         pageSize: this.pageSize
       }
-      axios.post('http://localhost:8080/user/searchList', params).then(res => {
+      axios.post('http://localhost:8081/user/searchList', params).then(res => {
         const {data} = res
         if (data.success) {
           const result = data.data
@@ -279,9 +279,10 @@ export default {
           this.tableLoading = false;
           this.buttonLoading  = false;
         }
-      }).catch(() => {
+      }).catch((err) => {
         this.tableLoading = false;
         this.buttonLoading  = false;
+        this.$message.error(err)
       })
     },
     closeDialog() {
@@ -321,7 +322,7 @@ export default {
     },
     doDelete(row) {
       this.buttonLoading = true
-      axios.post('http://localhost:8080/user/del', [row.id]).then(res => {
+      axios.post('http://localhost:8081/user/del', [row.id]).then(res => {
         const {data} = res
         if (data.success) {
           this.$message.success('删除成功')
@@ -336,7 +337,7 @@ export default {
       })
     },
     doBatchDelete(rows) {
-      axios.post('http://localhost:8080/user/del', rows.map(e => e.id)).then(res => {
+      axios.post('http://localhost:8081/user/del', rows.map(e => e.id)).then(res => {
         const {data} = res
         if (data.success) {
           this.$message.success('删除成功')
@@ -349,11 +350,11 @@ export default {
       })
     },
     refresh() {
-      this.searchList()
-      this.$message.success('刷新成功')},
+      this.searchList();
+    },
     // 查看人脸信息
     seeFace(faceId) {
-      axios.get('http://localhost:8080/fs/readFace64InGridFS/' + faceId ).then((response) => {
+      axios.get('http://localhost:8081/fs/readFace64InGridFS/' + faceId ).then((response) => {
         const { data } = response
         if(data.success) {
           this.base64Image = `data:image/png;base64, ${data.data}`;
@@ -374,7 +375,7 @@ export default {
           data.username = this.form.username;
           data.img64 = this.img64;
           // 上传人脸信息
-          axios.post('http://localhost:8080/fs/uploadToGridFs', data).then((response) => {
+          axios.post('http://localhost:8081/fs/uploadToGridFs', data).then((response) => {
             const { data } = response
             if(data.success) {
               this.form.faceId = data.data;
