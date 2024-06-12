@@ -1,4 +1,4 @@
-import {sculptureList} from './data.js';
+import {sculptureList} from '../data/data.js';
 import {useState} from 'react';
 // 为什么使用 state
 // 局部变量的生命周期和组件息息相关

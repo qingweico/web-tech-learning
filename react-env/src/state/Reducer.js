@@ -41,7 +41,7 @@ function tasksReducer(tasks, action) {
             }];
         }
         case 'changed': {
-            tasks.map((task) => {
+            return tasks.map((task) => {
                 if (task.id === action.task.id) {
                     return action.task
                 } else {
@@ -50,7 +50,7 @@ function tasksReducer(tasks, action) {
             })
         }
         case 'deleted': {
-            return tasks.filter((task) => task.id !== action.task.id)
+            return tasks.filter((task) => task.id !== action.id)
         }
         default: {
             throw new Error('Invalid action type: ' + action.type)

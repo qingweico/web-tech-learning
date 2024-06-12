@@ -1,5 +1,5 @@
-import Messenger from "./state/ReserveReset";
-import TaskApp from "./state/Reducer";
+
+import ChatRoom from "./advanced/ChatRoom";
 
 export default function App() {
     return (// 组件返回的 JSX 需要包含在一个单一的根元素内
@@ -10,6 +10,6 @@ export default function App() {
             {/*传递多个属性 使用空格分割*/}
             {/*<User user={user} priority={priority}></User>*/}
             {/*<TeaSet/>*/}
-            <TaskApp/>
+            <ChatRoom/>
         </div>);
 }

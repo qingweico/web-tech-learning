@@ -11,9 +11,9 @@ export default function TaskList({tasks, onChangeTask, onDeleteTask}) {
 
 function Task({task, onChange, onDelete}) {
     const [editing, setEditing] = useState(false);
-    let taskFill;
+    let taskContent;
     if (editing) {
-        taskFill = (<>
+        taskContent = (<>
             <input value={task.text}
                    onChange={e => {
                        onChange({
@@ -23,7 +23,7 @@ function Task({task, onChange, onDelete}) {
             <button onClick={() => setEditing(false)}>保存</button>
         </>)
     } else {
-        taskFill = (<>
+        taskContent = (<>
             {task.text}
             <button onClick={() => setEditing(true)}>编辑</button>
         </>)
@@ -36,7 +36,7 @@ function Task({task, onChange, onDelete}) {
                            ...task, done: e.target.checked
                        })
                    }}/>
-            {taskFill}
+            {taskContent}
             <button onClick={() => onDelete(task.id)}>
                 删除
             </button>

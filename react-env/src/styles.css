@@ -58,3 +58,19 @@ ul, li {
     margin: 0;
     padding: 0;
 }
+
+.section {
+    padding: 10px;
+    margin: 5px;
+    border-radius: 5px;
+    border: 1px solid #aaa;
+}
+
+button {
+    display: block;
+    margin-bottom: 20px;
+}
+
+video {
+    width: 250px;
+}
