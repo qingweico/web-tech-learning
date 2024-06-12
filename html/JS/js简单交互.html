@@ -6,27 +6,29 @@
 </head>
 
 <style>
-     div{
+    div {
         width: 400px;
         height: 200px;
-        border: 1px  dashed gray;
+        border: 1px dashed gray;
         margin: 100px auto;
         text-align: center;
         font-size: 50px;
         color: darkgreen;
     }
-    #Set{
+
+    #Set {
         display: block;
         position: relative;
-        margin: 100px  auto;
+        margin: 100px auto;
         bottom: 100px;
-       
+
     }
-    @media   only screen and  ( min-width: 500px)  {
-        body{
+
+    @media only screen and  ( min-width: 500px) {
+        body {
             background-color: lightseagreen;
         }
-       
+
     }
 </style>
 <body>
@@ -39,38 +41,38 @@
 <p>&copy;</p>
 <p>&reg;</p>
 <script>
-	window.onload=function(){
+    window.onload = function () {
         const okayButton = document.getElementById("myFunction");
-        okayButton.onclick=malfunction;
-		console.log(okayButton);
-		function malfunction () {
-		document.getElementById("demo").innerHTML="我的第一个Javascript函数";
-		 }
-	};
-    let con=document.getElementsByTagName("div")[0];
-    con.textContent="Hello World";
-    console.log(con);
-    function  setUserNames() {
-        let myName=prompt("请输入您的姓名:");
-        if(!myName){
-            setUserNames();
+        okayButton.onclick = malfunction;
+        console.log(okayButton);
+
+        function malfunction() {
+            document.getElementById("demo").innerHTML = "我的第一个Javascript函数";
         }
-        else{
-            localStorage.setItem("name",myName);
-            con.textContent="欢迎回来"+myName;
+    };
+    let con = document.getElementsByTagName("div")[0];
+    con.textContent = "Hello World";
+    console.log(con);
+
+    function setUserNames() {
+        let myName = prompt("请输入您的姓名:");
+        if (!myName) {
+            setUserNames();
+        } else {
+            localStorage.setItem("name", myName);
+            con.textContent = "欢迎回来" + myName;
         }
     }
 
-    if(!localStorage.getItem("name")) {
+    if (!localStorage.getItem("name")) {
         setUserNames();
+    } else {
+        let storedName = localStorage.getItem("name");
+        con.textContent = "欢迎回来" + storedName;
     }
-    else{
-        let storedName= localStorage.getItem("name");
-        con.textContent="欢迎回来"+storedName;
-    }
-    document.getElementById("Set").onclick=function () {
+    document.getElementById("Set").onclick = function () {
         setUserNames();
     };
- </script>
+</script>
 </body>
 </html>
