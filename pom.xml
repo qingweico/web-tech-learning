@@ -7,4 +7,26 @@
 	<artifactId>web-tech-learning</artifactId>
 	<packaging>pom</packaging>
 	<version>20220717</version>
+	<modules>
+		<module>ali-face-recognition</module>
+		<module>boot3-env</module>
+		<module>cache</module>
+		<module>cloud-alibaba</module>
+		<module>common</module>
+		<module>elastic-lower-client</module>
+		<module>elastic-search</module>
+		<module>mongodb</module>
+		<module>mybatis-plus</module>
+		<module>playing-spring-family</module>
+		<module>prometheus</module>
+		<module>quartz</module>
+		<module>rabbitmq</module>
+		<module>rocketmq</module>
+		<module>swagger</module>
+		<module>thinking-in-spring</module>
+		<module>tk-mapper</module>
+		<module>web-server-container</module>
+		<module>web-socket</module>
+		<module>webflux</module>
+	</modules>
 </project>
