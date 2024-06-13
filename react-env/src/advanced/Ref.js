@@ -1,4 +1,6 @@
 // 使用 ref
+// ref 是一个普通的 JavaScript 对象
+// 使用 ref.current 获取当前 ref 的值, 既可以被读取也可以被修改
 import {useRef} from 'react';
 
 export default function Counter() {
