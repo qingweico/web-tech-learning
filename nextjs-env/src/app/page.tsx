@@ -4,5 +4,5 @@
 // 应用路由和页面路由
 // 应用程序的主页面
 export default function Page() {
-    return <h1>Hello Next.js</h1>
+    return <h1 className="text-red-500">Hello Next.js</h1>
 }

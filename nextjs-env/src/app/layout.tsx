@@ -1,6 +1,7 @@
 import React from "react";
 
 import "./ui/global.css";
+import "./ui/layout.css";
 // 这个是应用程序的主要布局
 export default function RootLayout({
                                        children,
@@ -9,8 +10,10 @@ export default function RootLayout({
 }) {
     return (
         <html lang="en">
-        <body>{children}
-            <h1 className="text-blue-500">Message</h1>
+        <body>
+        <div className="layout-container">
+            {children}
+        </div>
         </body>
         </html>
     )
