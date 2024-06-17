@@ -6,6 +6,7 @@ import org.springframework.aop.IntroductionInfo;
 import org.springframework.aop.MethodBeforeAdvice;
 import org.springframework.aop.framework.ProxyFactory;
 import org.springframework.aop.support.DefaultIntroductionAdvisor;
+import org.springframework.lang.NonNull;
 
 import java.lang.reflect.Method;
 
@@ -22,11 +23,12 @@ public class SpringIntroductionAdvisorImpl implements EchoService {
         proxyFactory.setTarget(sia);
         proxyFactory.addAdvisor(new DefaultIntroductionAdvisor(new MethodBeforeAdvice() {
             @Override
-            public void before(Method method, Object[] args, Object target) throws Throwable {
+            public void before(@NonNull Method method, @NonNull Object[] args, Object target) throws Throwable {
                 System.out.println("MethodBeforeAdvice: " + method);
             }
         }, new IntroductionInfo() {
             @Override
+            @NonNull
             public Class<?>[] getInterfaces() {
                 return new Class[]{EchoService.class};
             }

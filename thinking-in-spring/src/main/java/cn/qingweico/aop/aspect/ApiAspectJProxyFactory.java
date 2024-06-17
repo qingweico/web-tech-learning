@@ -3,6 +3,7 @@ package cn.qingweico.aop.aspect;
 import org.springframework.aop.AfterReturningAdvice;
 import org.springframework.aop.MethodBeforeAdvice;
 import org.springframework.aop.aspectj.annotation.AspectJProxyFactory;
+import org.springframework.lang.NonNull;
 
 import java.lang.reflect.Method;
 import java.util.HashMap;
@@ -24,7 +25,7 @@ public class ApiAspectJProxyFactory {
         proxyFactory.addAspect(AspectConfig.class);
         proxyFactory.addAdvice(new MethodBeforeAdvice() {
             @Override
-            public void before(Method method, Object[] args, Object target) throws Throwable {
+            public void before(@NonNull Method method, @NonNull Object[] args, Object target) throws Throwable {
                 if ("put".equals(method.getName()) && args.length == 2) {
                     System.out.printf("当前存放的 Key 是 %s 值是 %s %n", args[0], args[1]);
                 }
@@ -33,7 +34,7 @@ public class ApiAspectJProxyFactory {
         // 添加 AfterReturningAdvice
         proxyFactory.addAdvice(new AfterReturningAdvice() {
             @Override
-            public void afterReturning(Object returnValue, Method method, Object[] args, Object target) throws Throwable {
+            public void afterReturning(Object returnValue, @NonNull Method method, @NonNull Object[] args, Object target) {
                 if ("put".equals(method.getName()) && args.length == 2) {
                     System.out.printf("Map put 返回值为 %s%n", returnValue);
                 }

@@ -2,6 +2,7 @@ package cn.qingweico.aop.event;
 
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.ApplicationEventPublisherAware;
+import org.springframework.lang.NonNull;
 
 /**
  * 传统实现事件发布 偏向静态化
@@ -19,7 +20,7 @@ public class StaticExecutor implements ApplicationEventPublisherAware {
     }
 
     @Override
-    public void setApplicationEventPublisher(ApplicationEventPublisher applicationEventPublisher) {
+    public void setApplicationEventPublisher(@NonNull ApplicationEventPublisher applicationEventPublisher) {
         this.applicationEventPublisher = applicationEventPublisher;
     }
 }

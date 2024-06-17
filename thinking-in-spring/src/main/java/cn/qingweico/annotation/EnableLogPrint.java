@@ -23,7 +23,7 @@ import java.lang.annotation.Target;
  */
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
-// @Import(LogPrintConfig.class) 使用 @Import
+// @Import(LogPrintConfig.class) 使用 @Import 注解
 // @Import(LogPrintImportSelector.class) 使用 @Import + ImportSelector 接口
 @Import(LogPrintBeanDefinitionRegistrar.class) // 使用 @Import + ImportBeanDefinitionRegistrar 接口
 // @Import(LogPrintDeferredImportSelector.class) // 使用 @Import + DeferredImportSelector 接口

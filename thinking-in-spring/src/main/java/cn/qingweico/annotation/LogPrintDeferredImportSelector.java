@@ -2,6 +2,7 @@ package cn.qingweico.annotation;
 
 import org.springframework.context.annotation.DeferredImportSelector;
 import org.springframework.core.type.AnnotationMetadata;
+import org.springframework.lang.NonNull;
 
 /**
  * @author zqw
@@ -9,7 +10,8 @@ import org.springframework.core.type.AnnotationMetadata;
  */
 public class LogPrintDeferredImportSelector implements DeferredImportSelector {
     @Override
-    public String[] selectImports(AnnotationMetadata importingClassMetadata) {
+    @NonNull
+    public String[] selectImports(@NonNull AnnotationMetadata importingClassMetadata) {
         return new String[]{LogPrintConfig.class.getName()};
     }
 }

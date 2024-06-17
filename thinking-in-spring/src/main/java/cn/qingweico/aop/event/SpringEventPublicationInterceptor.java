@@ -9,6 +9,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.context.event.EventListener;
 import org.springframework.context.event.EventPublicationInterceptor;
+import org.springframework.lang.NonNull;
 
 import java.lang.reflect.Method;
 
@@ -48,7 +49,7 @@ public class SpringEventPublicationInterceptor {
         return new StaticMethodMatcherPointcut() {
 
             @Override
-            public boolean matches(Method method, Class<?> targetClass) {
+            public boolean matches(@NonNull Method method, @NonNull Class<?> targetClass) {
                 return "execute".equals(method.getName()) && AopExecutor.class.equals(targetClass);
             }
         };
