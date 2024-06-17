@@ -1,3 +1,4 @@
+// !!! 父子组件之间通过 props 对象传递, 所以子组件中接收时需要使用 {} 从props对象中结构出相对应的属性
 export default function User({user, priority = 0}) {
     const disabled = user.disabled
     // 条件渲染

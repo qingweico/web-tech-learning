@@ -1,4 +1,4 @@
-import Board from "./advanced/Game";
+import Game from "./advanced/Game";
 
 export default function App() {
     return (// 组件返回的 JSX 需要包含在一个单一的根元素内
@@ -9,6 +9,6 @@ export default function App() {
             {/*传递多个属性 使用空格分割*/}
             {/*<User user={user} priority={priority}></User>*/}
             {/*<TeaSet/>*/}
-            <Board/>
+            <Game/>
         </div>);
 }
