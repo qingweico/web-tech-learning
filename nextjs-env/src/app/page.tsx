@@ -3,6 +3,11 @@
 // 在组件顶部申明 'use client' 显示使用客户端组件
 // 应用路由和页面路由
 // 应用程序的主页面
+import Link from 'next/link';
 export default function Page() {
-    return <h1 className="text-red-500">Hello Next.js</h1>
+    return <div>
+        <Link href="/dashboard">dashboard</Link>
+        <br/>
+        <Link href="/fetch">fetch</Link>
+    </div>
 }

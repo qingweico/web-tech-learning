@@ -1,22 +1,37 @@
 package cn.qingweico.controller;
 
 import cn.hutool.json.JSONUtil;
+import cn.qingweico.client.RedisClient;
 import cn.qingweico.entity.User;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import javax.annotation.Resource;
 
 /**
  * @author zqw
  * @date 2024/5/11
  */
 @RestController
-@RequestMapping
+@RequestMapping("/user")
 public class UserController {
-
-    @PostMapping("/user")
+    @Resource
+    private RedisClient redisClient;
+    @PostMapping("/post")
     public String postUser(@RequestBody User user) {
+        return JSONUtil.toJsonStr(user);
+    }
+    @GetMapping("/get")
+    public String getUser() {
+        User user = redisClient.get("User", User.class);
+        if(user == null) {
+            user = User.builder()
+                    .id("1")
+                    .username("bob_jones")
+                    .address("789 Oak St, Gotham")
+                    .mobile("555-9012")
+                    .build();
+            redisClient.set("User", user);
+        }
         return JSONUtil.toJsonStr(user);
     }
 }

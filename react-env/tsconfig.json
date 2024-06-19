@@ -1,26 +1,43 @@
 {
   "compilerOptions": {
+    // 生成的 JavaScript 代码应兼容的 ECMAScript 版本
     "target": "es5",
+    // 指定要包含在编译中的库文件
     "lib": ["dom", "dom.iterable", "esnext"],
+    // 允许编译 JavaScript 文件
     "allowJs": true,
+    // 跳过声明文件的类型检查
     "skipLibCheck": true,
+    // 启用所有严格类型检查选项
     "strict": true,
+    // 不生成编译输出
     "noEmit": true,
+    // 启用 esModule 互操作性, 为 CommonJS 和 AMD 模块生成相应的兼容代码
     "esModuleInterop": true,
+    // 使用的模块系统, 这里是 ESNext
     "module": "esnext",
+    //  决定模块解析策略, 这里是使用捆绑工具的解析策略
     "moduleResolution": "bundler",
+    // 允许导入 JSON 文件
     "resolveJsonModule": true,
+    // 强制每个文件成为单独的模块
     "isolatedModules": true,
+    // 保留 JSX 语法(编译时不转换)
     "jsx": "preserve",
+    // 启用增量编译, 能加快后续编译速度
     "incremental": true,
     "plugins": [
       {"name": "next"}
     ],
     "paths": {
+      // 使用别名 "@" 代表 "./src/" 目录
       "@/*": ["./src/*"],
+      // 使用别名 "@resources/" 代表 "./resources/" 目录
       "@resources/*": ["./resources/*"],
     }
   },
+  // 包含在编译中的文件和目录
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
+  // 排除在编译之外的文件和目录
   "exclude": ["node_modules"]
 }
