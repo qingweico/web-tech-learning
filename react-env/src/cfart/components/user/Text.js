@@ -3,7 +3,7 @@ import ContentEditable from 'react-contenteditable'
 import {useNode} from "@craftjs/core";
 import {Slider, FormControl, FormLabel} from "@material-ui/core";
 
-export const Text = ({text}) => {
+export const Text = ({text, fontSize, textAlign}) => {
     const { connectors: {connect, drag}, isActive, hasSelectedNode, hasDraggedNode, actions: {setProp} } = useNode((state) => ({
         hasSelectedNode: state.events.selected,
         hasDraggedNode: state.events.dragged,
@@ -79,5 +79,8 @@ Text.craft = {
     },
     related: {
         settings: TextSettings
+    },
+    rules: {
+        canDrag: (node) => node.data.props.text !== "Drag"
     }
 }

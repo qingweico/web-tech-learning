@@ -5,6 +5,39 @@ import { Container } from "./Container";
 import {Element} from "@craftjs/core";
 import {ContainerSettings} from "./Container";
 import {ContainerDefaultProps} from "./Container";
+import {useNode} from "@craftjs/core";
+export const CardTop = ({children}) => {
+    const { connectors: {connect} } = useNode();
+    return (
+        <div ref={connect} className="text-only">
+            {children}
+        </div>
+    )
+}
+
+CardTop.craft = {
+    rules: {
+        // Only accept Text
+        canMoveIn: (incomingNodes) => incomingNodes.every(incomingNode => incomingNode.data.type === Text)
+    }
+}
+
+export const CardBottom = ({children}) => {
+    const { connectors: {connect} } = useNode();
+    return (
+        <div ref={connect}>
+            {children}
+        </div>
+    )
+}
+
+CardBottom.craft = {
+    rules: {
+        // Only accept Buttons
+        canMoveIn : (incomingNodes) => incomingNodes.every(incomingNode => incomingNode.data.type === Button)
+    }
+}
+
 export const Card = ({background, padding = 20}) => {
     return (
         <Container background={background} padding={padding}>
@@ -22,6 +55,8 @@ export const Card = ({background, padding = 20}) => {
         </Container>
     )
 }
+
+
 Card.craft = {
     props: ContainerDefaultProps,
     related: {

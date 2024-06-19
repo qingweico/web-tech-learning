@@ -3,6 +3,7 @@ import "primereact/resources/themes/lara-light-cyan/theme.css";
 import 'primeicons/primeicons.css';
 import PrimeReactApp from "./primereact/PrimeReact";
 import {PrimeReactProvider} from "primereact/api";
+import CraftApp from "./cfart";
 export default function App() {
     return (// 组件返回的 JSX 需要包含在一个单一的根元素内
         <div>
@@ -15,8 +16,9 @@ export default function App() {
             {/*<Provider store={store}>*/}
             {/*    <ToolkitReduxCounter />*/}
             {/*</Provider>*/}
-            <PrimeReactProvider>
-                <PrimeReactApp />
-            </PrimeReactProvider>
+            {/*<PrimeReactProvider>*/}
+            {/*    <PrimeReactApp />*/}
+            {/*</PrimeReactProvider>*/}
+            <CraftApp/>
         </div>);
 }
