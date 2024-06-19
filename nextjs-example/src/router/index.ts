@@ -10,11 +10,6 @@ const routes = [
     icon: 'icon-svgwrite'
   },
   {
-    name: '留言板',
-    path: '/board',
-    icon: 'icon-jurassic_message'
-  },
-  {
     name: '个人中心',
     path: '/profile',
     icon: 'icon-guanyuwomen'

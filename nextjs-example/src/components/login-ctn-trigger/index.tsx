@@ -5,7 +5,7 @@ import { LockOutlined, UserOutlined } from "@ant-design/icons"
 import { ContainerTriggerWrapper } from "./style"
 
 export default memo(function ContainerTrigger(props: any) {
-  const { onFinish, title, triggerContaienr } = props
+  const { onFinish, title, triggerContainer } = props
 
   return (
     <ContainerTriggerWrapper >
@@ -35,7 +35,7 @@ export default memo(function ContainerTrigger(props: any) {
           </Button>
         </Form.Item>
         <Form.Item >
-          <Button onClick={triggerContaienr} type='ghost'>
+          <Button onClick={triggerContainer} type='ghost'>
             { title == '登录' ? '注册帐户' :'现在去登录' }
           </Button>
         </Form.Item>

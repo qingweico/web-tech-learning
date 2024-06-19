@@ -15,19 +15,19 @@ export default memo(function ProfileInfo(props: any) {
         <Image src={ll_avatar}  alt='修改信息_用户头像'/>
       </div>
       <div className="user-id line">
-        <label>用户ID：</label> {ll_id}
+        <label>用户ID: </label> {ll_id}
       </div>
       <div className="nickname line">
-        <label>用户名：</label> {ll_username}
+        <label>用户名: </label> {ll_username}
       </div>
       <div className="username line">
-        <label>昵称：</label> {ll_nick_name}
+        <label>昵称: </label> {ll_nick_name}
       </div>
       <div className="createTime line">
-        <label>注册时间：</label> {formatTimeFromNow(ll_createdTime)}
+        <label>注册时间: </label> {formatTimeFromNow(ll_createdTime)}
       </div>
       <div className="updateTime line">
-        <label>上次修改：</label> {formatTimeFromNow(ll_updatedTime)}
+        <label>上次修改: </label> {formatTimeFromNow(ll_updatedTime)}
       </div>
       <div className="operator">
         <Space>
