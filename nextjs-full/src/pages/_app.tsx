@@ -21,7 +21,7 @@ import AppHeader from '@/components/app-header'
 import AppBackGround from '@/components/app-background'
 import AppLoading from '@/components/app-loading'
 import AppFooter from '@/components/app-footer'
-import { useKeyBoradEventHook } from '@/utils/hook'
+import { useKeyBoardEventHook } from '@/utils/hook'
 
 function App({ Component, pageProps }: AppProps) {
   // other hook
@@ -31,7 +31,7 @@ function App({ Component, pageProps }: AppProps) {
     setTheme(getReflectTheme(theme))
   }, [theme])
 
-  useKeyBoradEventHook(useMemo(() => ["Control", "r"], []), changeTheme)
+  useKeyBoardEventHook(useMemo(() => ["Control", "r"], []), changeTheme)
 
   const router = useRouter()
 

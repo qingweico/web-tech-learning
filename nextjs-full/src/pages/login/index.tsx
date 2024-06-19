@@ -5,10 +5,10 @@ import { SwitchTransition, CSSTransition } from "react-transition-group"
 import { useRouter } from 'next/router';
 import Image from 'next/image';
 
-import { 
-  OutContainerWrapper, 
-  ContainerWrapper, 
-  LoginWrapper, 
+import {
+  OutContainerWrapper,
+  ContainerWrapper,
+  LoginWrapper,
   RegisterWrapper } from "@/styles/login";
 import { userLoginVerify, userRegister } from '@/services/modules/login';
 import { userLoginAction } from '@/store/modules/login/actionCreators';
@@ -22,12 +22,11 @@ const Login: NextPage = memo(function MyLogin() {
   const [isLogin, setIsLogin] = useState(true)
   const router = useRouter()
 
-  const triggerContaienr = useCallback(() => {
+  const triggerContainer = useCallback(() => {
     setIsLogin(!isLogin)
   }, [isLogin])
   // 登录逻辑
   const onFinishLogin = useCallback(({ username, password }) => {
-    // redux-thunk 莫名不起效果 暂时这么写。
     userLoginVerify({ ll_username: username, ll_password: password })
       .then(({ data, code, msg }: any) => {
         if (code != 200) {
@@ -66,7 +65,7 @@ const Login: NextPage = memo(function MyLogin() {
                   height={300}
                   className='container-top'
                   src={require("../../assets/img/loginlight.jpg")} />
-                <ContainerTrigger triggerContaienr={triggerContaienr} title="登录" onFinish={onFinishLogin} />
+                <ContainerTrigger triggerContainer={triggerContainer} title="登录" onFinish={onFinishLogin} />
               </LoginWrapper> :
               <RegisterWrapper>
                 <Image
@@ -75,7 +74,7 @@ const Login: NextPage = memo(function MyLogin() {
                   width={400}
                   height={300}
                   src={require("../../assets/img/logindark.jpg")} />
-                <ContainerTrigger triggerContaienr={triggerContaienr} title="注册帐户" onFinish={onFinishRegister} />
+                <ContainerTrigger triggerContainer={triggerContainer} title="注册帐户" onFinish={onFinishRegister} />
               </RegisterWrapper>
             }
           </CSSTransition>

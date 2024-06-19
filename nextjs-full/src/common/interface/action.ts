@@ -1,5 +1,5 @@
 import type { Action } from "redux"
 
-export interface ActionExtenal extends Action {
+export interface ActionExternal extends Action {
   data?: any
 }

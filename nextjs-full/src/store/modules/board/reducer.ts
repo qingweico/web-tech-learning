@@ -1,4 +1,4 @@
-import { ActionExtenal } from "@/common/interface/action";
+import { ActionExternal } from "@/common/interface/action";
 import { Map } from "immutable";
 import { ActionTypes } from "./constants";
 
@@ -8,7 +8,7 @@ const initialState = Map({
 })
 
 
-function reducer(state = initialState, action: ActionExtenal) {
+function reducer(state = initialState, action: ActionExternal) {
   switch (action.type) {
     case ActionTypes.REQUST_COMMENT_LIST:
       // console.log("设置commentslsit数据", action.data.data)
