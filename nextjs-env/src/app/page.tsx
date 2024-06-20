@@ -4,10 +4,15 @@
 // 应用路由和页面路由
 // 应用程序的主页面
 import Link from 'next/link';
+import {AppFooterWrapper} from "@/app/components/AppFooterWrapper";
+import InvoiceStatus from "@/app/components/invoice/InvoiceStatus";
+import FetchPage from "@/app/fetch/page";
+import GetEnvVars from "@/app/components/GetEnv";
 export default function Page() {
-    return <div>
-        <Link href="/dashboard">dashboard</Link>
-        <br/>
-        <Link href="/fetch">fetch</Link>
-    </div>
+    return <GetEnvVars/>
+    // return <div>
+    //     <Link href="/dashboard">dashboard</Link>
+    //     <br/>
+    //     <Link xhref="/fetch">fetch</Link>
+    // </div>
 }

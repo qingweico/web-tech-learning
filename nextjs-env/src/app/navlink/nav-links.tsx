@@ -5,7 +5,6 @@
 // 3 使用redirect函数(服务器组件)
 // 4 使用原生History API
 import Link from 'next/link';
-import { useRouter } from 'next/router';
 const links = [
     {name: '菜单管理', href: "/system/menu"},
     {name: '角色管理', href: "/system/role"},
