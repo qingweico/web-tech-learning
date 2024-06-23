@@ -16,8 +16,11 @@ mybatis-plus:
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
   global-config:
+    banner: false
     db-config:
       table-prefix: tb_
       # 设置主键生成策略
       id-type: assign_id
   type-aliases-package: cn.qingweico.entity
+server:
+  port: 5000

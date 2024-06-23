@@ -46,7 +46,7 @@
 <script>
 import axios from 'axios'
 export default {
-  name: 'face-login',
+  name: 'FaceLogin',
   data() {
     return {
       enablingCamera: false,

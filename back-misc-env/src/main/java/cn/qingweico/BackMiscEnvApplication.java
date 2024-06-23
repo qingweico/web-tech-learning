@@ -3,6 +3,7 @@ package cn.qingweico;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
 
 /**
  * @author zqw
@@ -10,10 +11,11 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  */
 @MapperScan(basePackages = "cn.qingweico.mapper")
 @SpringBootApplication
-public class MybatisPlusApplication {
+@EnableAspectJAutoProxy
+public class BackMiscEnvApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(MybatisPlusApplication.class, args);
+        SpringApplication.run(BackMiscEnvApplication.class, args);
     }
 
 }

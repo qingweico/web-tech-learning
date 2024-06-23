@@ -9,16 +9,21 @@
 		<relativePath/>
 	</parent>
 	<groupId>cn.qingweico</groupId>
-	<artifactId>mybatis-plus</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
-	<name>mybatis-plus</name>
-	<description>mybatis-plus</description>
+	<artifactId>back-misc-env</artifactId>
+	<version>20240622</version>
+	<name>back-misc-env</name>
+	<description>back-misc-env</description>
 
 	<properties>
 		<java.version>8</java.version>
 	</properties>
 
 	<dependencies>
+		<dependency>
+			<groupId>cn.qinwweico</groupId>
+			<artifactId>common</artifactId>
+			<version>20231106</version>
+		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter</artifactId>
@@ -27,6 +32,10 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
 		<!-- mybatis-plus -->
 		<dependency>
@@ -41,6 +50,15 @@
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-aop</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>io.github.mouzt</groupId>
+			<artifactId>bizlog-sdk</artifactId>
+			<version>3.0.6</version>
 		</dependency>
 	</dependencies>
 	<build>

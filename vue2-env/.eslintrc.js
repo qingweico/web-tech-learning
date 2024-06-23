@@ -12,9 +12,7 @@ module.exports = {
   extends: ['plugin:vue/recommended', 'eslint:recommended'],
 
   rules: {
-      'no-unused-vars': [2, {
-          'vars': 'all',
-      'args': 'none'
-      }],
+      'vue/no-unused-components': 'warn',
+      'vue/multi-word-component-names': 'off',
   }
 }

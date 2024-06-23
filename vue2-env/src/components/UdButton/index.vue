@@ -17,7 +17,7 @@
 <script>
 
 export default {
-  name: 'udBtn',
+  name: 'UdButton',
   props: {
     disabledDle: {
       type: Boolean,

@@ -1,19 +1,21 @@
 <template>
   <div id="app">
-    <FaceLogin />
+    <fingerprint />
   </div>
 </template>
 
 <script>
-import FaceLogin from "@/components/face-login.vue";
+import Fingerprint from "@/views/Fingerprint.vue";
 
 export default {
   name: 'App',
   components: {
-    FaceLogin,
+    Fingerprint
     }
 }
 </script>
 
 <style>
+
+
 </style>

@@ -4,9 +4,10 @@ module.exports = defineConfig({
 })
 module.exports = {
   devServer: {
+    port: 3000,
     proxy: {
       '/user': {
-        target: 'http://localhost:8080',
+        target: process.env.VUE_APP_BASE_API,
         changeOrigin: true,
         secure: false,
         pathRewrite: {

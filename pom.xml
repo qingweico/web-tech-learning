@@ -16,7 +16,7 @@
 		<module>elastic-lower-client</module>
 		<module>elastic-search</module>
 		<module>mongodb</module>
-		<module>mybatis-plus</module>
+		<module>back-misc-env</module>
 		<module>playing-spring-family</module>
 		<module>prometheus</module>
 		<module>quartz</module>

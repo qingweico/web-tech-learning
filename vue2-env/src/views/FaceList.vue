@@ -147,9 +147,9 @@
 
 <script>
 import axios from 'axios'
-import UdBtn from "@/components/ud-btn.vue";
+import UdBtn from "@/components/UdButton/index.vue";
 export default {
-  name: 'face-list',
+  name: 'FaceList',
   components: {UdBtn},
   data() {
     return {
