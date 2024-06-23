@@ -3,7 +3,6 @@ package cn.qingweico.service.impl;
 import cn.qingweico.entity.Goods;
 import cn.qingweico.mapper.GoodsMapper;
 import cn.qingweico.service.GoodsService;
-import com.baomidou.mybatisplus.extension.service.IService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 
