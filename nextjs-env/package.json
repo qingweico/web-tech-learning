@@ -18,12 +18,17 @@
     }
   },
   "dependencies": {
+    "client-only": "0.0.1",
     "clsx": "^2.1.1",
+    "ioredis": "^5.4.1",
     "next": "^13.0.6",
+    "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-redux": "^7.2.6",
     "redux": "^4.1.2",
-    "styled-components": "^6.1.11"
+    "server-only": "0.0.1",
+    "styled-components": "^6.1.11",
+    "swr": "^2.2.5"
   },
   "devDependencies": {
     "@types/node": "^20",
