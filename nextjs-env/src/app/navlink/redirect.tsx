@@ -1,13 +1,15 @@
-import {redirect} from 'next/navigation'
+'use client'
+export default function RedirectPage() {
 
-function getToken(id: string) {
-    console.log(id)
-    return window.localStorage.getItem("Authorization");
-}
-
-export default async function beforeRouter({params}: { params: { id: string } }) {
-    const token = getToken(params.id)
-    if (!token) {
-        redirect('/login')
+    async function fetchData() {
+        setTimeout(async () => {
+            await fetch('/api/redirect');
+        }, 2000)
     }
+
+    return (
+        <div>
+            <button onClick={fetchData}>点我2s后重定向到 Dashboard</button>
+        </div>
+    );
 }

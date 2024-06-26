@@ -1,6 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-    output: 'export',
+    // output: 'export',
     // images: {
     //     loader: 'custom',
     //     loaderFile: '.src/app/components/img-loader.ts',

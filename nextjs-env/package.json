@@ -28,7 +28,9 @@
     "redux": "^4.1.2",
     "server-only": "0.0.1",
     "styled-components": "^6.1.11",
-    "swr": "^2.2.5"
+    "swr": "^2.2.5",
+    "immutable": "^4.0.0",
+    "redux-immutable": "^4.0.0"
   },
   "devDependencies": {
     "@types/node": "^20",
@@ -41,6 +43,7 @@
     "postcss-nested": "^6.0.1",
     "postcss-prefixwrap": "^1.43.0",
     "tailwindcss": "^3.4.1",
-    "typescript": "^5"
+    "typescript": "^5",
+    "@types/redux-immutable": "^4.0.2"
   }
 }
