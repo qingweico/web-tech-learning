@@ -18,8 +18,12 @@ export async function generateMetadata() {
 // 这个是应用程序的主要布局
 export default function RootLayout({
                                        children,
+                                       page1,
+                                       page2,
                                    }: {
-    children: React.ReactNode
+    children: React.ReactNode,
+    page1: React.ReactNode
+    page2: React.ReactNode
 }) {
 
     return (
@@ -27,6 +31,8 @@ export default function RootLayout({
         <body>
         <div className="layout-container">
             {children}
+            {page1}
+            {page2}
         </div>
         </body>
         </html>

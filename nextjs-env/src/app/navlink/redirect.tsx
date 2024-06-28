@@ -6,10 +6,11 @@ export default function RedirectPage() {
             await fetch('/api/redirect');
         }, 2000)
     }
+    fetchData().then(r => {})
 
     return (
         <div>
-            <button onClick={fetchData}>点我2s后重定向到 Dashboard</button>
+            <button>2s后重定向到 Dashboard</button>
         </div>
     );
 }
