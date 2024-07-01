@@ -15,7 +15,7 @@
     // 启用 esModule 互操作性, 为 CommonJS 和 AMD 模块生成相应的兼容代码
     "esModuleInterop": true,
     // 使用的模块系统, 这里是 ESNext
-    "module": "esnext",
+    "module": "commonjs",
     //  决定模块解析策略, 这里是使用捆绑工具的解析策略
     "moduleResolution": "bundler",
     // 允许导入 JSON 文件
