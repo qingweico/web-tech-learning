@@ -1,0 +1,23 @@
+.mask {
+    position: fixed;
+    left: 0;
+    right: 100%;
+    top: 0;
+    bottom: 100%;
+    z-index: 999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    background-color: var(--color-bg-default);
+    color: var(--color-text-unimportant);
+    user-select: none;
+
+    .icon { /* Gain more specificity weight to override the original style. */
+        width: 5rem;
+        height: 5rem;
+        padding: unset;
+        margin: unset;
+    }
+}

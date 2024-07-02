@@ -1,0 +1,16 @@
+.wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--color-bg-default);
+    color: var(--color-text-unimportant);
+    user-select: none;
+
+    .icon { /* Gain more specificity weight to override the original style. */
+        width: auto;
+        height: 20%;
+        min-height: 1em;
+        padding: unset;
+        margin: unset;
+    }
+}

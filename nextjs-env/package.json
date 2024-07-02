@@ -18,6 +18,7 @@
     }
   },
   "dependencies": {
+    "@reduxjs/toolkit": "^1.9.7",
     "@formatjs/intl-localematcher": "^0.5.4",
     "client-only": "0.0.1",
     "clsx": "^2.1.1",
@@ -32,7 +33,11 @@
     "redux-immutable": "^4.0.0",
     "server-only": "0.0.1",
     "styled-components": "^6.1.11",
-    "swr": "^2.2.5"
+    "swr": "^2.2.5",
+    "pino": "^8.15.2",
+    "pino-pretty": "^10.2.0",
+    "primeicons": "^6.0.1",
+    "primereact": "^10.0.2"
   },
   "devDependencies": {
     "@types/negotiator": "^0.6.3",

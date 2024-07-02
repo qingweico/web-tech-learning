@@ -1,0 +1,35 @@
+.wrapper {
+    max-width: 30rem;
+    margin: 1rem auto;
+    display: grid;
+    justify-content: center;
+    background-color: var(--color-bg-less-important);
+
+    &.placeholder {
+        height: 10rem;
+    }
+}
+
+.header {
+    margin: 1rem;
+    text-align: center;
+    font-size: 3rem;
+    font-weight: bold;
+    color: var(--color-text-default);
+}
+
+.desc {
+    margin: 0.5rem;
+    text-align: center;
+    font-size: 1.2rem;
+    font-weight: normal;
+    color: var(--color-text-less-important);
+}
+
+.comment {
+    margin: 0.5rem;
+    text-align: center;
+    font-size: 1rem;
+    font-weight: normal;
+    color: var(--color-text-unimportant);
+}

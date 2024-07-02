@@ -1,0 +1,46 @@
+body, body[data-theme="light"] {
+    --color-text-default: #080808;
+    --color-text-less-important: #303030;
+    --color-text-unimportant: #585858;
+    --color-bg-default: #E3E3E3;
+    --color-bg-less-important: #D4D4D4;
+    --color-bg-unimportant: #C5C5C5;
+}
+
+body[data-theme="gray"] {
+    --color-text-default: #181818;
+    --color-text-less-important: #383838;
+    --color-text-unimportant: #585858;
+    --color-bg-default: #C8C8C8;
+    --color-bg-less-important: #B0B0B0;
+    --color-bg-unimportant: #888888;
+}
+
+body[data-theme="dark"] {
+    --color-text-default: #B8B8B8;
+    --color-text-less-important: #909090;
+    --color-text-unimportant: #686868;
+    --color-bg-default: #2B2D2F;
+    --color-bg-less-important: #3C3F41;
+    --color-bg-unimportant: #4D5153;
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 12px;
+}
+
+body {
+    --text-color: var(--color-text-default);
+    --text-color-secondary: var(--color-text-less-important);
+    --primary-color: var(--color-bg-default);
+    --primary-color-text: var(--color-text-default);
+
+    background-color: var(--color-bg-default);
+    color: var(--color-text-default);
+    font-family: var(--font-family);
+    transition: background-color 0.25s ease-in-out;
+}

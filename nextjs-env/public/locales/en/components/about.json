@@ -1,0 +1,12 @@
+{
+  "ServerSideAbout": {
+    "header": "About",
+    "desc": "Desc",
+    "comment": "This is a comment(Server)"
+  },
+  "ClientSideAbout": {
+    "header": "About",
+    "desc": "Desc",
+    "comment": "This is a comment(Client)"
+  }
+}

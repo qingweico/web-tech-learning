@@ -1,0 +1,12 @@
+{
+  "ServerSideAbout": {
+    "header": "关于",
+    "desc": "这是描述",
+    "comment": "这是注释(服务端)"
+  },
+  "ClientSideAbout": {
+    "header": "关于",
+    "desc": "这是描述",
+    "comment": "这是注释(客户端)"
+  }
+}

@@ -1,0 +1,17 @@
+.login-container {
+    max-width: 300px;
+    margin: 20px auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #fff;
+}
+
+.p-field {
+    margin-bottom: 1em;
+}
+
+.p-field label {
+    display: block;
+    margin-bottom: 0.5em;
+}

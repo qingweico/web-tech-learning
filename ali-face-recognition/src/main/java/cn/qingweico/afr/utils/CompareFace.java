@@ -45,9 +45,9 @@ public class CompareFace {
         } catch (ServerException e) {
             log.error(e.getMessage());
         } catch (ClientException e) {
-            log.error("ErrCode:" + e.getErrCode());
-            log.error("ErrMsg:" + e.getErrMsg());
-            log.error("RequestId:" + e.getRequestId());
+            log.error("ErrCode:{}", e.getErrCode());
+            log.error("ErrMsg:{}", e.getErrMsg());
+            log.error("RequestId:{}", e.getRequestId());
         }
         return false;
     }

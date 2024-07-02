@@ -1,0 +1,17 @@
+div.dropdown { /* Gain more specificity weight to override the original style. */
+    width: 6rem;
+    height: 2rem;
+    background-color: var(--color-bg-unimportant);
+}
+
+.dropdown > [class~="p-dropdown-trigger"] {
+    display: none;
+}
+
+.dropdown > [class~="p-dropdown-label"],
+.dropdown [class~="p-dropdown-item"] {
+    padding: 0.25rem 0.75rem;
+    background-color: var(--color-bg-less-important);
+    color: var(--color-text-less-important);
+    text-align: center;
+}

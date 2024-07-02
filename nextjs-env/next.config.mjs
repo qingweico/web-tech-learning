@@ -21,11 +21,14 @@ const nextConfig = {
             },
         ]
     },
-    i18n: {
-        // 支持的语言列表
-        locales: ['en', 'zh'],
-        // 默认语言
-        defaultLocale: 'en',
+    // i18n: {
+    //     // 支持的语言列表
+    //     locales: ['en', 'zh'],
+    //     // 默认语言
+    //     defaultLocale: 'en',
+    // },
+    experimental: {
+        serverActions: true,
     },
 };
 export default nextConfig;

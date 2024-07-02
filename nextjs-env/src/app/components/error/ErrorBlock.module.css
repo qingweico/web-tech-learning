@@ -1,0 +1,19 @@
+.wrapper {
+    outline: var(--color-text-unimportant) dashed 1px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--color-bg-default);
+    color: var(--color-text-default);
+    user-select: none;
+
+    .icon {
+        width: auto;
+        height: 20%;
+        min-height: 1em;
+        aspect-ratio: 1 / 1;
+    }
+}
+
+.dialog {
+}
