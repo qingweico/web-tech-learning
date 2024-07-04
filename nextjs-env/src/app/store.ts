@@ -1,7 +1,6 @@
 import {combineReducers, configureStore, Middleware, Store} from '@reduxjs/toolkit';
 import settingsReducer from '@/app/lib/settings/slice';
 import {apiSlice} from '@/app/lib/api/slice';
-
 const reducer = combineReducers({
     settings: settingsReducer,
     [apiSlice.reducerPath]: apiSlice.reducer,
@@ -33,8 +32,5 @@ export const getOrCreateStore = (preloadedState: Partial<AppState>) => {
     return store;
 }
 
-export type AppStore = ReturnType<typeof createStore>;
 export type AppState = ReturnType<typeof reducer>;
 export type AppDispatch = ReturnType<typeof createStore>['dispatch'];
-export type AppMiddleware = Middleware<AppDispatch, AppState>;
-export type ThunkApi = { dispatch: AppDispatch; state: AppState };

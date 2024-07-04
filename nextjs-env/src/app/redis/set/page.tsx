@@ -26,12 +26,12 @@ export default function SetDataPage() {
     return (
         <form onSubmit={handleSubmit}>
             <div>
-                <label>Key</label>
-                <input type="text" value={key} onChange={(e) => setKey(e.target.value)} />
+                <label htmlFor="key">Key</label>
+                <input id="key" type="text" value={key} onChange={(e) => setKey(e.target.value)} />
             </div>
             <div>
-                <label>Value</label>
-                <input type="text" value={value} onChange={(e) => setValue(e.target.value)} />
+                <label htmlFor="value">Value</label>
+                <input id="value" type="text" value={value} onChange={(e) => setValue(e.target.value)} />
             </div>
             <button type="submit">Set Data</button>
         </form>
