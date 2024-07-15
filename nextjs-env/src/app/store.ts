@@ -32,5 +32,6 @@ export const getOrCreateStore = (preloadedState: Partial<AppState>) => {
     return store;
 }
 
+// ReturnType(TypeScript 中的一种类型定义) 意思是获取 reducer 函数的返回类型 并将其定义为 AppState 类型
 export type AppState = ReturnType<typeof reducer>;
 export type AppDispatch = ReturnType<typeof createStore>['dispatch'];
