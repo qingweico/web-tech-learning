@@ -15,6 +15,7 @@ import org.apache.rocketmq.common.message.Message;
 @Slf4j
 public class SyncMessage extends AbstractMessageSend {
 
+    @Override
     public void doSendMessage(DefaultMQProducer producer) {
         try {
             Message message = new Message("MsgTopic", "This is a simple sync message".getBytes());
