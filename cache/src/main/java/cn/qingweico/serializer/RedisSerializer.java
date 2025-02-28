@@ -1,6 +1,5 @@
 package cn.qingweico.serializer;
 
-import com.sun.xml.internal.ws.encoding.soap.SerializationException;
 import org.springframework.lang.Nullable;
 
 /**
