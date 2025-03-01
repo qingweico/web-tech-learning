@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<style>
+    #container {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        background: gray;
+        height: 800px;
+        /** flex-start 默认值 从侧轴的头部开始排列*/
+        /** flex-end 从侧轴的尾部开始排列*/
+        /** center 从侧轴的中间*/
+        /** space-around 子项在侧轴平分剩余空间*/
+        /** space-between 子项在侧轴先分部在两头 再平分剩余空间*/
+        /** stretch 设置子项元素高度平分父元素高度*/
+        align-content: flex-end ;
+    }
+
+    .box {
+        width: 200px;
+        height: 200px;
+        background: khaki;
+        margin: 20px;
+    }
+</style>
+<body>
+<h1>设置侧轴(交叉轴)上的子元素的排列方式(需要多行)</h1>
+<div id="container">
+    <div class="box"></div>
+    <div class="box"></div>
+    <div class="box"></div>
+    <div class="box"></div>
+    <div class="box"></div>
+
+</div>
+
+</body>
+</html>

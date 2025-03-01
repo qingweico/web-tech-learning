@@ -23,7 +23,7 @@ public class UserInterceptor implements HandlerInterceptor {
     }
 
     private String getUserNo(HttpServletRequest request) {
-        // 通过 SSO 或者Cookie 或者 Auth信息获取到 当前登陆的用户信息
+        // 通过 SSO 或者Cookie 或者 Auth信息获取到当前登陆的用户信息
         return request.getRemoteAddr();
     }
 }

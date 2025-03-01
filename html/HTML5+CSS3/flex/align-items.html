@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<style>
+    #container {
+        width: 100%;
+        height: 400px;
+        display: flex;
+        background: gray;
+        /*
+        flex-start 交叉轴的起点对齐
+        flex-end   交叉轴的终点对齐
+        center     交叉轴的中点对齐
+        baseline   第一行文字的基线对齐
+        stretch    默认值;占满整个容器的高度
+         */
+        align-items: stretch;
+    }
+
+    .box {
+        width: 200px;
+        background: khaki;
+        margin-right: 40px;
+    }
+
+    .left {
+        height: 100px;
+
+    }
+
+    .mid {
+        height: 300px;
+
+    }
+
+    .right {
+        height: 200px;
+
+    }
+</style>
+<body>
+<h1>交叉轴上的对齐方式</h1>
+<div id="container">
+    <div class="box left"></div>
+    <div class="box mid"></div>
+    <div class="box right"></div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<style>
+
+    /**flex属性以下三个属性的简写*/
+    /**flex-grow 扩展比 定义项目在容器中可用空间分配的比例*/
+    /**flex-shrink 收缩比 定义项目在容器空间不足时的收缩比例*/
+    /**flex-basis 基础大小 定义项目的初始大小 在分配多余空间或收缩前的基础尺寸*/
+    /**默认值 flex: 0 1 auto;*/
+    .container {
+        display: flex;
+        width: 300px;
+        border: 1px solid #ccc;
+    }
+
+    .item {
+        text-align: center;
+        color: white;
+        font-size: 16px;
+    }
+
+    .item1 {
+        background-color: #4caf50;
+        flex: 0 1 100px;
+    }
+
+    .item2 {
+        background-color: #2196f3;
+        flex: 2 1 0;
+    }
+
+    .item3 {
+        background-color: #f44336;
+        flex: 1 1 0;
+    }
+
+</style>
+<body>
+<div class="container">
+    <div class="item item1">Item 1</div>
+    <div class="item item2">Item 2</div>
+    <div class="item item3">Item 3</div>
+</div>
+</body>
+</html>

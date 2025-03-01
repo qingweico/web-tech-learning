@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<style>
+    #container {
+        width: 100%;
+        height: 400px;
+        display: flex;
+        background: gray;
+        /*
+        row (默认 主轴为水平方向, 起点在左端)
+        row-reverse (主轴为水平方向, 起点在右端)
+        column (交叉轴 从上到下)
+        column-reverse (交叉轴 从下到上)
+        */
+        flex-direction: row-reverse;
+    }
+
+    .box {
+        width: 200px;
+        height: 200px;
+        background: khaki;
+        margin-right: 40px;
+    }
+</style>
+<body>
+<h1>主轴的方向</h1>
+<div id="container">
+    <div class="box"></div>
+    <div class="box"></div>
+    <div class="box"></div>
+</div>
+
+</body>
+</html>

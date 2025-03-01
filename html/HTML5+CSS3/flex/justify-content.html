@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<style>
+    #container {
+        width: 100%;
+        height: 200px;
+        display: flex;
+        background: gray;
+        /*
+        flex-start (默认 左对齐)
+        flex-end 右对齐
+        center 居中
+        space-between 两端对齐 间隔都相等(首位贴合容器边缘)
+        space-around 前后两侧的间隔相等
+        space-evenly 等距包含容器边缘
+         */
+        /*注意需要添加在父容器上面 而不是子元素的样式上*/
+        justify-content: space-evenly;
+        /**nowrap(默认) 不换行*/
+        /**wrap 换行 第一行在上方
+        /**wrap-reverse 换行 第一行在下方*/
+        flex-wrap: wrap;
+    }
+    .box {
+        width: 200px;
+        height: 200px;
+        background: khaki;
+    }
+</style>
+<body>
+<h1>主轴上的对齐方式</h1>
+<div id="container">
+    <div class="box"></div>
+    <div class="box"></div>
+    <div class="box"></div>
+</div>
+
+</body>
+</html>

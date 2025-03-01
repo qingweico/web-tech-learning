@@ -7,5 +7,5 @@
 - Jsoup
 - Vue.js
 
-![](http://cdn.qingweico.cn/Snipaste_2022-11-16_21-36-22.png)
-![](http://cdn.qingweico.cn/Snipaste_2022-11-16_21-33-31.png)
+![](https://static-i0.oss-cn-shanghai.aliyuncs.com/pic/Snipaste_2022-11-16_21-36-22.png)
+![](https://static-i0.oss-cn-shanghai.aliyuncs.com/pic/Snipaste_2022-11-16_21-33-31.png)
