@@ -5,6 +5,7 @@ import cn.qingweico.client.RedisClient;
 import cn.qingweico.delayTask.DelayQueueManager;
 import cn.qingweico.delayTask.DelayTask;
 import cn.qingweico.delayTask.RedisBroadcastDelayTask;
+import cn.qingweico.delayTask.ZSetDelayQueue;
 import cn.qingweico.serializer.JacksonRedisSerializer;
 import cn.qingweico.serializer.JdkRedisSerializer;
 import cn.qingweico.entity.User;
@@ -18,11 +19,10 @@ import org.springframework.data.redis.core.script.DefaultRedisScript;
 import org.springframework.scripting.support.ResourceScriptSource;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -38,6 +38,8 @@ public class RedisApplicationTests {
 
     @Autowired
     private DelayQueueManager delayQueueManager;
+    @Autowired
+    private ZSetDelayQueue zSetDelayQueue;
 
     @Test
     void strType() {
@@ -206,6 +208,14 @@ public class RedisApplicationTests {
                                 delay));
 
 
+        System.out.println(System.in.read());
+    }
+    @Test
+    void zSetDelay() throws IOException {
+        zSetDelayQueue.addTask(UUID.randomUUID().toString(), 2000);
+        zSetDelayQueue.addTask(UUID.randomUUID().toString(), 6000);
+        ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
+        scheduler.scheduleAtFixedRate(zSetDelayQueue::pollTasks, 0, 2, TimeUnit.SECONDS);
         System.out.println(System.in.read());
     }
 }

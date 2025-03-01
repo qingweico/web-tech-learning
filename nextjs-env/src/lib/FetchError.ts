@@ -11,9 +11,11 @@ export default class FetchError<BodyJson> extends Error {
     }
 
     public toString() {
-        return `${this.name}: ${this.message}
-URL: ${this.url}
-status: ${this.status}
-info: ${JSON.stringify(this.info)}`;
+        return `
+            ${this.name}: ${this.message}
+            URL: ${this.url}
+            status: ${this.status}
+            info: ${JSON.stringify(this.info)}
+                `;
     }
 }

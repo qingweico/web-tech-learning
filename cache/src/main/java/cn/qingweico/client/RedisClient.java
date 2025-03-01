@@ -2,6 +2,8 @@ package cn.qingweico.client;
 
 import cn.qingweico.serializer.RedisSerializer;
 import io.lettuce.core.KeyValue;
+import io.lettuce.core.Range;
+import io.lettuce.core.api.sync.RedisSortedSetCommands;
 
 import java.util.List;
 import java.util.Set;
@@ -325,4 +327,20 @@ public interface RedisClient {
      * @return 成功返回value 失败返回null
      */
     <T> List<KeyValue<String, T>> mget(String[] keys, Class<T> resultType);
+
+    /**
+     * {@link RedisSortedSetCommands#zadd(Object, double, Object)}
+     */
+    void zadd(String key, double score, String member);
+
+
+    /**
+     * {@link RedisSortedSetCommands#zrem(Object, Object[])}
+     */
+    Long zrem(String key, String... members);
+
+    /**
+     * {@link RedisSortedSetCommands#zrangebyscore(Object, Range)}
+     */
+    List<String> zrangebyscore(String key, long min, long max);
 }

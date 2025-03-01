@@ -11,11 +11,13 @@ import java.util.concurrent.DelayQueue;
 
 
 /**
+ * 基于 JDK 的延迟队列
+ *
  * @author zqw
  * @date 2023/11/19
  */
-@Component
 @Slf4j
+@Component
 public class DelayQueueManager implements CommandLineRunner {
     private final DelayQueue<DelayTask> delayQueue = new DelayQueue<>();
 

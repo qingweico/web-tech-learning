@@ -1,7 +1,7 @@
 'use client'
 import styled from "styled-components"
 
-export const AppFooterWrapper = styled.div`
+export const DivWrapper = styled.div`
   width: 100%;
   height: 100px;
   text-align: center;

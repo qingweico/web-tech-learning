@@ -17,24 +17,24 @@ public class SpringProfile {
         AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
         context.register(SpringProfile.class);
         ConfigurableEnvironment environment = context.getEnvironment();
-        environment.setDefaultProfiles("odd");
-        environment.addActiveProfile("even");
+        environment.setDefaultProfiles("dev");
+        environment.addActiveProfile("tst");
         context.refresh();
-        Integer number = context.getBean("number", Integer.class);
-        System.out.println(number);
+        String dev = context.getBean("dev", String.class);
+        System.out.println(dev);
         context.close();
     }
 
-    @Bean(name = "number")
-    @Profile(value = "odd")
-    public int odd() {
-        return 1;
+    @Bean(name = "dev")
+    @Profile(value = "dev")
+    public String dev() {
+        return "dev";
     }
 
-    @Bean(name = "number")
-    @Profile(value = "even")
+    @Bean(name = "tst")
+    @Profile(value = "tst")
     @Conditional(EventCondition.class)
-    public int even() {
-        return 2;
+    public String tst() {
+        return "tst";
     }
 }

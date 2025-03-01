@@ -2,9 +2,9 @@ package cn.qingweico.client;
 
 import cn.qingweico.serializer.JacksonRedisSerializer;
 import cn.qingweico.serializer.RedisSerializer;
+import cn.qingweico.serializer.SerializationException;
 import cn.qingweico.serializer.StringRedisSerializer;
 import com.alibaba.fastjson.JSON;
-import com.sun.xml.internal.ws.encoding.soap.SerializationException;
 import io.lettuce.core.*;
 import io.lettuce.core.api.StatefulRedisConnection;
 import io.lettuce.core.api.sync.RedisCommands;
@@ -97,7 +97,8 @@ public class SingleRedisClient implements RedisClient {
 
         try {
             RedisCommands<byte[], byte[]> sync = connection.sync();
-            return sync.setex(getKeySerializer().serialize(key), unit.toSeconds(time), getValueSerializer().serialize(value));
+            return sync.setex(getKeySerializer().serialize(key), unit.toSeconds(time),
+                    getValueSerializer().serialize(value));
         } catch (SerializationException e) {
             throw e;
         } catch (Exception e) {
@@ -109,7 +110,8 @@ public class SingleRedisClient implements RedisClient {
     public String set(String key, Object value, long time, TimeUnit unit, RedisSerializer valueRedisSerializer) {
         try {
             RedisCommands<byte[], byte[]> sync = connection.sync();
-            return sync.setex(getKeySerializer().serialize(key), unit.toSeconds(time), valueRedisSerializer.serialize(value));
+            return sync.setex(getKeySerializer().serialize(key), unit.toSeconds(time),
+                    valueRedisSerializer.serialize(value));
         } catch (SerializationException e) {
             throw e;
         } catch (Exception e) {
@@ -122,7 +124,8 @@ public class SingleRedisClient implements RedisClient {
 
         try {
             RedisCommands<byte[], byte[]> sync = connection.sync();
-            return sync.set(getKeySerializer().serialize(key), getValueSerializer().serialize(value), SetArgs.Builder.nx().ex(time));
+            return sync.set(getKeySerializer().serialize(key), getValueSerializer().serialize(value),
+                    SetArgs.Builder.nx().ex(time));
         } catch (SerializationException e) {
             throw e;
         } catch (Exception e) {
@@ -298,8 +301,10 @@ public class SingleRedisClient implements RedisClient {
             boolean finished;
             ScanCursor cursor = ScanCursor.INITIAL;
             do {
-                KeyScanCursor<byte[]> scanCursor = sync.scan(cursor, ScanArgs.Builder.limit(10000).match(pattern));
-                scanCursor.getKeys().forEach(key -> keys.add(getKeySerializer().deserialize(key, String.class)));
+                KeyScanCursor<byte[]> scanCursor = sync.scan(cursor,
+                        ScanArgs.Builder.limit(10000).match(pattern));
+                scanCursor.getKeys().forEach(key ->
+                        keys.add(getKeySerializer().deserialize(key, String.class)));
                 finished = scanCursor.isFinished();
                 cursor = ScanCursor.of(scanCursor.getCursor());
             } while (!finished);
@@ -315,9 +320,12 @@ public class SingleRedisClient implements RedisClient {
     public Object eval(String script, List<String> keys, List<Object> args) {
         try {
             RedisCommands<byte[], byte[]> sync = connection.sync();
-            List<byte[]> byteKeys = keys.stream().map(key -> getKeySerializer().serialize(key)).collect(Collectors.toList());
-            List<byte[]> byteArgs = args.stream().map(arg -> getValueSerializer().serialize(arg)).collect(Collectors.toList());
-            return sync.eval(script, ScriptOutputType.INTEGER, byteKeys.toArray(new byte[0][0]), byteArgs.toArray(new byte[0][0]));
+            List<byte[]> byteKeys = keys.stream().map(key ->
+                    getKeySerializer().serialize(key)).collect(Collectors.toList());
+            List<byte[]> byteArgs = args.stream().map(arg ->
+                    getValueSerializer().serialize(arg)).collect(Collectors.toList());
+            return sync.eval(script, ScriptOutputType.INTEGER, byteKeys.toArray(new byte[0][0]),
+                    byteArgs.toArray(new byte[0][0]));
         } catch (SerializationException e) {
             throw e;
         } catch (Exception e) {
@@ -388,8 +396,60 @@ public class SingleRedisClient implements RedisClient {
     public <T> List<KeyValue<String, T>> mget(String[] keys, Class<T> resultType) {
         try {
             RedisCommands<byte[], byte[]> sync = connection.sync();
-            byte[][] byteKeys = Arrays.stream(keys).map(k -> getKeySerializer().serialize(k)).toArray(byte[][]::new);
-            return sync.mget(byteKeys).stream().map(v -> KeyValue.just(getKeySerializer().deserialize(v.getKey(), String.class), getValueSerializer().deserialize(v.getValue(), resultType))).collect(Collectors.toList());
+            byte[][] byteKeys = Arrays.stream(keys).map(k -> getKeySerializer()
+                    .serialize(k)).toArray(byte[][]::new);
+            return sync.mget(byteKeys).stream().map(v ->
+                    KeyValue.just(getKeySerializer().deserialize(v.getKey(), String.class),
+                            getValueSerializer().deserialize(v.getValue(), resultType)))
+                    .collect(Collectors.toList());
+        } catch (SerializationException e) {
+            throw e;
+        } catch (Exception e) {
+            throw new RedisClientException(e.getMessage(), e);
+        }
+    }
+
+    @Override
+    public void zadd(String key, double score, String member) {
+        try {
+            RedisCommands<byte[], byte[]> sync = connection.sync();
+            byte[] serializedKey = getKeySerializer().serialize(key);
+            byte[] serializedMember = getValueSerializer().serialize(member);
+            sync.zadd(serializedKey, score, serializedMember);
+        } catch (SerializationException e) {
+            throw e;
+        } catch (Exception e) {
+            throw new RedisClientException(e.getMessage(), e);
+        }
+    }
+
+    @Override
+    public Long zrem(String key, String... members) {
+        try {
+            RedisCommands<byte[], byte[]> sync = connection.sync();
+            byte[] serializedKey = getKeySerializer().serialize(key);
+            byte[][] serializedMembers = new byte[members.length][];
+            for (int i = 0; i < members.length; i++) {
+                serializedMembers[i] = getValueSerializer().serialize(members[i]);
+            }
+            return sync.zrem(serializedKey, serializedMembers);
+        } catch (SerializationException e) {
+            throw e;
+        } catch (Exception e) {
+            throw new RedisClientException(e.getMessage(), e);
+        }
+    }
+
+    @Override
+    public List<String> zrangebyscore(String key, long min, long max) {
+        try {
+            RedisCommands<byte[], byte[]> sync = connection.sync();
+            byte[] serializedKey = getKeySerializer().serialize(key);
+            Range<Long> scoreRange = Range.create(min, max);
+            List<byte[]> rawResult = sync.zrangebyscore(serializedKey, scoreRange);
+            return rawResult.stream()
+                    .map(e -> getValueSerializer().deserialize(e, String.class))
+                    .collect(Collectors.toList());
         } catch (SerializationException e) {
             throw e;
         } catch (Exception e) {
