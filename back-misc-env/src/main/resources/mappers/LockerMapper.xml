@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.qingweico.mapper.LockerMapper">
+    <resultMap id="BaseResultMap" type="cn.qingweico.entity.Locker">
+        <id column="lock_name" jdbcType="VARCHAR" property="lockName"/>
+        <result column="lock_key" jdbcType="VARCHAR" property="lockKey"/>
+        <result column="lock_count" jdbcType="INTEGER" property="lockCount"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="limit_time" jdbcType="TIMESTAMP" property="limitTime"/>
+    </resultMap>
+
+    <insert id="insert" parameterType="cn.qingweico.entity.Locker">
+        insert into p_lock (lock_name, lock_key, lock_count,
+                            create_time, limit_time)
+        values (#{lockName,jdbcType=VARCHAR}, #{lockKey,jdbcType=VARCHAR}, #{lockCount,jdbcType=INTEGER},
+                #{createTime,jdbcType=TIMESTAMP}, #{limitTime,jdbcType=TIMESTAMP})
+    </insert>
+
+    <update id="increaseByCondition" parameterType="map">
+        update p_lock
+        set lock_count = lock_count + 1,
+            limit_time = #{limitTime,jdbcType=TIMESTAMP}
+        where lock_name = #{lockName,jdbcType=VARCHAR}
+          and lock_key = #{lockKey,jdbcType=VARCHAR}
+    </update>
+
+    <update id="reduceByCondition" parameterType="map">
+        update p_lock
+        set lock_count = lock_count - 1
+        where lock_name = #{lockName,jdbcType=VARCHAR}
+          and lock_key = #{lockKey,jdbcType=VARCHAR}
+    </update>
+
+    <delete id="deleteOutOfDate" parameterType="map">
+    <![CDATA[
+        delete
+        from p_lock
+        where lock_name = #{lockName,jdbcType=VARCHAR}
+          and limit_time < #{limitTime,jdbcType=TIMESTAMP}
+        ]]>
+  </delete>
+    <delete id="deleteByCondition" parameterType="map">
+    <![CDATA[
+        delete
+        from p_lock
+        where lock_name = #{lockName,jdbcType=VARCHAR}
+          and lock_key = #{lockKey,jdbcType=VARCHAR}
+          and (limit_time < #{limitTime,jdbcType=TIMESTAMP} or lock_count < #{lockCount,jdbcType=INTEGER})
+        ]]>
+  </delete>
+</mapper>

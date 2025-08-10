@@ -1,10 +1,10 @@
 package cn.qingweico.utils;
 
 import org.springframework.data.annotation.Id;
-import sun.reflect.generics.reflectiveObjects.ParameterizedTypeImpl;
 
 import java.io.Serializable;
 import java.lang.reflect.Field;
+import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.Map;
 import java.util.Objects;
@@ -90,7 +90,7 @@ public class ClassUtil {
             return result;
         }
         Type aClass = obj.getClass().getGenericSuperclass();
-        Type subType = ((ParameterizedTypeImpl) aClass).getActualTypeArguments()[1];
+        Type subType = ((ParameterizedType) aClass).getActualTypeArguments()[1];
         result = (Class<?>) subType;
         CACHE.put(clazz, result);
         return result;

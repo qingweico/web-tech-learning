@@ -2,12 +2,18 @@ package cn.qingweico.config;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.aop.interceptor.AsyncUncaughtExceptionHandler;
+import org.springframework.beans.factory.config.BeanDefinition;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Role;
 import org.springframework.core.task.SimpleAsyncTaskExecutor;
 import org.springframework.lang.NonNull;
 import org.springframework.scheduling.annotation.AsyncConfigurer;
 import org.springframework.scheduling.annotation.EnableAsync;
+import org.springframework.scheduling.annotation.ScheduledAnnotationBeanPostProcessor;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
+import org.springframework.scheduling.config.TaskManagementConfigUtils;
 
 import java.lang.reflect.Method;
 import java.util.Arrays;
@@ -49,4 +55,10 @@ public class AsyncConfig implements AsyncConfigurer {
         }
     }
 
+    @ConditionalOnMissingBean
+    @Role(BeanDefinition.ROLE_INFRASTRUCTURE)
+    @Bean(name = TaskManagementConfigUtils.SCHEDULED_ANNOTATION_PROCESSOR_BEAN_NAME)
+    public ScheduledAnnotationBeanPostProcessor scheduledAnnotationProcessor() {
+        return new ScheduledAnnotationBeanPostProcessor();
+    }
 }

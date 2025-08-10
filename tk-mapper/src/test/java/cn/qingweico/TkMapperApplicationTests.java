@@ -1,8 +1,8 @@
 package cn.qingweico;
 
 import cn.qingweico.entity.Goods;
+import cn.qingweico.io.Print;
 import cn.qingweico.mapper.GoodsMapper;
-import cn.qingweico.utils.Print;
 import org.apache.ibatis.session.RowBounds;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,7 +42,7 @@ class TkMapperApplicationTests {
         Example.Criteria criteria = example.createCriteria();
         example.orderBy("unitPrice").desc();
         criteria.andEqualTo("available", 1);
-        Print.toPrint(goodsMapper.selectByExample(example));
+        Print.printColl(goodsMapper.selectByExample(example));
     }
 
     @Test
@@ -50,7 +50,7 @@ class TkMapperApplicationTests {
         Example example = new Example(Goods.class);
         example.orderBy("inventory").desc();
         RowBounds rowBounds = new RowBounds(1, 4);
-        Print.toPrint(goodsMapper.selectByExampleAndRowBounds(example, rowBounds));
+        Print.printColl(goodsMapper.selectByExampleAndRowBounds(example, rowBounds));
     }
 
     @Test
@@ -63,7 +63,7 @@ class TkMapperApplicationTests {
                 .available(1)
                 .build();
         RowBounds rowBounds = new RowBounds(1, 2);
-        Print.toPrint(goodsMapper.selectByRowBounds(goods, rowBounds));
+        Print.printColl(goodsMapper.selectByRowBounds(goods, rowBounds));
     }
     @Test
     void selectCount()  {

@@ -15,7 +15,7 @@
     </properties>
     <dependencies>
         <dependency>
-            <groupId>cn.qinwweico</groupId>
+            <groupId>cn.qingweico</groupId>
             <artifactId>common</artifactId>
             <version>20231106</version>
         </dependency>

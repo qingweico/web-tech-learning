@@ -1,12 +1,13 @@
 package cn.qingweico.elasticlowerclient.controller;
 
 import cn.hutool.core.lang.Snowflake;
+import cn.qingweico.convert.Convert;
 import cn.qingweico.elasticlowerclient.entity.ElasticUser;
 import cn.qingweico.elasticlowerclient.model.ReqParams;
 import cn.qingweico.model.ApiResponse;
 import cn.qingweico.model.PagedResult;
-import cn.qingweico.util.Global;
-import cn.qingweico.util.RandomDataUtil;
+
+import cn.qingweico.supplier.RandomDataGenerator;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.elasticsearch.action.search.SearchResponse;
@@ -47,7 +48,7 @@ public class UserController {
     private ElasticsearchTemplate elasticsearchTemplate;
 
     @PostMapping("/searchList")
-    public ApiResponse searchList(@RequestBody ReqParams params) {
+    public ApiResponse<PagedResult> searchList(@RequestBody ReqParams params) {
         Integer page = params.getPage();
         page--;
         Integer pageSize = params.getPageSize();
@@ -135,12 +136,12 @@ public class UserController {
     }
 
     @GetMapping("/delete/{Id}")
-    public ApiResponse delete(@PathVariable("Id") String id) {
+    public ApiResponse<?> delete(@PathVariable("Id") String id) {
         elasticsearchTemplate.delete(ElasticUser.class, id);
         return ApiResponse.ok();
     }
 
-    public ApiResponse deleteByCondition(@PathVariable("Id") String id) {
+    public ApiResponse<?> deleteByCondition(@PathVariable("Id") String id) {
         DeleteQuery deleteQuery = new DeleteQuery();
         deleteQuery.setQuery(QueryBuilders.termQuery("id", id));
         elasticsearchTemplate.delete(deleteQuery, ElasticUser.class);
@@ -153,7 +154,7 @@ public class UserController {
      * @return ApiResponse
      */
     @GetMapping("/differentGendersNumber")
-    public ApiResponse differentGendersNumber() {
+    public ApiResponse<Map<String, Object>> differentGendersNumber() {
         Map<String, Object> result = new HashMap<>();
         TermsAggregationBuilder termBuilder = AggregationBuilders.terms("different-genders-number").field("gender.keyword");
         SearchQuery searchQuery = new NativeSearchQueryBuilder().addAggregation(termBuilder).build();
@@ -187,7 +188,7 @@ public class UserController {
      * @return ApiResponse
      */
     @GetMapping("/differentProvinceNumber")
-    public ApiResponse differentProvinceNumber() {
+    public ApiResponse<List<Map<String, Object>>> differentProvinceNumber() {
         // 默认聚合大小限制 default size 10
         TermsAggregationBuilder termBuilder = AggregationBuilders.terms("different-province-number").field("province.keyword").size(REGIONS.length);
         SearchQuery searchQuery = new NativeSearchQueryBuilder()
@@ -219,11 +220,11 @@ public class UserController {
      */
 
     @PostMapping("/randomAdd/{quantity}")
-    public ApiResponse randomAdd(@PathVariable("quantity") Integer quantity) throws InterruptedException {
+    public ApiResponse<?> randomAdd(@PathVariable("quantity") Integer quantity) throws InterruptedException {
         if (quantity != null) {
             CountDownLatch latch = new CountDownLatch(quantity);
             int batch = 10;
-            int[] batchArray = Global.splitInteger(quantity, batch);
+            int[] batchArray = Convert.splitInteger(quantity, batch);
             long start = System.currentTimeMillis();
             for (int i = 0; i < batch; i++) {
                 int frequency = batchArray[i];
@@ -234,12 +235,12 @@ public class UserController {
                         for (int f = 0; f < frequency; f++) {
                             ElasticUser eu = new ElasticUser();
                             eu.setId(snowflake.nextIdStr());
-                            eu.setName(RandomDataUtil.name(true));
-                            eu.setAddress(RandomDataUtil.address(true));
-                            eu.setAvl(RandomDataUtil.zeroOrOne());
-                            eu.setGender(RandomDataUtil.zeroOrOne());
-                            eu.setProvince(REGIONS[RandomDataUtil.nextInt(REGIONS.length)]);
-                            eu.setPhone(RandomDataUtil.phone(true));
+                            eu.setName(RandomDataGenerator.name(true));
+                            eu.setAddress(RandomDataGenerator.address(true));
+                            eu.setAvl(RandomDataGenerator.zeroOrOne());
+                            eu.setGender(RandomDataGenerator.zeroOrOne());
+                            eu.setProvince(REGIONS[RandomDataGenerator.rndInt(REGIONS.length)]);
+                            eu.setPhone(RandomDataGenerator.phone(true));
                             eu.setCreate(new Date());
                             eu.setUpdate(new Date());
                             IndexQuery indexQuery = queryBuilder.withObject(eu).build();

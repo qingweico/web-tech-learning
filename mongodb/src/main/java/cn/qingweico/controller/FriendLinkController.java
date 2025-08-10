@@ -1,12 +1,12 @@
 package cn.qingweico.controller;
 
+import cn.qingweico.convert.Convert;
 import cn.qingweico.entity.FriendLink;
 import cn.qingweico.entity.model.PostParams;
 import cn.qingweico.model.ApiResponse;
 import cn.qingweico.service.impl.FriendLinkServiceImpl;
 import cn.qingweico.model.PagedResult;
-import cn.qingweico.util.Global;
-import cn.qingweico.util.RandomDataUtil;
+import cn.qingweico.supplier.RandomDataGenerator;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
@@ -28,7 +28,7 @@ public class FriendLinkController {
     private FriendLinkServiceImpl friendLinkService;
 
     @PostMapping("/save")
-    public ApiResponse save(@RequestBody FriendLink friendLink) {
+    public ApiResponse<?> save(@RequestBody FriendLink friendLink) {
         friendLink.setUpdate(new Date());
         friendLink.setCreate(new Date());
         friendLinkService.save(friendLink);
@@ -36,36 +36,36 @@ public class FriendLinkController {
     }
 
     @PostMapping("/update")
-    public ApiResponse update(@RequestBody FriendLink friendLink) {
+    public ApiResponse<?> update(@RequestBody FriendLink friendLink) {
         friendLink.setUpdate(new Date());
         friendLinkService.updateById(friendLink);
         return ApiResponse.ok();
     }
 
     @PostMapping("/searchList")
-    public ApiResponse searchList(@RequestBody PostParams postParams) {
+    public ApiResponse<PagedResult> searchList(@RequestBody PostParams postParams) {
         PagedResult result = friendLinkService.searchList(postParams);
         return ApiResponse.ok(result);
     }
 
     @PostMapping("/delete")
-    public ApiResponse batchDelete(@RequestBody List<String> ids) {
+    public ApiResponse<?> batchDelete(@RequestBody List<String> ids) {
         friendLinkService.deleteAll(ids);
         return ApiResponse.ok();
     }
 
     @PostMapping("/delete/{id}")
-    public ApiResponse delete(@PathVariable("id") String linkId) {
+    public ApiResponse<?> delete(@PathVariable("id") String linkId) {
         friendLinkService.delete(linkId);
         return ApiResponse.ok();
     }
 
     @PostMapping("/randomAdd/{quantity}")
-    public ApiResponse randomAdd(@PathVariable("quantity") Integer quantity) throws InterruptedException {
+    public ApiResponse<?> randomAdd(@PathVariable("quantity") Integer quantity) throws InterruptedException {
         if (quantity != null) {
             CountDownLatch latch = new CountDownLatch(quantity);
             int batch = 10;
-            int[] batchArray = Global.splitInteger(quantity, batch);
+            int[] batchArray = Convert.splitInteger(quantity, batch);
             long start = System.currentTimeMillis();
             for (int i = 0; i < batch; i++) {
                 int frequency = batchArray[i];
@@ -73,9 +73,9 @@ public class FriendLinkController {
                     CompletableFuture.runAsync(() -> {
                         for (int f = 0; f < frequency; f++) {
                             FriendLink fl = new FriendLink();
-                            fl.setName(RandomDataUtil.name());
-                            fl.setUrl(RandomDataUtil.address());
-                            fl.setAvl(RandomDataUtil.zeroOrOne());
+                            fl.setName(RandomDataGenerator.name());
+                            fl.setUrl(RandomDataGenerator.address());
+                            fl.setAvl(RandomDataGenerator.zeroOrOne());
                             fl.setCreate(new Date());
                             fl.setUpdate(new Date());
                             friendLinkService.save(fl);

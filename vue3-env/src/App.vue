@@ -1,50 +1,71 @@
 <template>
-  <h1>
-    Message : {{ message }}
-  </h1>
-  <span>{{el}}</span>
-  <button @click="clickAlert">Click</button>
-  <button @click="changeMessage">Change Message</button>
+  <div style="display: flex; flex-direction: column;">
+    <el-switch
+        v-model="mode"
+        class="mb-2"
+        :active-value="'ComponentMode'"
+        :inactive-value="'RouterMode'"
+        style="--el-switch-on-color: #13ce66; --el-switch-off-color: #409EFF"
+        active-text="组件模式"
+        inactive-text="路由模式"
+    />
+  </div>
+  <div class="container" v-if="mode === 'ComponentMode'">
+    <div class="left-panel">
+      <el-select clearable filterable v-model="selected" placeholder="选择组件">
+        <el-option
+            v-for="item in componentList"
+            :key="item.label"
+            :label="item.label"
+            :value="item.label"
+        />
+      </el-select>
+    </div>
+    <div class="right-panel">
+      <component :is="selectedComponent" v-if="selectedComponent"/>
+    </div>
+  </div>
+  <keep-alive v-else>
+    <router-view/>
+  </keep-alive>
+
 </template>
+<script setup>
+import {ref, watch} from 'vue';
+import {componentList, componentMap} from './components/ComponentList';
 
-<script>
-
-import {ref, reactive} from "vue";
-
-export default {
-  name: 'App',
-  components: {
-  },
-  setup(){
-    // 定义一个响应式的数据
-    let message = ref("This is a message")
-
-    const el = reactive(['e1', 'e2', 'e3'])
-
-    function clickAlert () {
-      alert(`${message.value}`)
-    }
-    function changeMessage () {
-      message.value = "This is a changed message"
-      el[0] = 'e4'
-    }
-    return {
-      message,
-      clickAlert,
-      changeMessage,
-      el
-    }
+const selectedComponent = ref(null);
+const selected = ref(null);
+import {onMounted} from 'vue'
+import {markRaw} from "@vue/runtime-core";
+// 组件模式 / 路由模式
+// ComponentMode / RouterMode
+const mode = ref('')
+onMounted(() => {
+})
+watch(() => selected.value, (newValue) => {
+  if (newValue) {
+    selectedComponent.value = markRaw(componentMap.get(newValue))
+  } else {
+    selectedComponent.value = null
   }
-}
+})
 </script>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+<style scoped>
+.container {
+  display: flex;
+  height: 100vh;
+}
+
+.left-panel {
+  width: 200px;
+  padding: 20px;
+}
+
+.right-panel {
+  flex: 1;
+  padding: 20px;
+  border-left: 1px solid #ccc;
 }
 </style>

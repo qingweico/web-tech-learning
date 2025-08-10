@@ -1,11 +1,10 @@
 package cn.qingweico.controller;
 
+import cn.qingweico.entity.dto.ResponseDto;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 
 /**
@@ -26,5 +25,28 @@ public class UserController {
     @RequestMapping(value = "businessLog", method = RequestMethod.GET)
     public void businessLog() {
         businessLog.info("这是用来记录业务操作日志");
+    }
+
+    /**
+     * {
+     *     "msg": "OK",
+     *     "code": 200,
+     *     "data": {
+     *         "accountBill": {
+     *             "money": "100",
+     *             "amount": "24",
+     *             "rate": 12
+     *         },
+     *         "plInfo": {
+     *             "name": "中国建设银行",
+     *             "date": "2025-08-12",
+     *             "sign": "Y"
+     *         }
+     *     }
+     * }
+     */
+    @PostMapping(value = "postParamsAnalysis")
+    public void postParamsAnalysis(@RequestBody ResponseDto responseDto) {
+        log.info("{}", responseDto);
     }
 }

@@ -9,7 +9,7 @@ import cn.qingweico.delayTask.ZSetDelayQueue;
 import cn.qingweico.serializer.JacksonRedisSerializer;
 import cn.qingweico.serializer.JdkRedisSerializer;
 import cn.qingweico.entity.User;
-import cn.qingweico.util.RandomDataUtil;
+import cn.qingweico.supplier.RandomDataGenerator;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,10 +53,10 @@ public class RedisApplicationTests {
         for (int i = 0; i < 10; i++) {
             User user = User.builder()
                     .id(String.valueOf(i))
-                    .username(RandomDataUtil.name())
-                    .mobile(RandomDataUtil.phone())
-                    .birthday(RandomDataUtil.birthday())
-                    .address(RandomDataUtil.address())
+                    .username(RandomDataGenerator.name())
+                    .mobile(RandomDataGenerator.phone())
+                    .birthday(RandomDataGenerator.birthday())
+                    .address(RandomDataGenerator.address())
                     .build();
             System.out.println(redisClient.set("user[" + i + "]", user));
         }
@@ -71,10 +71,10 @@ public class RedisApplicationTests {
     void getObjAssignedSerializer() {
         User user = User.builder()
                 .id(String.valueOf(10))
-                .username(RandomDataUtil.name())
-                .mobile(RandomDataUtil.phone())
-                .birthday(RandomDataUtil.birthday())
-                .address(RandomDataUtil.address())
+                .username(RandomDataGenerator.name())
+                .mobile(RandomDataGenerator.phone())
+                .birthday(RandomDataGenerator.birthday())
+                .address(RandomDataGenerator.address())
                 .build();
         System.out.println(redisClient.set("user[" + 10 + "]", user, 10, TimeUnit.SECONDS, new JdkRedisSerializer()));
         System.out.println(redisClient.get("user[10]", User.class, new JdkRedisSerializer()));
