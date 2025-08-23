@@ -3,6 +3,7 @@ server:
 spring:
   data:
     mongodb:
+      # use admin
       # db.createUser({
       #    user: "rw",
       #    pwd: "rw",
@@ -10,7 +11,7 @@ spring:
       #        { role: "readWrite", db: "rw_test" }
       #    ]
       #})
-      uri: mongodb://rw:rw@106.12.136.221:27017/?authSource=root&authMechanism=SCRAM-SHA-1
+      uri: mongodb://rw:rw@127.0.0.1:27017/?authSource=root&authMechanism=SCRAM-SHA-1
       database: rw_test
   jackson:
     date-format: yyyy-MM-dd HH:mm:ss

@@ -121,7 +121,7 @@ public class WebSocketServer {
 
     public void sendMessageAll(String message) {
         for (WebSocketServer item : WEB_SOCKET_MAP.values()) {
-            log.info("客户消息:" + item.clientId + ",报文:" + message);
+            log.info("客户消息:{},报文:{}", item.clientId, message);
             item.session.getAsyncRemote().sendText(message);
         }
     }

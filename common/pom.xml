@@ -16,6 +16,12 @@
             <groupId>cn.qingweico</groupId>
             <artifactId>we-common-library</artifactId>
             <version>20250802</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.yaml</groupId>
+                    <artifactId>snakeyaml</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>

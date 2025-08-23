@@ -12,15 +12,23 @@ spring:
       connection-timeout: 30000
       max-lifetime: 1800000
       idle-timeout: 600000
-  data:
-    mongodb:
-      # see mongodb/src/main/resources/application.yml
-      uri: mongodb://rw:rw@127.0.0.1:27017/?authSource=root&authMechanism=SCRAM-SHA-1
-      database: rw_test
-face:
-  file:
-    path: c:\app\face\
 
-mybatis-plus:
-  global-config:
-    banner: false
+redisson:
+  mode: single  # single, cluster, sentinel, master-slave
+  host: 127.0.0.1
+  port: 6379
+  password:
+  database: 0
+  timeout: 3000
+  pool-size: 64
+  min-idle-size: 24
+redis:
+  sentinel:
+    master: mr
+    password: null
+    ips: 127.0.0.1
+  pool:
+    maxTotal: 10
+    maxIdle: 8
+    minIdle: 0
+    testOnBorrow: true

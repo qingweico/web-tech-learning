@@ -1,14 +1,18 @@
 <template>
- <div>
-   <el-select v-model="select" multiple placeholder="请选择">
-     <el-option
-         v-for="item in options"
-         :key="item.id"
-         :label="item.label"
-         :value="item.value">
-     </el-option>
-   </el-select>
- </div>
+  <div>
+    <el-select
+      v-model="select"
+      multiple
+      placeholder="请选择"
+    >
+      <el-option
+        v-for="item in options"
+        :key="item.id"
+        :label="item.label"
+        :value="item.value"
+      />
+    </el-select>
+  </div>
 </template>
 
 <script>

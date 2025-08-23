@@ -1,6 +1,8 @@
 <template>
   <div>
-    <button @click="getFpId">获取浏览器指纹ID</button>
+    <button @click="getFpId">
+      获取浏览器指纹ID
+    </button>
     <div>
       visitorId: {{ visitorId }}
     </div>

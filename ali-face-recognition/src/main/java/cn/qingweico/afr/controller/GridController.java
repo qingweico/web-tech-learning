@@ -86,9 +86,7 @@ public class GridController {
             return null;
         }
         String fileName = gridFs.getFilename();
-        if (Files.notExists(Paths.get(faceFilePath))) {
-            Files.createDirectory(Paths.get(faceFilePath));
-        }
+        FileUtils.createDir(faceFilePath);
         // 获取文件流; 保存到本地或者服务器的临时目录
         File picFile = new File(faceFilePath + File.separator + fileName);
         // 创建文件输出流

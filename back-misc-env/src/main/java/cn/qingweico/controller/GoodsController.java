@@ -1,6 +1,7 @@
 package cn.qingweico.controller;
 
 import cn.qingweico.entity.Goods;
+import cn.qingweico.model.ApiResponse;
 import cn.qingweico.service.GoodsService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,9 +24,9 @@ public class GoodsController {
     private GoodsService goodsService;
 
     @RequestMapping(value = "list", method = RequestMethod.GET)
-    public void list() {
+    public  ApiResponse<List<Goods>> list() {
         List<Goods> list = goodsService.list();
-        log.info(list.toString());
         goodsService.calculateAndSaveAmount();
+        return ApiResponse.ok(list);
     }
 }

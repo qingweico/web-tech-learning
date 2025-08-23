@@ -1,40 +1,84 @@
 <template>
   <div class="login-wrap">
     <div class="ms-login">
-      <div class="ms-title">人脸登陆</div>
-      <el-form :model="data" :rules="rules" ref="login" label-width="0px" class="ms-content">
+      <div class="ms-title">
+        人脸登陆
+      </div>
+      <el-form
+        ref="login"
+        :model="data"
+        :rules="rules"
+        label-width="0px"
+        class="ms-content"
+      >
         <el-form-item prop="username">
-          <el-input v-model="data.username" placeholder="username">
+          <el-input
+            v-model="data.username"
+            placeholder="username"
+          >
             <template #prepend>
-              <el-button icon="el-icon-user"></el-button>
+              <el-button icon="el-icon-user" />
             </template>
           </el-input>
         </el-form-item>
         <el-form-item>
           <div class="face-view">
-            <i class="el-icon-camera logo-camera" v-show="!enablingCamera"></i>
-            <video id="video" width="140" height="150" autoplay="autoplay"
-                   style="border-radius: 8px;position: absolute"></video>
+            <i
+              v-show="!enablingCamera"
+              class="el-icon-camera logo-camera"
+            />
+            <video
+              id="video"
+              width="140"
+              height="150"
+              autoplay="autoplay"
+              style="border-radius: 8px;position: absolute"
+            />
           </div>
-          <div class="face-pic" v-show="enablingCamera">
-            <i class="el-icon-picture logo-pic" v-show="!beginCapture"></i>
-            <canvas id="canvas" width="140" height="150" style="border-radius: 8px;"></canvas>
+          <div
+            v-show="enablingCamera"
+            class="face-pic"
+          >
+            <i
+              v-show="!beginCapture"
+              class="el-icon-picture logo-pic"
+            />
+            <canvas
+              id="canvas"
+              width="140"
+              height="150"
+              style="border-radius: 8px;"
+            />
           </div>
           <div class="tip">
-            <el-checkbox v-model="enablingCamera"
-                         @change="openOrCloseCamera()"
-                         style="margin:0 0 25px 0;"><span style="color: #eee;font-size: 12px">开启人脸识别</span>
+            <el-checkbox
+              v-model="enablingCamera"
+              style="margin:0 0 25px 0;"
+              @change="openOrCloseCamera()"
+            >
+              <span style="color: #eee;font-size: 12px">开启人脸识别</span>
             </el-checkbox>
             <span class="login-tip">建议在Chrome下使用本系统</span>
           </div>
         </el-form-item>
         <div class="login-btn">
           <el-row :gutter="12">
-            <el-col :span=12>
-              <el-button type="primary" @click="captureFace()">{{ startCapture }}</el-button>
+            <el-col :span="12">
+              <el-button
+                type="primary"
+                @click="captureFace()"
+              >
+                {{ startCapture }}
+              </el-button>
             </el-col>
-            <el-col :span=12>
-              <el-button type="primary" :loading="loading" @click="faceVerify()">{{ startFaceVerify }}</el-button>
+            <el-col :span="12">
+              <el-button
+                type="primary"
+                :loading="loading"
+                @click="faceVerify()"
+              >
+                {{ startFaceVerify }}
+              </el-button>
             </el-col>
           </el-row>
         </div>
@@ -114,7 +158,7 @@ export default {
       this.$refs.login.validate(valid => {
         if (valid) {
           this.loading = true;
-          axios.post('http://localhost:8080/fs/login', this.data).then(response => {
+          axios.post('/api/fs/login', this.data).then(response => {
             const {data} = response
             if(data.success) {
               this.$message.success(data.msg);

@@ -1,153 +1,328 @@
 <template>
   <div>
-    <h2 style="text-align: center;margin-top: 20px">人脸信息管理</h2>
-    <el-dialog :close-on-click-modal="false" :before-close="closeDialog" :visible="showDialog" :title="cuStatus === 1 ? '新增' : '编辑'" width="800px">
-      <el-form ref="form" :model="form" :rules="formRules" size="small" label-width="120px">
-        <el-form-item label="用户名" prop="username">
-          <el-input v-model="form.username" maxlength="32" show-word-limit/>
+    <h2 style="text-align: center;margin-top: 20px">
+      人脸信息管理
+    </h2>
+    <el-dialog
+      :close-on-click-modal="false"
+      :before-close="closeDialog"
+      :visible="showDialog"
+      :title="cuStatus === 1 ? '新增' : '编辑'"
+      width="800px"
+    >
+      <el-form
+        ref="form"
+        :model="form"
+        :rules="formRules"
+        size="small"
+        label-width="120px"
+      >
+        <el-form-item
+          label="用户名"
+          prop="username"
+        >
+          <el-input
+            v-model="form.username"
+            maxlength="32"
+            show-word-limit
+          />
         </el-form-item>
-        <el-form-item label="人脸信息" prop="faceId">
+        <el-form-item
+          label="人脸信息"
+          prop="faceId"
+        >
           <el-row>
             <el-col :span="24">
-              <el-radio v-model="form.enableFace" :label=true @change="enableOrDisableFaceLogin">启用</el-radio>
-              <el-radio v-model="form.enableFace" :label=false @change="enableOrDisableFaceLogin">未启用</el-radio>
-              <el-button class="face-btn" @click="seeFace(form.faceId)" size="mini" style="margin-right: 10px"
-                         v-show="form.enableFace && form.faceId">查看人脸
+              <el-radio
+                v-model="form.enableFace"
+                :label="true"
+                @change="enableOrDisableFaceLogin"
+              >
+                启用
+              </el-radio>
+              <el-radio
+                v-model="form.enableFace"
+                :label="false"
+                @change="enableOrDisableFaceLogin"
+              >
+                未启用
+              </el-radio>
+              <el-button
+                v-show="form.enableFace && form.faceId"
+                class="face-btn"
+                size="mini"
+                style="margin-right: 10px"
+                @click="seeFace(form.faceId)"
+              >
+                查看人脸
               </el-button>
-              <el-button @click="takeFace" size="mini" style="margin-right: 10px"
-                         v-show="form.enableFace && takeFaceStatus === 1">获取人脸
+              <el-button
+                v-show="form.enableFace && takeFaceStatus === 1"
+                size="mini"
+                style="margin-right: 10px"
+                @click="takeFace"
+              >
+                获取人脸
               </el-button>
-              <el-button @click="refreshFace" size="mini"
-                         v-show="form.enableFace && takeFaceStatus=== 2">重新获取
+              <el-button
+                v-show="form.enableFace && takeFaceStatus=== 2"
+                size="mini"
+                @click="refreshFace"
+              >
+                重新获取
               </el-button>
-              <el-button @click="startUpload" size="mini" style="margin-right: 10px"
-                         v-show="form.enableFace && takeFaceStatus=== 2">上传人脸信息
+              <el-button
+                v-show="form.enableFace && takeFaceStatus=== 2"
+                size="mini"
+                style="margin-right: 10px"
+                @click="startUpload"
+              >
+                上传人脸信息
               </el-button>
-              <el-button v-show="form.enableFace" type="primary" size="mini"
-                         @click="openOrCloseCamera()"
-                         style="margin:0 0 25px 0;">开启/关闭摄像头
+              <el-button
+                v-show="form.enableFace"
+                type="primary"
+                size="mini"
+                style="margin:0 0 25px 0;"
+                :disabled="cameraStatus === 'loading'"
+                @click="openOrCloseCamera()"
+              >
+                {{ isCameraOpen ? '关闭摄像头' : '开启摄像头' }}
               </el-button>
-              <el-link style="margin-left: 15px" v-show="form.enableFace && takeFaceStatus=== 2" type="danger" disabled>
-                <el-popover placement="bottom" trigger="hover">
+              <el-link
+                v-show="form.enableFace && takeFaceStatus=== 2"
+                style="margin-left: 15px"
+                type="danger"
+                disabled
+              >
+                <el-popover
+                  placement="bottom"
+                  trigger="hover"
+                >
                   <div>
                     获取人脸后记得先点击上传人脸信息按钮上传人脸信息
                   </div>
-                  <i slot="reference" class="el-icon-warning-outline" />
+                  <i
+                    slot="reference"
+                    class="el-icon-warning-outline"
+                  />
                 </el-popover>
               </el-link>
             </el-col>
             <el-col :span="12">
-              <div v-show="form.enableFace && takeFaceStatus === 1">
-                <video id="video" width="140px" height="150px"></video>
+              <div v-show="form.enableFace">
+                <div v-show="cameraStatus === 'loading'">
+                  <el-icon class="el-icon-loading" />
+                  <p>正在启动摄像头...</p>
+                </div>
+                <video
+                  v-show="takeFaceStatus === 1"
+                  id="video"
+                  width="140px"
+                  height="150px"
+                />
               </div>
               <div v-show="form.enableFace && takeFaceStatus === 2">
-                <canvas id="canvas" width="140px" height="150px"></canvas>
+                <canvas
+                  id="canvas"
+                  width="140px"
+                  height="150px"
+                />
               </div>
             </el-col>
           </el-row>
         </el-form-item>
-
       </el-form>
-      <div slot="footer" class="dialog-footer">
-        <el-button sid="form_column_cancel" size="mini" type="text" @click="closeDialog">关闭</el-button>
-        <el-button sid="form_column_submit" size="mini" type="primary" @click="handleClick" :loading="buttonLoading">确认</el-button>
+      <div
+        slot="footer"
+        class="dialog-footer"
+      >
+        <el-button
+          sid="form_column_cancel"
+          size="mini"
+          type="text"
+          @click="closeDialog"
+        >
+          关闭
+        </el-button>
+        <el-button
+          sid="form_column_submit"
+          size="mini"
+          type="primary"
+          :loading="buttonLoading"
+          @click="handleClick"
+        >
+          确认
+        </el-button>
       </div>
     </el-dialog>
     <el-dialog
-        title="人脸信息"
-        align="center"
-        :visible.sync="dialogVisible"
-        :before-close="handleClose"
-        width="20%">
-        <div class="block">
-          <el-image :src="base64Image" style="width: 200px;" fit="contain"></el-image>
-        </div>
-      <span slot="footer" class="dialog-footer"></span>
+      title="人脸信息"
+      align="center"
+      :visible.sync="dialogVisible"
+      :before-close="handleClose"
+      width="20%"
+    >
+      <div class="block">
+        <el-image
+          :src="base64Image"
+          style="width: 200px;"
+          fit="contain"
+        />
+      </div>
+      <span
+        slot="footer"
+        class="dialog-footer"
+      />
     </el-dialog>
     <div class="crud-opts">
-            <span class="crud-opts-left">
-                <span style="margin-right: 10px">
-                <el-button  size="mini" type="primary" icon="el-icon-plus" :loading="buttonLoading"
-                           @click="add" style="margin-left: 0">添加</el-button>
-                </span>
-                <span style="margin-right: 10px">
-                <el-button  size="mini" style="margin-left: 0" type="primary" icon="el-icon-edit"
-                           :disabled="multipleSelection.length !== 1" :loading="buttonLoading"
-                           @click="edit(multipleSelection[0])">编辑</el-button>
-                </span>
-                <span style="margin-right: 10px">
-                <el-button  size="mini" style="margin-left: 0" type="danger" icon="el-icon-delete"
-                           :loading="buttonLoading" :disabled="multipleSelection.length === 0"
-                           @click="del(multipleSelection)">删除</el-button>
-                </span>
-                <span style="margin-right: 10px">
-                 <el-button  size="mini" style="margin-left: 0" type="success" icon="el-icon-refresh"
-                            :loading="buttonLoading"
-                            @click="refresh">刷新</el-button>
-                </span>
-            </span>
+      <span class="crud-opts-left">
+        <span style="margin-right: 10px">
+          <el-button
+            size="mini"
+            type="primary"
+            icon="el-icon-plus"
+            :loading="buttonLoading"
+            style="margin-left: 0"
+            @click="add"
+          >添加</el-button>
+        </span>
+        <span style="margin-right: 10px">
+          <el-button
+            size="mini"
+            style="margin-left: 0"
+            type="primary"
+            icon="el-icon-edit"
+            :disabled="multipleSelection.length !== 1"
+            :loading="buttonLoading"
+            @click="edit(multipleSelection[0])"
+          >编辑</el-button>
+        </span>
+        <span style="margin-right: 10px">
+          <el-button
+            size="mini"
+            style="margin-left: 0"
+            type="danger"
+            icon="el-icon-delete"
+            :loading="buttonLoading"
+            :disabled="multipleSelection.length === 0"
+            @click="del(multipleSelection)"
+          >删除</el-button>
+        </span>
+        <span style="margin-right: 10px">
+          <el-button
+            size="mini"
+            style="margin-left: 0"
+            type="success"
+            icon="el-icon-refresh"
+            :loading="buttonLoading"
+            @click="refresh"
+          >刷新</el-button>
+        </span>
+      </span>
     </div>
     <el-table
-        ref="table"
-        border
-        :data="users"
-        size="small"
-        v-loading="tableLoading"
-        style="width: 100%;"
-        @selection-change="handleSelectionChange"
+      ref="table"
+      v-loading="tableLoading"
+      border
+      :data="users"
+      size="small"
+      style="width: 100%;"
+      @selection-change="handleSelectionChange"
     >
-      <el-table-column type="selection" width="55"></el-table-column>
-      <el-table-column label="序号" width="60" align="center">
+      <el-table-column
+        type="selection"
+        width="55"
+      />
+      <el-table-column
+        label="序号"
+        width="60"
+        align="center"
+      >
         <template slot-scope="scope">
           <span>{{ scope.$index + 1 }}</span>
         </template>
       </el-table-column>
-      <el-table-column prop="username" label="用户名" align="center" show-overflow-tooltip min-width="200px">
-      </el-table-column>
-      <el-table-column prop="avl" label="是否启用人脸信息" align="center" show-overflow-tooltip
-                       min-width="200px">
+      <el-table-column
+        prop="username"
+        label="用户名"
+        align="center"
+        show-overflow-tooltip
+        min-width="200px"
+      />
+      <el-table-column
+        prop="avl"
+        label="是否启用人脸信息"
+        align="center"
+        show-overflow-tooltip
+        min-width="200px"
+      >
         <template slot-scope="scope">
           {{ scope.row.faceId ? '已启用' : '未启用' }}
         </template>
       </el-table-column>
-      <el-table-column prop="create" label="创建时间" align="center" show-overflow-tooltip
-                       min-width="200px">
+      <el-table-column
+        prop="create"
+        label="创建时间"
+        align="center"
+        show-overflow-tooltip
+        min-width="200px"
+      >
         <template slot-scope="scope">
           {{ scope.row.createTime }}
         </template>
       </el-table-column>
-      <el-table-column prop="update" label="更新时间" align="center" show-overflow-tooltip
-                       min-width="200px">
+      <el-table-column
+        prop="update"
+        label="更新时间"
+        align="center"
+        show-overflow-tooltip
+        min-width="200px"
+      >
         <template slot-scope="scope">
           {{ scope.row.updateTime }}
         </template>
       </el-table-column>
-      <el-table-column width="200px" label="操作" align="center">
+      <el-table-column
+        width="200px"
+        label="操作"
+        align="center"
+      >
         <template slot-scope="scope">
-          <el-button size="mini" type="primary" icon="el-icon-view" :disabled="!scope.row.faceId"
-                     @click="seeFace(scope.row.faceId)" style="float: left;"></el-button>
-          <ud-btn :loading="buttonLoading" @doDelete="doDelete(scope.row)" @doEdit="edit(scope.row)"></ud-btn>
+          <el-button
+            size="mini"
+            type="primary"
+            icon="el-icon-view"
+            :disabled="!scope.row.faceId"
+            style="float: left;"
+            @click="seeFace(scope.row.faceId)"
+          />
+          <ud-btn
+            :loading="buttonLoading"
+            @doDelete="doDelete(scope.row)"
+            @doEdit="edit(scope.row)"
+          />
         </template>
       </el-table-column>
     </el-table>
     <!--分页-->
     <div class="block">
       <el-pagination
-          @current-change="handleCurrentChange"
-          @size-change="handleSizeChange"
-          :current-page.sync="currentPage"
-          :page-size="pageSize"
-          :page-sizes="[10, 30, 50, 100,200, 500, 1000]"
-          layout="total, sizes, prev, pager, next, jumper"
-          :total="records"
-      ></el-pagination>
+        :current-page.sync="currentPage"
+        :page-size="pageSize"
+        :page-sizes="[10, 30, 50, 100,200, 500, 1000]"
+        layout="total, sizes, prev, pager, next, jumper"
+        :total="records"
+        @current-change="handleCurrentChange"
+        @size-change="handleSizeChange"
+      />
     </div>
   </div>
 </template>
 
 <script>
 import axios from 'axios'
-import UdBtn from "@/components/UdButton/index.vue";
+import UdBtn from "@/components/UdButton";
 export default {
   name: 'FaceList',
   components: {UdBtn},
@@ -192,13 +367,15 @@ export default {
       takeFaceStatus: 0,
       // 人脸数据,用于数据层交互,入库
       faceData64: "",
+      // closed loading opened
+      cameraStatus: 'closed'
     };
-  },
-  created() {
-    this.searchList()
   },
   computed: {
 
+  },
+  created() {
+    this.searchList()
   },
   methods: {
     handleClick() {
@@ -216,12 +393,13 @@ export default {
       this.$refs.form.validate((valid) => {
         if (valid) {
           this.buttonLoading = true
-          axios.post('http://localhost:8081/user/cu', this.form).then(res => {
+          axios.post('/api/user/cu', this.form).then(res => {
             const {data} = res
             if (data.success) {
               this.$message.success('添加成功')
               this.searchList();
-              this.closeDialog()
+              this.closeDialog();
+              this.clearCameraStatus();
             }else {
               this.$message.error(data.msg)
             }
@@ -236,12 +414,13 @@ export default {
       this.$refs.form.validate((valid) => {
         if (valid) {
           this.buttonLoading = true
-          axios.post('http://localhost:8081/user/cu', this.form).then(res => {
+          axios.post('/api/user/cu', this.form).then(res => {
             const {data} = res
             if (data.success) {
               this.$message.success('修改成功')
               this.searchList();
-              this.closeDialog()
+              this.closeDialog();
+              this.clearCameraStatus();
             }
             this.buttonLoading = false
           }).catch(() => {
@@ -269,7 +448,7 @@ export default {
         page: this.currentPage,
         pageSize: this.pageSize
       }
-      axios.post('http://localhost:8081/user/searchList', params).then(res => {
+      axios.post('/api/user/searchList', params).then(res => {
         const {data} = res
         if (data.success) {
           const result = data.data
@@ -297,6 +476,9 @@ export default {
       this.takeFaceStatus = 0
       this.faceData64 = ''
       this.$refs.form.clearValidate()
+      if(this.isCameraOpen) {
+        this.clearCameraStatus()
+      }
     },
     handleSelectionChange(val) {
       this.multipleSelection = val;
@@ -322,7 +504,7 @@ export default {
     },
     doDelete(row) {
       this.buttonLoading = true
-      axios.post('http://localhost:8081/user/del', [row.id]).then(res => {
+      axios.post('/api/user/del', [row.id]).then(res => {
         const {data} = res
         if (data.success) {
           this.$message.success('删除成功')
@@ -337,7 +519,7 @@ export default {
       })
     },
     doBatchDelete(rows) {
-      axios.post('http://localhost:8081/user/del', rows.map(e => e.id)).then(res => {
+      axios.post('/api/user/del', rows.map(e => e.id)).then(res => {
         const {data} = res
         if (data.success) {
           this.$message.success('删除成功')
@@ -354,7 +536,7 @@ export default {
     },
     // 查看人脸信息
     seeFace(faceId) {
-      axios.get('http://localhost:8081/fs/readFace64InGridFS/' + faceId ).then((response) => {
+      axios.get('/api/fs/readFace64InGridFS/' + faceId ).then((response) => {
         const { data } = response
         if(data.success) {
           this.base64Image = `data:image/png;base64, ${data.data}`;
@@ -375,7 +557,7 @@ export default {
           data.username = this.form.username;
           data.img64 = this.img64;
           // 上传人脸信息
-          axios.post('http://localhost:8081/fs/uploadToGridFs', data).then((response) => {
+          axios.post('/api/fs/uploadToGridFs', data).then((response) => {
             const { data } = response
             if(data.success) {
               this.form.faceId = data.data;
@@ -437,6 +619,7 @@ export default {
       this.isCameraOpen = false;
       // 不使用人脸
       this.takeFaceStatus = 0;
+      this.cameraStatus = 'closed'
     },
     // 打开人脸摄像头
     openFace() {
@@ -445,7 +628,7 @@ export default {
       if (_this.isCameraOpen) {
         return;
       }
-
+      this.cameraStatus = 'loading'
       let constraints = {
         video: {width: 140, height: 150},
         audio: false
@@ -460,6 +643,7 @@ export default {
       });
       _this.video.onloadedmetadata = function () {
         _this.isCameraOpen = true;
+        _this.cameraStatus = 'opened'
       };
     },
     // 关闭人脸摄像头
@@ -474,6 +658,7 @@ export default {
         track.stop();
       });
       document.getElementById('video').srcObject = null;
+      this.cameraStatus = 'closed';
     },
   }
 }

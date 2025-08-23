@@ -23,39 +23,39 @@ import java.util.Objects;
 public class BookController {
 
     @Resource
-    private BookService userService;
+    private BookService bookService;
 
     @PostMapping("/save")
-    public ApiResponse save(@RequestBody BookModel um) {
+    public ApiResponse<Boolean> save(@RequestBody BookModel um) {
         Book user = new Book();
         BeanUtils.copyProperties(um, user);
         user.setCreateTime(DateUtil.now());
         user.setUpdateTime(DateUtil.now());
-        return ApiResponse.ok(userService.save(user));
+        return ApiResponse.ok(bookService.save(user));
     }
 
     @PostMapping("/update")
-    public ApiResponse update(@RequestBody BookModel um) {
+    public ApiResponse<Boolean> update(@RequestBody BookModel um) {
         Book user = new Book();
         BeanUtils.copyProperties(um, user);
         user.setUpdateTime(DateUtil.now());
-        return ApiResponse.ok(userService.updateById(user));
+        return ApiResponse.ok(bookService.updateById(user));
     }
 
     @DeleteMapping("/delete/{id}")
-    public ApiResponse deleteById(@PathVariable String id) {
-        return ApiResponse.ok(userService.removeById(id));
+    public ApiResponse<Boolean> deleteById(@PathVariable String id) {
+        return ApiResponse.ok(bookService.removeById(id));
     }
 
     @GetMapping("/get/{id}")
-    public ApiResponse getById(@PathVariable String id) {
-        return ApiResponse.ok(userService.getById(id));
+    public ApiResponse<Book> getById(@PathVariable String id) {
+        return ApiResponse.ok(bookService.getById(id));
     }
 
     @PostMapping("/page")
-    public ApiResponse queryList(@RequestBody BookModel um) {
+    public ApiResponse<Page<Book>> queryList(@RequestBody BookModel um) {
         LambdaQueryWrapper<Book> query = Wrappers.<Book>lambdaQuery().eq(Objects.nonNull(um.getName()), Book::getName, um.getName());
-        Page<Book> page = userService.page(query, um.getPageNo(), um.getPageSize());
+        Page<Book> page = bookService.page(query, um.getPageNo(), um.getPageSize());
         return ApiResponse.ok(page);
     }
 }
