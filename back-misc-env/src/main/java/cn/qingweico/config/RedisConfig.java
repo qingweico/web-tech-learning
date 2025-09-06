@@ -101,6 +101,10 @@ public class RedisConfig {
     @Bean("redisTemplate")
     public RedisTemplate<String, Object> getRedisTemplate(@Autowired RedisConnectionFactory connectionFactory) {
         RedisTemplate<String, Object> redisTemplate = new RedisTemplate<>();
+        // RedisTemplate 会使用 Lettuce 作为底层驱动
+        // 当然命令还是使用 Spring 提供的 API(如opsForValue、opsForHash等等)
+        // 但不能直接使用Lettuce命令, 除非主动配置 Lettuce Client
+        // 就像 RedisClient client = RedisClient.create("xxx"); client.connect().sync();client.connect().async();
         redisTemplate.setConnectionFactory(connectionFactory);
         // 数据的key通过字符串存储
         redisTemplate.setKeySerializer(new StringRedisSerializer());

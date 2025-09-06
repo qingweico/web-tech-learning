@@ -10,11 +10,8 @@ import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
 
 /**
  * @author zqw
@@ -30,16 +27,13 @@ public class ProducerController {
 
     @GetMapping("send")
     public String send() {
-        HttpServletRequest request = ((ServletRequestAttributes) (RequestContextHolder.currentRequestAttributes())).getRequest();
-        log.info("request url ---> {}", request.getRequestURI());
         rabbitTemplate.convertAndSend(RabbitMqConfig.EXCHANGE_SMS, MqConstant.SMS_SEND_DO, "这是一条即时消息!");
         return "OK";
     }
 
     @GetMapping("delay")
     public String delay() {
-        HttpServletRequest request = ((ServletRequestAttributes) (RequestContextHolder.currentRequestAttributes())).getRequest();
-        log.info("request url ---> {}", request.getRequestURI());
+        // TODO 切面做拦截请求日志
         // ms
         long delay = 10000;
         MessagePostProcessor messagePostProcessor = (message) -> {

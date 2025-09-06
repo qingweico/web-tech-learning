@@ -22,6 +22,8 @@ import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 /**
+ * 基于 lettuce 实现的 RedisClient
+ *
  * @author zqw
  * @date 2023/11/5
  */

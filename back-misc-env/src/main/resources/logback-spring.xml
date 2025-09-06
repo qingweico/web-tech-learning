@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration debug="false" scan="true" scanPeriod="30 seconds">
+    <!--在分布式环境中记录节点实例产生的日志-->
+    <springProperty scope="context" name="node" source="spring.cloud.client.ip-address" defaultValue="Unknow"/>
+    <springProperty scope="context" name="system" source="spring.application.name" defaultValue="Unknow"/>
+
+    <!-- 根据不同的 Spring Profile 设置不同的日志路径 -->
+    <!-- 开发环境使用相对路径 -->
+    <springProfile name="dev,default">
+        <property name="log.dir" value="logs/${system}"/>
+    </springProfile>
+
+    <!-- 测试和生产环境使用统一的相对路径配置 -->
+    <springProfile name="test,product">
+        <property name="log.dir" value="./logs/${system}"/>
+    </springProfile>
+
+    <conversionRule conversionWord="clr" converterClass="org.springframework.boot.logging.logback.ColorConverter"/>
+
+    <!--输出到控制台 ConsoleAppender-->
+    <appender name="Console" class="ch.qos.logback.core.ConsoleAppender">
+        <!--展示格式 layout-->
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <pattern>
+                <pattern>
+                    %d{MM/dd HH:mm:ss} %clr([%thread]) [%X{token},%X{traceId}] %clr(%-5level) %clr(%-40.40logger{39}){cyan} - %msg%n
+                </pattern>
+            </pattern>
+        </layout>
+    </appender>
+
+    <appender name="file" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>INFO</level>
+        </filter>
+        <File>${log.dir}/file.log</File>
+        <!--滚动策略,按照时间滚动 TimeBasedRollingPolicy-->
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <!--文件路径,定义了日志的切分方式——把每一天的日志归档到一个文件中,以防止日志填满整个磁盘空间-->
+            <FileNamePattern>${log.dir}/history/file.%d{yyyy-MM-dd}.%i.log</FileNamePattern>
+            <!--只保留最近30天的日志-->
+            <maxHistory>30</maxHistory>
+            <!--用来指定日志文件的上限大小,那么到了这个值,就会删除旧的日志-->
+            <totalSizeCap>1GB</totalSizeCap>
+            <!--文件切割大小,达到此大小后文件将被切割-->
+            <maxFileSize>200MB</maxFileSize>
+        </rollingPolicy>
+        <!--日志输出编码格式化-->
+        <encoder>
+            <charset>UTF-8</charset>
+            <pattern>
+                %d{MM/dd HH:mm:ss.SSS} %clr([%thread]) [%yellow(%X{X-B3-TraceId})] [%X{token},%X{traceId}] %clr(%-5level) %clr(%-40.40logger{39}){cyan} - %msg%n
+            </pattern>
+        </encoder>
+    </appender>
+
+    <appender name="json" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>INFO</level>
+        </filter>
+        <File>${log.dir}/json.log</File>
+        <!--滚动策略,按照时间滚动 TimeBasedRollingPolicy-->
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <!--文件路径,定义了日志的切分方式——把每一天的日志归档到一个文件中,以防止日志填满整个磁盘空间-->
+            <FileNamePattern>${log.dir}/history/json.%d{yyyy-MM-dd}.%i.log</FileNamePattern>
+            <!--只保留最近1天的日志-->
+            <maxHistory>1</maxHistory>
+            <!--用来指定日志文件的上限大小,那么到了这个值,就会删除旧的日志-->
+            <totalSizeCap>1GB</totalSizeCap>
+            <!--文件切割大小,达到此大小后文件将被切割-->
+            <maxFileSize>500MB</maxFileSize>
+        </rollingPolicy>
+        <!--日志输出编码格式化-->
+        <encoder name="json" charset="UTF-8" class="net.logstash.logback.encoder.LogstashEncoder">
+            <fieldNames>
+                <timestamp>timestamp</timestamp>
+            </fieldNames>
+            <timestampPattern>yyyy-MM-dd HH:mm:ss.SSS</timestampPattern>
+            <throwableConverter class="net.logstash.logback.stacktrace.ShortenedThrowableConverter">
+                <maxDepthPerThrowable>50</maxDepthPerThrowable>
+                <maxLength>4096</maxLength>
+                <shortenedClassNameLength>30</shortenedClassNameLength>
+                <exclude>sun.reflect..*.invoke.*</exclude>
+                <exclude>java.lang.reflect.*</exclude>
+                <exclude>org.springframework.aop.*</exclude>
+                <exclude>org.apache.*</exclude>
+                <exclude>net.sf.cglib.proxy.*</exclude>
+                <rootCauseFirst>true</rootCauseFirst>
+                <inlineHash>true</inlineHash>
+            </throwableConverter>
+        </encoder>
+    </appender>
+
+    <springProfile name="default,dev">
+        <root level="INFO">
+            <appender-ref ref="Console"/>
+            <appender-ref ref="file"/>
+            <appender-ref ref="json"/>
+        </root>
+        <!-- 打印SQL语句 -->
+        <logger name="cn.qingweico" level="DEBUG" additivity="true"/>
+    </springProfile>
+
+    <!-- 测试和生产环境使用统一配置 -->
+    <springProfile name="test,product">
+        <root level="INFO">
+            <appender-ref ref="Console"/>
+            <appender-ref ref="file"/>
+            <appender-ref ref="json"/>
+        </root>
+        <!-- 打印SQL语句 - 测试和生产环境都使用INFO级别 -->
+        <logger name="cn.qingweico" level="INFO" additivity="true"/>
+    </springProfile>
+
+</configuration>

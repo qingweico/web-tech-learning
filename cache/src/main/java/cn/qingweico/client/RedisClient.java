@@ -4,12 +4,20 @@ import cn.qingweico.serializer.RedisSerializer;
 import io.lettuce.core.KeyValue;
 import io.lettuce.core.Range;
 import io.lettuce.core.api.sync.RedisSortedSetCommands;
+import org.springframework.data.redis.connection.RedisConnectionFactory;
+import org.springframework.data.redis.core.RedisOperations;
+import org.springframework.data.redis.core.RedisTemplate;
 
 import java.util.List;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 /**
+ * {@link RedisOperations} 是 Spring Data Redis 的核心接口(高级抽象层), 提供了对 Redis 各种操作的统一抽象
+ * 通过 {@link RedisTemplate} 实例来使用, 与 Lettuce 以及 Jedis 是不同层次的概念
+ * RedisTemplate(实现 RedisOperations 接口), 通过 {@link RedisConnectionFactory } 连接工厂抽象用来
+ * 委托底层实现不同的Redis客户端驱动(底层网络通信), 可以是 Lettuce(高性能异步驱动), 也可以是 Jedis(传统同步驱动)
+ *
  * @author zqw
  * @date 2023/11/5
  */

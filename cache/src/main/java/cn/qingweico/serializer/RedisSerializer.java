@@ -3,6 +3,8 @@ package cn.qingweico.serializer;
 import org.springframework.lang.Nullable;
 
 /**
+ * {@link org.springframework.data.redis.serializer.RedisSerializer}
+ *
  * @author zqw
  * @date 2023/11/5
  */

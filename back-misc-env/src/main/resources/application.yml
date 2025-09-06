@@ -1,6 +1,15 @@
 spring:
   profiles:
     active: @profile.active@
+  messages:
+    basename: messages
+    cache-duration: 1800
+    encoding: UTF-8
+  servlet:
+    multipart:
+      max-file-size: 25MB     #最大单个文件25MB,默认1MB
+      max-request-size: 25MB  #单次上传最大25MB,默认10MB
+
 server:
   port: 5000
 mybatis-plus:
@@ -26,3 +35,14 @@ http:
       - Content-Type
     max-age: 3600
     allow-credentials: true
+  logger:
+    head: true
+    media-types:
+    - application/json
+    - application/xml
+    - text/plain
+    - application/*+json
+encrypt:
+  sm2:
+    private-key: b884fb7d817df3f83fd77265da7c42c3b23a3e8c8c09c052d8066dc303c7db2e
+    public-key: 0472ed38ebed046873bb6363e394dcd9bb51fbd0240d4411f7358a454c14ba8b06fcfa20e4a4434501ea538b14d68656ff2793dc26c2075365d390589be9ce5677
