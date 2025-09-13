@@ -6,6 +6,7 @@ import cn.qingweico.service.LoginPasswordDecoder;
 import org.apache.commons.lang3.StringUtils;
 import org.bouncycastle.util.encoders.Hex;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 
 import java.nio.charset.StandardCharsets;
 
@@ -13,6 +14,7 @@ import java.nio.charset.StandardCharsets;
  * @author zqw
  * @date 2025/9/6
  */
+@Component
 public class SM2LoginPasswordDecoder implements LoginPasswordDecoder {
 
     @Value("${encrypt.sm2.private-key}")

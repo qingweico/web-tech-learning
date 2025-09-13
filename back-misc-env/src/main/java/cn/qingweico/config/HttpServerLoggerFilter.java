@@ -92,7 +92,7 @@ public class HttpServerLoggerFilter extends OncePerRequestFilter implements Orde
                         if(StringUtils.isNotEmpty(contentType)) {
                             final MediaType media = MediaType.parseMediaType(contentType);
                             if (Arrays.stream(mediaTypes).anyMatch(p -> p.isCompatibleWith(media))) {
-                                sb.append("------------Body------------\n");
+                                sb.append("\n------------Body------------\n");
                                 requestWrapper = new ContentCachingRequestWrapper(request);
                                 byte[] data = requestWrapper.getContentAsByteArray();
                                 if (data.length > 0) {
@@ -149,7 +149,7 @@ public class HttpServerLoggerFilter extends OncePerRequestFilter implements Orde
                     logger.warn("HTTP服务执行时间过长,花费了[{}]毫秒,URL => {}", endTime - startTime, url);
                 }
 
-                if (responseWrapper != null) {
+                if (responseWrapper != null && responseWrapper.getContentType() != null) {
                     final MediaType media = MediaType.parseMediaType(responseWrapper.getContentType());
                     if (Arrays.stream(mediaTypes).anyMatch(p -> p.isCompatibleWith(media))) {
                         int size = responseWrapper.getContentSize();

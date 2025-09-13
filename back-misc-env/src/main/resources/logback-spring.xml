@@ -98,7 +98,7 @@
             <appender-ref ref="json"/>
         </root>
         <!-- 打印SQL语句 -->
-        <logger name="cn.qingweico" level="DEBUG" additivity="true"/>
+        <logger name="cn.qingweico" level="INFO" additivity="true"/>
     </springProfile>
 
     <!-- 测试和生产环境使用统一配置 -->
