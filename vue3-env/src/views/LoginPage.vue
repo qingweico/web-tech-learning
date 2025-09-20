@@ -93,7 +93,7 @@ const submitForm = () => {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  height: calc(100vh - 52px);
   background-color: #f5f7fa;
 }
 

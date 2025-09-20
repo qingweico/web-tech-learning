@@ -7,6 +7,7 @@
         v-model="selected"
         clearable
         filterable
+        size="mini"
         placeholder="选择组件"
       >
         <el-option

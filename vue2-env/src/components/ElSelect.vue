@@ -3,6 +3,7 @@
     <el-select
       v-model="select"
       multiple
+      size="mini"
       placeholder="请选择"
     >
       <el-option

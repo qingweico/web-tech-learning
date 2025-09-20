@@ -55,7 +55,7 @@ watch(() => selected.value, (newValue) => {
 <style scoped>
 .container {
   display: flex;
-  height: 100vh;
+  height: calc(100vh - 52px);
 }
 
 .left-panel {

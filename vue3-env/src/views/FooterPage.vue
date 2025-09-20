@@ -29,8 +29,9 @@ export default {
   padding: 20px 0;
   text-align: center;
   font-size: 14px;
-  position: absolute;
-  width: 100%;
+  position: fixed;
+  left: 0;
+  right: 0;
   bottom: 0;
 }
 

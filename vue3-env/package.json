@@ -10,6 +10,8 @@
   "dependencies": {
     "@element-plus/icons-vue": "2.3.1",
     "@vue/compiler-sfc": "^3.5.17",
+    "@wangeditor/editor": "^5.1.23",
+    "@wangeditor/editor-for-vue": "^1.0.2",
     "axios": "^0.25.0",
     "chance": "^1.1.13",
     "core-js": "^3.8.3",
@@ -29,7 +31,8 @@
     "vue-class-component": "^8.0.0-0",
     "vue-clipboard3": "^2.0.0",
     "vue-i18n": "^11.1.11",
-    "vue-router": "^4.5.1"
+    "vue-router": "^4.5.1",
+    "wangeditor": "^4.7.15"
   },
   "devDependencies": {
     "@babel/core": "^7.12.16",
@@ -40,7 +43,9 @@
     "@vue/runtime-core": "^3.5.17",
     "@vue/runtime-dom": "^3.5.17",
     "eslint": "^7.32.0",
-    "eslint-plugin-vue": "^8.0.3"
+    "eslint-plugin-vue": "^8.0.3",
+    "sass": "^1.92.1",
+    "sass-loader": "^16.0.5"
   },
   "eslintConfig": {
     "root": true,
