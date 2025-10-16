@@ -11,6 +11,8 @@ import zhCn from 'element-plus/es/locale/lang/zh-cn';
 import {createPinia} from 'pinia'
 import i18nPlugin from './plugins/i18n'
 import router from './router/index'
+import VueJsonPretty from 'vue-json-pretty'
+import 'vue-json-pretty/lib/styles.css'
 const app = createApp(App)
 const pinia = createPinia()
 pinia.use(SecretPiniaPlugin)
@@ -72,4 +74,5 @@ app.use(i18nPlugin, {
  */
 app.use(router)
 app.use(i18n);
+app.component('vue-json-pretty', VueJsonPretty)
 app.mount('#app');
