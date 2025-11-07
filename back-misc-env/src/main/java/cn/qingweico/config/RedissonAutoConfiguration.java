@@ -3,6 +3,7 @@ package cn.qingweico.config;
 import org.apache.commons.lang3.StringUtils;
 import org.redisson.Redisson;
 import org.redisson.api.RedissonClient;
+import org.redisson.codec.JsonJacksonCodec;
 import org.redisson.config.Config;
 import org.redisson.config.ReadMode;
 import org.redisson.config.SubscriptionMode;
@@ -35,6 +36,8 @@ public class RedissonAutoConfiguration {
     @ConditionalOnProperty(name = "redisson.mode", havingValue = "single")
     public RedissonClient singleRedissonClient() {
         Config config = new Config();
+        // 使用 Jackson JSON 编解码器(Redisson默认使用Java序列化来存储对象)
+        config.setCodec(new JsonJacksonCodec());
         config.useSingleServer()
                 .setAddress("redis://" + redissonProperties.getHost() + ":" + redissonProperties.getPort())
                 .setDatabase(redissonProperties.getDatabase())
@@ -67,6 +70,8 @@ public class RedissonAutoConfiguration {
 
     /**
      * 哨兵模式
+     * 其需要专门的 Sentinel 进程来监控 Redis 主从节点
+     * 单机 Redis 不支持 Sentinel 命令
      */
     @Bean
     @ConditionalOnProperty(name = "redisson.mode", havingValue = "sentinel")

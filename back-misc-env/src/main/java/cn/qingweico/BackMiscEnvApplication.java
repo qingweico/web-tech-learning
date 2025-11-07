@@ -11,7 +11,7 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
  */
 @MapperScan(basePackages = "cn.qingweico.mapper")
 @SpringBootApplication
-@EnableAspectJAutoProxy
+@EnableAspectJAutoProxy(exposeProxy = true)
 public class BackMiscEnvApplication {
 
     public static void main(String[] args) {

@@ -2,6 +2,7 @@ package cn.qingweico.config;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationEvent;
@@ -46,13 +47,13 @@ public class SpringContextListener implements SmartApplicationListener {
     }
 
     @Override
-    public boolean supportsEventType(Class<? extends ApplicationEvent> eventType) {
+    public boolean supportsEventType(@NotNull Class<? extends ApplicationEvent> eventType) {
         return ContextClosedEvent.class.isAssignableFrom(eventType)
                 || ContextRefreshedEvent.class.isAssignableFrom(eventType);
     }
 
     @Override
-    public void onApplicationEvent(ApplicationEvent event) {
+    public void onApplicationEvent(@NotNull ApplicationEvent event) {
         if (event instanceof ContextRefreshedEvent
                 || event instanceof ContextClosedEvent) {
             if (log.isDebugEnabled()) {

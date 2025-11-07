@@ -13,7 +13,7 @@ import org.apache.ibatis.session.RowBounds;
  * @author zqw
  * @date 2025/8/2
  */
-public class MybatisConfiguration  extends Configuration {
+public class MybatisConfiguration extends Configuration {
     private final long limitRows;
 
     public MybatisConfiguration(long limitRows) {
