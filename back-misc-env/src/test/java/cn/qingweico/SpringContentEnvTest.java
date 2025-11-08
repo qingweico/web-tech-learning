@@ -1,6 +1,7 @@
 package cn.qingweico;
 
 import cn.qingweico.database.SqlTmplQuery;
+import cn.qingweico.service.SqlServerLckMSchS;
 import jodd.util.ThreadUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.jetbrains.annotations.NotNull;
@@ -40,6 +41,8 @@ public class SpringContentEnvTest {
     private RedissonClient redissonClient;
     @Resource
     SqlTmplQuery sqlTmplQuery;
+    @Resource
+    private SqlServerLckMSchS sqlServerLckMSchS;
     @Test
     public void programmaticTx() {
         DefaultTransactionDefinition transactionDefinition = new DefaultTransactionDefinition();
@@ -96,6 +99,10 @@ public class SpringContentEnvTest {
         transaction.rollbackToSavepoint(savepoint);
         transaction.releaseSavepoint(savepoint);
         jdbcTransactionManager.commit(transaction);
+    }
+    @Test
+    public void sqlServerLckMSchS() {
+        sqlServerLckMSchS.start();
     }
 
 }

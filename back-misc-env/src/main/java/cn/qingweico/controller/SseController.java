@@ -1,6 +1,5 @@
 package cn.qingweico.controller;
 
-import cn.qingweico.concurrent.pool.ThreadPoolBuilder;
 import cn.qingweico.service.PdfGenerationService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,7 +18,8 @@ import java.util.concurrent.ExecutorService;
 @RestController
 @RequestMapping("/sse")
 public class SseController {
-    private final ExecutorService executorService = ThreadPoolBuilder.builder().build();
+    @Resource
+    private ExecutorService executorService;
     @Resource
     private PdfGenerationService pdfGenerationService;
 

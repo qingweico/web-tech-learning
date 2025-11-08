@@ -5,7 +5,6 @@ import cn.qingweico.afr.entity.User;
 import cn.qingweico.afr.mapper.UserMapper;
 import cn.qingweico.afr.model.PagedParams;
 import cn.qingweico.afr.servoce.UserService;
-import cn.qingweico.concurrent.pool.ThreadPoolBuilder;
 import cn.qingweico.constants.Symbol;
 import cn.qingweico.model.PagedResult;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
@@ -39,8 +38,8 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     private UserMapper userMapper;
     @Resource
     private GridFSBucket gridFsBucket;
-
-    private final ExecutorService pool = ThreadPoolBuilder.create();
+    @Resource
+    private ExecutorService pool;
 
     @Override
     public User findOneByUsername(String username) {
