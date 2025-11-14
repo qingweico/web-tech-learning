@@ -1,10 +1,16 @@
 package cn.qingweico.controller;
 
+import cn.qingweico.annotation.SemaphoreLimit;
+import cn.qingweico.concurrent.UnsafeSupport;
 import cn.qingweico.entity.dto.ResponseDto;
+import cn.qingweico.model.ApiResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 
 /**
@@ -49,4 +55,32 @@ public class UserController {
     public void postParamsAnalysis(@RequestBody ResponseDto responseDto) {
         log.info("{}", responseDto);
     }
+
+    @RequestMapping(value = "sl", method = RequestMethod.GET)
+    @SemaphoreLimit(name = "user")
+    public ApiResponse<?> semaphoreLimit() {
+        UnsafeSupport.shortWait(3000);
+        return ApiResponse.ok();
+    }
+
+    @PostMapping(value = "/form-urlencoded", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+    @ResponseBody
+    public ResponseEntity<String> formUrlencoded(
+            @RequestParam String username) {
+        return ResponseEntity.ok(username);
+    }
+
+    @PostMapping(value = "/multipart", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    @ResponseBody
+    public ResponseEntity<String> multipart(
+            @RequestParam String username,
+            @RequestParam(value = "file", required = false) MultipartFile file) {
+        if (file != null && !file.isEmpty()) {
+            String fileName = file.getOriginalFilename();
+            long fileSize = file.getSize();
+            log.info("File: {}, Size: {}", fileName, fileSize);
+        }
+        return ResponseEntity.ok(username);
+    }
+
 }

@@ -1,13 +1,16 @@
 package cn.qingweico.controller;
 
 import cn.qingweico.service.PdfGenerationService;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.Collection;
 import java.util.concurrent.ExecutorService;
 
@@ -24,7 +27,9 @@ public class SseController {
     private PdfGenerationService pdfGenerationService;
 
     @GetMapping("/stream")
-    public SseEmitter streamEvents() {
+    public SseEmitter streamEvents(HttpServletResponse response) {
+        response.setContentType(MediaType.TEXT_EVENT_STREAM_VALUE);
+        response.setCharacterEncoding(StandardCharsets.UTF_8.name());
         SseEmitter emitter = new SseEmitter(60_000L);
 
         executorService.execute(() -> {

@@ -19,4 +19,10 @@ public class GraceExceptionHandle {
     public ApiResponse<?> paramValidateExceptionHandler(ParamValidateException ex) {
         return ApiResponse.error(ex.getMessage());
     }
+
+    @ExceptionHandler({SemaphoreLimitException.class})
+    @ResponseBody
+    public ApiResponse<?> runtimeExceptionHandler(SemaphoreLimitException ex) {
+        return ApiResponse.error(ex.getMessage());
+    }
 }
