@@ -8,9 +8,10 @@ import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+
+import java.util.Map;
 
 
 /**
@@ -63,16 +64,14 @@ public class UserController {
         return ApiResponse.ok();
     }
 
-    @PostMapping(value = "/form-urlencoded", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
-    @ResponseBody
-    public ResponseEntity<String> formUrlencoded(
+    @PostMapping(value = "/urlencoded", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+    public ApiResponse<String> urlencoded(
             @RequestParam String username) {
-        return ResponseEntity.ok(username);
+        return ApiResponse.ok(username);
     }
 
     @PostMapping(value = "/multipart", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    @ResponseBody
-    public ResponseEntity<String> multipart(
+    public ApiResponse<String> multipart(
             @RequestParam String username,
             @RequestParam(value = "file", required = false) MultipartFile file) {
         if (file != null && !file.isEmpty()) {
@@ -80,7 +79,13 @@ public class UserController {
             long fileSize = file.getSize();
             log.info("File: {}, Size: {}", fileName, fileSize);
         }
-        return ResponseEntity.ok(username);
+        return ApiResponse.ok(username);
+    }
+    /*@RequestBody 用于将 HTTP 请求体中的 JSON/XML 数据绑定到 Java 对象上;因为每个 HTTP 请求只有一个请求体, 所以只能有一个被 @RequestBody 修饰的参数;*/
+    @PostMapping(value = "/json", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ApiResponse<?> json(
+            @RequestBody Map<String, Object> params) {
+        return ApiResponse.ok(params);
     }
 
 }
