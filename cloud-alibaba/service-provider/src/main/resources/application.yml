@@ -10,3 +10,8 @@ spring:
         # https://github.com/alibaba/nacos/releases
         # 启动 startup.cmd -m standalone
         server-addr: 127.0.0.1:8848
+        # 命名空间ID
+        # 用于不同环境的隔离
+        namespace: ${spring.application.name}-public
+        # 用于同一环境内的逻辑分组
+        group: DEFAULT_GROUP_AorB
