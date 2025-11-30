@@ -84,6 +84,10 @@ public class BlockingQueueCPTask {
         }
         log.info("本批次任务已全部处理完毕..... 暂无可处理的任务");
         pool.shutdown();
+        // 调用 pool.awaitTermination 时, 不要和外层共用一个线程池, 因为
+        // 其本身是作为一个任务提交到线程池中, 导致线程池中永远有一个任务在执行
+        // 直到时间超时或者被打断才可以正常结束, 不然一直阻塞
+        // pool.awaitTermination(1, TimeUnit.MINUTES);
     }
 
     public void start() {
