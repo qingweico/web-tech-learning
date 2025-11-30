@@ -8,6 +8,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
 import lombok.experimental.Accessors;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
@@ -24,6 +25,7 @@ import java.time.LocalDateTime;
 @TableName(value = "t_user")
 @Accessors(chain = true)
 public class User implements Serializable {
+    @Serial
     private static final long serialVersionUID = 8059511295718875912L;
     @TableId(value = "id", type = IdType.ASSIGN_ID)
     private String id;
