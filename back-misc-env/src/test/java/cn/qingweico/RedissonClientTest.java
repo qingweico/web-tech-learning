@@ -35,6 +35,7 @@ import java.util.*;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.IntStream;
 
 /**
@@ -368,26 +369,38 @@ public class RedissonClientTest {
 
     @Test
     public void transferQueue() throws InterruptedException {
+        // JsonJacksonCodec fails to serialize Throwable on Java17
+        // https://github.com/redisson/redisson/issues/5369
+        // redisson 3.24.3
         RTransferQueue<Object> tq = redissonClient.getTransferQueue("transfer-queue");
-        pool.execute(() -> IntStream.range(0, 10).forEach(i -> {
-            try {
-                tq.transfer("OK");
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
-            }
-        }));
+        int total = 10;
+        AtomicInteger remaining = new AtomicInteger(total);
+        CountDownLatch latch = new CountDownLatch(2);
         pool.execute(() -> {
-            for (; ; ) {
+            IntStream.range(0, total).forEach(i -> {
                 try {
-                    System.out.println(tq.take());
+                    tq.transfer(i);
+                    remaining.decrementAndGet();
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+            });
+            latch.countDown();
+        });
+        pool.execute(() -> {
+            while (remaining.get() > 0 || !tq.isEmpty()) {
+                try {
+                    tq.take();
+                    System.out.println("消费者处理任务中...");
+                    ThreadUtil.sleep(1000);
                 } catch (InterruptedException e) {
                     break;
                 }
             }
+            latch.countDown();
         });
-        if (pool.awaitTermination(10, TimeUnit.MINUTES)) {
-            pool.shutdown();
-        }
+        latch.await();
+        pool.shutdown();
     }
 
     @Test
