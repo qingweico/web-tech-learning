@@ -1,0 +1,51 @@
+spring:
+  application:
+    name: kafka-env
+
+  # Kafka 配置
+  kafka:
+    bootstrap-servers: ${SPRING_KAFKA_BOOTSTRAP_SERVERS:kafka:9092}
+
+    # 生产者配置
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+      properties:
+        spring.json.type.mapping: orderEvent:cn.qingweico.kafka.dto.OrderEvent,userEvent:cn.qingweico.kafka.dto.UserEvent
+
+    # 消费者配置
+    consumer:
+      group-id: ${spring.application.name}-group
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      properties:
+        spring.json.trusted.packages: "cn.qingweico.kafka.dto"
+        spring.json.type.mapping: orderEvent:cn.qingweico.kafka.dto.OrderEvent,userEvent:cn.qingweico.kafka.dto.UserEvent
+
+    # 监听器配置
+    listener:
+      ack-mode: manual_immediate
+
+    # 主题配置
+    topic:
+      user-topic: user-events
+      order-topic: order-events
+      notification-topic: notifications
+
+server:
+  port: 8082
+# Actuator 配置
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics
+  endpoint:
+    health:
+      show-details: always
+
+logging:
+  level:
+    org.apache.kafka: WARN
+    org.springframework.kafka: INFO

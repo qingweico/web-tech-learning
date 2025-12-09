@@ -3,7 +3,7 @@ spring:
     url: jdbc:mysql://127.0.0.1:3306/test?useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&serverTimezone=GMT%2b8
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: root
-    password: 990712
+    password: 123456
     hikari:
       # 最大连接数 默认值为10
       maximum-pool-size: 30

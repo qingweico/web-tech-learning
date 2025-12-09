@@ -10,7 +10,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @author zqw
  * @date 2022/3/5
  */
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages = {"cn.qingweico"})
 @MapperScan(basePackages = "cn.qingweico.afr.mapper")
 public class AliFaceRecognitionApplication {
 
