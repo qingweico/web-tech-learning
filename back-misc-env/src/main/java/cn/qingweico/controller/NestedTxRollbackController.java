@@ -20,14 +20,14 @@ import javax.annotation.Resource;
  */
 @Slf4j
 @RestController
-public class NextedTxRollbackController {
+public class NestedTxRollbackController {
 
     @Resource
     SqlTmplQuery sqlTmplQuery;
 
     @GetMapping("/tx")
     public ApiResponse<?> tx() {
-        ((NextedTxRollbackController) AopContext.currentProxy()).service();
+        ((NestedTxRollbackController) AopContext.currentProxy()).service();
         // 事务不会回滚
         // service();
         return ApiResponse.ok();

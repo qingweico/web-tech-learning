@@ -1,0 +1,64 @@
+services:
+  # Name Server
+  namesrv:
+    image: apache/rocketmq:5.1.4
+    container_name: rocketmq-namesrv
+    platform: linux/amd64
+    command: sh mqnamesrv
+    hostname: namesrv
+    ports:
+      - "9876:9876"
+    volumes:
+      - ./data/namesrv/logs:/home/rocketmq/logs
+      - ./data/namesrv/store:/home/rocketmq/store
+    environment:
+      - JAVA_OPT_EXT=-Xms512m -Xmx512m -Xmn256m
+    restart: unless-stopped
+    networks:
+      - rocketmq-net
+
+  # Broker
+  broker:
+    image: apache/rocketmq:5.1.4
+    container_name: rocketmq-broker
+    platform: linux/amd64
+    command: sh mqbroker -c /home/rocketmq/rocketmq-5.1.4/conf/broker.conf
+    ports:
+      - "10909:10909"   # VIP channel
+      - "10911:10911"   # Broker 端口
+      # - "10912:10912" # HA 端口 High Availability高可用端口,单节点不需要
+    volumes:
+      - ./data/broker/logs:/home/rocketmq/logs
+      - ./data/broker/store:/home/rocketmq/store
+      - ./conf/broker.conf:/home/rocketmq/rocketmq-5.1.4/conf/broker.conf
+    environment:
+      - JAVA_OPT_EXT=-Xms1g -Xmx1g -Xmn512m
+      # 移除 NAMESRV_ADDR, 在broker.conf中设置
+    depends_on:
+      - namesrv
+    restart: unless-stopped
+    networks:
+      - rocketmq-net
+
+  # Dashboard
+  dashboard:
+    image: apacherocketmq/rocketmq-dashboard:latest
+    platform: linux/amd64
+    container_name: rocketmq-dashboard
+    ports:
+      - "8082:8082"
+    environment:
+      - JAVA_OPTS=-Xmx512m -Xms512m -Drocketmq.config.isVIPChannel=false
+      - NAMESRV_ADDR=namesrv:9876
+        # 添加 Broker 访问配置
+      - ROCKETMQ_CONFIG_ISVIPCHANNEL=false
+    depends_on:
+      - namesrv
+      - broker
+    restart: unless-stopped
+    networks:
+      - rocketmq-net
+
+networks:
+  rocketmq-net:
+    driver: bridge

@@ -33,7 +33,6 @@ public class ProducerController {
 
     @GetMapping("delay")
     public String delay() {
-        // TODO 切面做拦截请求日志
         // ms
         long delay = 10000;
         MessagePostProcessor messagePostProcessor = (message) -> {

@@ -8,7 +8,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  */
 @SpringBootApplication
 public class RabbitmqApplication {
-
+    // 管理界面地址 http://localhost:15672/
     public static void main(String[] args) {
         SpringApplication.run(RabbitmqApplication.class, args);
     }

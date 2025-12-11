@@ -9,5 +9,5 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public final class Constant {
 
-    public static final String NAME_SRC_ADDR = "106.12.136.221:9876";
+    public static final String NAME_SRC_ADDR = "localhost:9876";
 }

@@ -1,8 +1,6 @@
 package cn.qingweico.test;
 
 import org.junit.Test;
-import org.springframework.core.annotation.Order;
-
 /**
  * @author zqw
  * @date 2023/10/14

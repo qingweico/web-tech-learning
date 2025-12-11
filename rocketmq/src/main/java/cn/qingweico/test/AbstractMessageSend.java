@@ -22,6 +22,7 @@ public abstract class AbstractMessageSend {
     final DefaultMQProducer init(final String producerGroup) {
         DefaultMQProducer producer = new DefaultMQProducer(producerGroup);
         producer.setNamesrvAddr(Constant.NAME_SRC_ADDR);
+        producer.setVipChannelEnabled(false);
         try {
             producer.start();
         } catch (MQClientException e) {
