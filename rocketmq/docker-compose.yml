@@ -1,9 +1,9 @@
 services:
   # Name Server
   namesrv:
-    image: apache/rocketmq:5.1.4
+    image: apache/rocketmq:5.3.1
     container_name: rocketmq-namesrv
-    platform: linux/amd64
+    platform: linux/arm64
     command: sh mqnamesrv
     hostname: namesrv
     ports:
@@ -19,9 +19,9 @@ services:
 
   # Broker
   broker:
-    image: apache/rocketmq:5.1.4
+    image: apache/rocketmq:5.3.1
     container_name: rocketmq-broker
-    platform: linux/amd64
+    platform: linux/arm64
     command: sh mqbroker -c /home/rocketmq/rocketmq-5.1.4/conf/broker.conf
     ports:
       - "10909:10909"   # VIP channel
@@ -43,7 +43,7 @@ services:
   # Dashboard
   dashboard:
     image: apacherocketmq/rocketmq-dashboard:latest
-    platform: linux/amd64
+    platform: linux/arm64
     container_name: rocketmq-dashboard
     ports:
       - "8082:8082"
