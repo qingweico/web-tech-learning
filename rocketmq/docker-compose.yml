@@ -22,7 +22,7 @@ services:
     image: apache/rocketmq:5.3.1
     container_name: rocketmq-broker
     platform: linux/arm64
-    command: sh mqbroker -c /home/rocketmq/rocketmq-5.1.4/conf/broker.conf
+    command: sh mqbroker -c /home/rocketmq/rocketmq-5.3.1/conf/broker.conf
     ports:
       - "10909:10909"   # VIP channel
       - "10911:10911"   # Broker 端口
@@ -30,7 +30,7 @@ services:
     volumes:
       - ./data/broker/logs:/home/rocketmq/logs
       - ./data/broker/store:/home/rocketmq/store
-      - ./conf/broker.conf:/home/rocketmq/rocketmq-5.1.4/conf/broker.conf
+      - ./conf/broker.conf:/home/rocketmq/rocketmq-5.3.1/conf/broker.conf
     environment:
       - JAVA_OPT_EXT=-Xms1g -Xmx1g -Xmn512m
       # 移除 NAMESRV_ADDR, 在broker.conf中设置
