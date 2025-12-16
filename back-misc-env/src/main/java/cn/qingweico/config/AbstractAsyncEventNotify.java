@@ -43,7 +43,7 @@ public abstract class AbstractAsyncEventNotify implements ISystemNotify {
                 1024 * 4,
                 // 设置线程工厂(ExecutorService)
                 Executors.defaultThreadFactory(),
-                // 设置生产者类型（MULTI/SINGLE）
+                // 设置生产者类型(MULTI/SINGLE)
                 ProducerType.MULTI,
                 // 设置等待策略
                 new SleepingWaitStrategy()

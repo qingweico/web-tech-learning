@@ -27,7 +27,7 @@ public class Page<T> {
     private long total = 0;
 
     /**
-     * 每页显示条数，默认 10
+     * 每页显示条数, 默认 10
      */
     private int pageSize = 10;
 

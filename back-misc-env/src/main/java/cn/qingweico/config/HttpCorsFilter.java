@@ -1,7 +1,7 @@
 package cn.qingweico.config;
 
 import cn.hutool.core.util.StrUtil;
-import cn.qingweico.convert.Convert;
+import cn.qingweico.convert.StringConvert;
 import org.apache.commons.lang3.StringUtils;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.context.annotation.Configuration;
@@ -37,7 +37,7 @@ public class HttpCorsFilter extends OncePerRequestFilter implements Ordered {
             response.setHeader(HttpHeaders.ACCESS_CONTROL_ALLOW_METHODS, StringUtils.join(config.getAllowedMethods(), StrUtil.COMMA));
         }
         response.setHeader(HttpHeaders.ACCESS_CONTROL_ALLOW_CREDENTIALS, Boolean.toString(config.isAllowCredentials()));
-        response.setHeader(HttpHeaders.ACCESS_CONTROL_MAX_AGE, Convert.toString(config.getMaxAge()));
+        response.setHeader(HttpHeaders.ACCESS_CONTROL_MAX_AGE, StringConvert.toString(config.getMaxAge()));
 
         if (config.getAllowedHeaders() != null && config.getAllowedHeaders().length > 0) {
             response.setHeader(HttpHeaders.ACCESS_CONTROL_ALLOW_HEADERS, StringUtils.join(config.getAllowedHeaders(), StrUtil.COMMA));
