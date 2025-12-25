@@ -9,7 +9,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  */
 @SpringBootApplication
 public class Boot3EnvApplication {
-    // gu install native-image 安装native支持
+    // gu install native-image 安装native支持(gu 命令是 GraalVM 自带的工具, 全称是 GraalVM Updater)
     // 打包项目 mvn package -Pnative -DskipTests
     // Quarkus
 
