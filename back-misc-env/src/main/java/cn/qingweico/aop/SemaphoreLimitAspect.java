@@ -29,8 +29,6 @@ public class SemaphoreLimitAspect {
     private static final String INIT_SEMAPHORE_PREFIX = "semaphore:init:";
     private static final String LOCK_SEMAPHORE_PREFIX = "semaphore:lock:";
     private static final String SEMAPHORE_KEY_PREFIX = "semaphore:limit:";
-    // 信号量过期时间(分钟)
-    private static final long SEMAPHORE_EXPIRE_MINUTES = 10;
     // 分布式锁获取超时时间(秒)
     private static final long LOCK_WAIT_TIMEOUT_SECONDS = 5;
     // 分布式锁持有时间(秒)
@@ -61,9 +59,12 @@ public class SemaphoreLimitAspect {
                         semaphore.trySetPermits(sl.maxConcurrent());
                         // 避免每次请求都更新过期时间
                         // 防止覆盖掉上次的过期时间, 注意expire方法对不存在的key无效, 先使用trySetPermits()创建信号量再设置过期时间
-                        semaphore.expire(Duration.ofMinutes(SEMAPHORE_EXPIRE_MINUTES));
-                        // 设置和信号量相同的过期时间
-                        initFlag.set(true, Duration.ofMinutes(SEMAPHORE_EXPIRE_MINUTES));
+                        long ttl = sl.ttl();
+                        if(ttl > 0) {
+                            semaphore.expire(Duration.of(ttl, sl.unit()));
+                            // 设置和信号量相同的过期时间
+                            initFlag.setIfAbsent(true, Duration.of(ttl, sl.unit()));
+                        }
                     }
                 }
             } catch (InterruptedException e) {
