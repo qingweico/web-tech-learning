@@ -2,7 +2,7 @@ package cn.qingweico.service;
 
 import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.util.ObjectUtil;
-import cn.qingweico.convert.Convert;
+import cn.qingweico.convert.StringConvert;
 import cn.qingweico.model.Poem;
 import cn.qingweico.network.NetworkUtils;
 import com.itextpdf.text.*;
@@ -41,7 +41,7 @@ public class PdfGenerationService {
             Font titleFont = new Font(bfChinese, 18, Font.BOLD);
             Font authorFont = new Font(bfChinese, 12, Font.NORMAL);
             // 诗词题目设置
-            Paragraph title = new Paragraph(Convert.toString(map.remove("title")), titleFont);
+            Paragraph title = new Paragraph(StringConvert.toString(map.remove("title")), titleFont);
             title.setAlignment(Element.ALIGN_CENTER);
             document.add(title);
             // 诗词作者、朝代设置
@@ -55,7 +55,7 @@ public class PdfGenerationService {
             document.add(Chunk.NEWLINE);
             for (Object content : map.values()) {
                 if (ObjectUtil.isNotEmpty(content)) {
-                    Paragraph paragraph = new Paragraph(Convert.toString(content), contentFont);
+                    Paragraph paragraph = new Paragraph(StringConvert.toString(content), contentFont);
                     paragraph.setAlignment(Element.ALIGN_LEFT);
                     document.add(paragraph);
                     document.add(Chunk.NEWLINE);

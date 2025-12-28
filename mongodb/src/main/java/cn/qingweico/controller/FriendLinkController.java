@@ -1,6 +1,6 @@
 package cn.qingweico.controller;
 
-import cn.qingweico.convert.Convert;
+import cn.qingweico.convert.NumberConvert;
 import cn.qingweico.entity.FriendLink;
 import cn.qingweico.entity.model.PostParams;
 import cn.qingweico.model.ApiResponse;
@@ -65,7 +65,7 @@ public class FriendLinkController {
         if (quantity != null) {
             CountDownLatch latch = new CountDownLatch(quantity);
             int batch = 10;
-            int[] batchArray = Convert.splitInteger(quantity, batch);
+            int[] batchArray = NumberConvert.splitInteger(quantity, batch);
             long start = System.currentTimeMillis();
             for (int i = 0; i < batch; i++) {
                 int frequency = batchArray[i];

@@ -2,7 +2,7 @@ package cn.qingweico.controller;
 
 import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
-import cn.qingweico.convert.Convert;
+import cn.qingweico.convert.StringConvert;
 import cn.qingweico.encrypt.SM2Util;
 import cn.qingweico.model.ApiResponse;
 import cn.qingweico.service.LoginPasswordDecoder;
@@ -38,7 +38,7 @@ public class Sm2DecodeController {
                 return new ApiResponse<>("不支持当前加密模式");
             }
             JSONObject jsonObject = JSONUtil.parseObj(content);
-            content = decoder.decode(Convert.toString(jsonObject.get("content")));
+            content = decoder.decode(StringConvert.toString(jsonObject.get("content")));
             log.info("sm2解密成功, 解密后的数据为 : {}", content);
         }
         return ApiResponse.ok(content);

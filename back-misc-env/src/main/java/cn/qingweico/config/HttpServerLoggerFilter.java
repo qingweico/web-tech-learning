@@ -1,7 +1,7 @@
 package cn.qingweico.config;
 
 import cn.hutool.core.text.AntPathMatcher;
-import cn.qingweico.convert.Convert;
+import cn.qingweico.convert.StringConvert;
 import jodd.util.StringUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.jetbrains.annotations.NotNull;
@@ -97,7 +97,7 @@ public class HttpServerLoggerFilter extends OncePerRequestFilter implements Orde
                                 byte[] data = requestWrapper.getContentAsByteArray();
                                 if (data.length > 0) {
                                     Charset charset = media.getCharset() == null ? defaultCharset : media.getCharset();
-                                    String characterEncoding = Convert.toString(request.getCharacterEncoding(), "UTF-8");
+                                    String characterEncoding = StringConvert.toString(request.getCharacterEncoding(), "UTF-8");
                                     if (urlDecode && MediaType.APPLICATION_FORM_URLENCODED.isCompatibleWith(media)) {
 
                                         if (maxLength > data.length) {

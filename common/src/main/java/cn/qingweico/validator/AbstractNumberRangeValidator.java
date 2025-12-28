@@ -1,7 +1,7 @@
 package cn.qingweico.validator;
 
 import cn.hutool.core.annotation.AnnotationUtil;
-import cn.qingweico.convert.Convert;
+import cn.qingweico.convert.NumberConvert;
 import cn.qingweico.validate.IFieldValidator;
 import cn.qingweico.validate.ValidatorHelper;
 import org.apache.commons.lang3.StringUtils;
@@ -32,8 +32,8 @@ public abstract class AbstractNumberRangeValidator<T extends Annotation> impleme
                     ValidatorHelper.getFieldName(field), annotation.getClass().getSimpleName());
             throw new RuntimeException(errorMsg);
         }
-        BigDecimal v = Convert.toBigDecimal(value);
-        BigDecimal limitValue = Convert.toBigDecimal(AnnotationUtils.getValue(anno, "value"));
+        BigDecimal v = NumberConvert.toBigDecimal(value);
+        BigDecimal limitValue = NumberConvert.toBigDecimal(AnnotationUtils.getValue(anno, "value"));
         String error = AnnotationUtil.getAnnotationValue(field, anno.annotationType(), "error");
         if (compare(v, limitValue) > 0) {
             throw createValidationException(field, limitValue, error);

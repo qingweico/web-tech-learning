@@ -2,7 +2,7 @@ package cn.qingweico.controller;
 
 import cn.qingweico.constants.FileSuffixConstants;
 import cn.qingweico.constants.Symbol;
-import cn.qingweico.convert.Convert;
+import cn.qingweico.convert.StringConvert;
 import cn.qingweico.service.DocumentService;
 import cn.qingweico.service.PdfGenerationService;
 import lombok.extern.slf4j.Slf4j;
@@ -38,8 +38,8 @@ public class WordController {
     public ResponseEntity<ByteArrayResource> downloadWord() throws IOException {
         try {
             Map<String, Object> dataMap = pdfGenerationService.buildSend();
-            String wordFilename = Convert.toString(dataMap.get("title")) + Symbol.DASHED + Convert.toString(dataMap.get("author")) +
-                    Symbol.DASHED + Convert.toString(dataMap.get("dynasty")) + FileSuffixConstants.WORD;
+            String wordFilename = StringConvert.toString(dataMap.get("title")) + Symbol.DASHED + StringConvert.toString(dataMap.get("author")) +
+                    Symbol.DASHED + StringConvert.toString(dataMap.get("dynasty")) + FileSuffixConstants.WORD;
             String filenameEncoded = URLEncoder.encode(wordFilename, StandardCharsets.UTF_8);
             byte[] wordBytes = documentService.generateDocument(dataMap);
             log.info("生成word文件 {}...", wordFilename);

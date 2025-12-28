@@ -2,7 +2,7 @@ package cn.qingweico.controller;
 
 import cn.qingweico.constants.FileSuffixConstants;
 import cn.qingweico.constants.Symbol;
-import cn.qingweico.convert.Convert;
+import cn.qingweico.convert.StringConvert;
 import cn.qingweico.service.PdfGenerationService;
 import cn.qingweico.supplier.RandomDataGenerator;
 import lombok.extern.slf4j.Slf4j;
@@ -37,8 +37,8 @@ public class PdfController {
     public ResponseEntity<ByteArrayResource> downloadPdf() throws IOException {
         try {
             Map<String, Object> pdfMap = pdfGenerationService.buildSend();
-            String pdgFilename = Convert.toString(pdfMap.get("title")) + Symbol.DASHED + Convert.toString(pdfMap.get("author")) +
-                    Symbol.DASHED + Convert.toString(pdfMap.get("dynasty")) + FileSuffixConstants.PDF;
+            String pdgFilename = StringConvert.toString(pdfMap.get("title")) + Symbol.DASHED + StringConvert.toString(pdfMap.get("author")) +
+                    Symbol.DASHED + StringConvert.toString(pdfMap.get("dynasty")) + FileSuffixConstants.PDF;
             byte[] pdfBytes = pdfGenerationService.generatePdf(pdfMap);
             HttpHeaders headers = new HttpHeaders();
             log.info("生成pdf文件 {}...", pdgFilename);

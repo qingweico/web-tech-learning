@@ -1,6 +1,6 @@
 package cn.qingweico.validator;
 
-import cn.qingweico.convert.Convert;
+import cn.qingweico.convert.NumberConvert;
 import cn.qingweico.validate.IFieldValidator;
 import cn.qingweico.validate.ValidatorHelper;
 import cn.qingweico.validate.anno.Range;
@@ -17,7 +17,7 @@ public class RangeFieldValidator implements IFieldValidator<Range, Object> {
     @Override
     public void validate(Field field, Object value, Object entity, Range anno) {
         if (field.getType().isPrimitive() || field.getType().equals(String.class) || Number.class.isAssignableFrom(field.getType())) {
-            BigDecimal v = Convert.toBigDecimal(value);
+            BigDecimal v = NumberConvert.toBigDecimal(value);
             if (v.compareTo(BigDecimal.valueOf(anno.max())) > 0 || v.compareTo(BigDecimal.valueOf(anno.min())) < 0) {
                 String msg = anno.error();
                 String name = ValidatorHelper.getFieldName(field);

@@ -1,7 +1,7 @@
 package cn.qingweico.validator;
 
 import cn.hutool.core.util.ObjectUtil;
-import cn.qingweico.convert.Convert;
+import cn.qingweico.convert.StringConvert;
 import cn.qingweico.validate.IFieldValidator;
 import cn.qingweico.validate.ValidatorHelper;
 import cn.qingweico.validate.anno.Length;
@@ -23,7 +23,7 @@ public class LengthFieldValidator implements IFieldValidator<Length, Object> {
         if (ObjectUtil.isEmpty(value)) {
             return;
         }
-        int strlen = Convert.toString(value).length();
+        int strlen = StringConvert.toString(value).length();
         String name = ValidatorHelper.getFieldName(field);
         validateLength(strlen, anno.min(), anno.max(), name, anno.error());
     }
