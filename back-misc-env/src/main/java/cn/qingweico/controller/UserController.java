@@ -58,9 +58,9 @@ public class UserController {
     }
 
     @RequestMapping(value = "sl", method = RequestMethod.GET)
-    @SemaphoreLimit(name = "user")
+    @SemaphoreLimit(name = "user", maxConcurrent = 1, ttl = 10)
     public ApiResponse<?> semaphoreLimit() {
-        UnsafeSupport.shortWait(3000);
+        UnsafeSupport.shortWait(300000);
         return ApiResponse.ok();
     }
 
