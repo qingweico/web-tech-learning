@@ -1,0 +1,16 @@
+spring:
+  profiles:
+    active: dev
+  jpa:
+    properties:
+      hibernate:
+        format_sql: true
+        jdbc:
+          lob:
+            non_contextual_creation: true
+logging:
+  level:
+    root: INFO
+    cn.qingweico.jpa: DEBUG
+
+

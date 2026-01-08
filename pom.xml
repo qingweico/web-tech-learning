@@ -28,6 +28,7 @@
 		<module>web-server-container</module>
 		<module>web-socket</module>
 		<module>webflux</module>
-        <module>kafka</module>
+		<module>kafka</module>
+		<module>jpa</module>
     </modules>
 </project>
