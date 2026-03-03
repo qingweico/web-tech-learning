@@ -15,3 +15,6 @@ spring:
       database: rw_test
   jackson:
     date-format: yyyy-MM-dd HH:mm:ss
+app:
+  jdbc:
+    enabled: false
