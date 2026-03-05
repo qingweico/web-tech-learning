@@ -46,6 +46,3 @@ encrypt:
   sm2:
     private-key: 2a8827a3471131059f83980ba1eca1e7f20a02af717d9523ea9c58f69ae3565b
     public-key: 042d36dfdf646d71ff4380a87c653448905f02a5d6642b29c87a3fa5d63265d56c6152da1b8aa486a1b220d4138caf83ba4b69bd7da96da16b144386ff96ab57ca
-app:
-  jdbc:
-    enabled: true

@@ -1,4 +1,4 @@
-package cn.qingweico.afr.servoce;
+package cn.qingweico.afr.service;
 
 import cn.qingweico.afr.entity.User;
 import cn.qingweico.afr.model.PagedParams;

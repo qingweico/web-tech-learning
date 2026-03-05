@@ -4,7 +4,7 @@ import cn.hutool.core.collection.CollUtil;
 import cn.qingweico.afr.entity.User;
 import cn.qingweico.afr.model.PagedParams;
 import cn.qingweico.afr.model.SaveUser;
-import cn.qingweico.afr.servoce.impl.UserServiceImpl;
+import cn.qingweico.afr.service.impl.UserServiceImpl;
 import cn.qingweico.model.ApiResponse;
 import cn.qingweico.model.PagedResult;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;

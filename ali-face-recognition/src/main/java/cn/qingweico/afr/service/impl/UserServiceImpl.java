@@ -1,10 +1,10 @@
-package cn.qingweico.afr.servoce.impl;
+package cn.qingweico.afr.service.impl;
 
 import cn.hutool.core.collection.CollUtil;
 import cn.qingweico.afr.entity.User;
 import cn.qingweico.afr.mapper.UserMapper;
 import cn.qingweico.afr.model.PagedParams;
-import cn.qingweico.afr.servoce.UserService;
+import cn.qingweico.afr.service.UserService;
 import cn.qingweico.constants.Symbol;
 import cn.qingweico.model.PagedResult;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;

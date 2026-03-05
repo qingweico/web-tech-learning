@@ -3,7 +3,7 @@ package cn.qingweico.afr.controller;
 import cn.qingweico.afr.entity.User;
 import cn.qingweico.afr.enums.FaceVerifyType;
 import cn.qingweico.afr.model.GridFs;
-import cn.qingweico.afr.servoce.impl.UserServiceImpl;
+import cn.qingweico.afr.service.impl.UserServiceImpl;
 import cn.qingweico.afr.utils.CompareFace;
 import cn.qingweico.io.FileUtils;
 import cn.qingweico.model.ApiResponse;
@@ -22,7 +22,6 @@ import java.io.File;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.Base64;
 
 /**

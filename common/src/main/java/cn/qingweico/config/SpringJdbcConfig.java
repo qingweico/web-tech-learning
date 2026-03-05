@@ -13,7 +13,7 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
  * @date 2025/12/11
  */
 @Configuration
-@ConditionalOnProperty(prefix = "app.jdbc", name = "enabled", havingValue = "true")
+@ConditionalOnProperty(prefix = "app.jdbc", name = "enabled", havingValue = "true", matchIfMissing = true)
 public class SpringJdbcConfig {
 
     private final JdbcTemplate jdbcTemplate;
