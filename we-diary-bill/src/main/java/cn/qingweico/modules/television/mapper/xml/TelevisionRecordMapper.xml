@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.qingweico.modules.television.mapper.TelevisionRecordMapper">
+
+    <!-- 查询评分前十的影视 -->
+    <select id="selectTop10ByRating" resultType="java.util.Map">
+        SELECT
+            id,
+            name,
+            rating,
+            watch_status,
+            category_id
+        FROM television_record
+        WHERE rating IS NOT NULL
+        <if test="userId != null and userId != ''">
+            AND created_by = #{userId}
+        </if>
+        ORDER BY rating DESC
+        LIMIT 10
+    </select>
+
+    <!-- 统计观看状态数量 -->
+    <select id="selectWatchStatusStatistics" resultType="java.util.Map">
+        SELECT
+            watch_status AS status,
+            COUNT(*) AS count
+        FROM television_record
+        WHERE 1=1
+        <if test="userId != null and userId != ''">
+            AND created_by = #{userId}
+        </if>
+        GROUP BY watch_status
+        ORDER BY watch_status
+    </select>
+
+    <!-- 查询观看时长前十的影视（结束时间减去开始时间，单位：天） -->
+    <select id="selectTop10ByWatchDuration" resultType="java.util.Map">
+        SELECT
+            id,
+            name,
+            start_time,
+            end_time,
+            CASE
+                WHEN end_time IS NOT NULL AND start_time IS NOT NULL
+                THEN DATEDIFF(end_time, start_time)
+                ELSE 0
+            END AS duration_days
+        FROM television_record
+        WHERE start_time IS NOT NULL
+        AND end_time IS NOT NULL
+        <if test="userId != null and userId != ''">
+            AND created_by = #{userId}
+        </if>
+        ORDER BY duration_days DESC
+        LIMIT 10
+    </select>
+
+    <!-- 统计观影分类前十的影视数量 -->
+    <select id="selectTop10CategoryStatistics" resultType="java.util.Map">
+        SELECT
+            tc.id AS category_id,
+            tc.name AS category_name,
+            COUNT(tr.id) AS count
+        FROM television_category tc
+        LEFT JOIN television_record tr ON tc.id = tr.category_id
+        WHERE 1=1
+        <if test="userId != null and userId != ''">
+            AND tr.created_by = #{userId}
+        </if>
+        GROUP BY tc.id, tc.name
+        HAVING count > 0
+        ORDER BY count DESC
+        LIMIT 10
+    </select>
+
+    <!-- 按年度统计已看完、正在看的影视数量 -->
+    <select id="selectStatisticsByYear" resultType="java.util.Map">
+        SELECT
+            YEAR(created) AS `year`,
+            SUM(CASE WHEN watch_status = 2 THEN 1 ELSE 0 END) AS finished_count,
+            SUM(CASE WHEN watch_status = 1 THEN 1 ELSE 0 END) AS watching_count,
+            COUNT(*) AS total_count
+        FROM television_record
+        WHERE 1=1
+        <if test="userId != null and userId != ''">
+            AND created_by = #{userId}
+        </if>
+        <if test="year != null">
+            AND YEAR(created) = #{year}
+        </if>
+        GROUP BY YEAR(created)
+        ORDER BY `year` DESC
+    </select>
+
+    <!-- 按季度统计已看完、正在看的影视数量 -->
+    <select id="selectStatisticsByQuarter" resultType="java.util.Map">
+        SELECT
+            YEAR(created) AS `year`,
+            QUARTER(created) AS `quarter`,
+            SUM(CASE WHEN watch_status = 2 THEN 1 ELSE 0 END) AS finished_count,
+            SUM(CASE WHEN watch_status = 1 THEN 1 ELSE 0 END) AS watching_count,
+            COUNT(*) AS total_count
+        FROM television_record
+        WHERE 1=1
+        <if test="userId != null and userId != ''">
+            AND created_by = #{userId}
+        </if>
+        <if test="year != null">
+            AND YEAR(created) = #{year}
+        </if>
+        <if test="quarter != null">
+            AND QUARTER(created) = #{quarter}
+        </if>
+        GROUP BY YEAR(created), QUARTER(created)
+        ORDER BY `year` DESC, `quarter` DESC
+    </select>
+
+    <!-- 按月统计已看完、正在看的影视数量 -->
+    <select id="selectStatisticsByMonth" resultType="java.util.Map">
+        SELECT
+            YEAR(created) AS `year`,
+            MONTH(created) AS `month`,
+            CONCAT(YEAR(created), '-', LPAD(MONTH(created), 2, '0')) AS year_month,
+            SUM(CASE WHEN watch_status = 2 THEN 1 ELSE 0 END) AS finished_count,
+            SUM(CASE WHEN watch_status = 1 THEN 1 ELSE 0 END) AS watching_count,
+            COUNT(*) AS total_count
+        FROM television_record
+        WHERE 1=1
+        <if test="userId != null and userId != ''">
+            AND created_by = #{userId}
+        </if>
+        <if test="year != null">
+            AND YEAR(created) = #{year}
+        </if>
+        <if test="month != null">
+            AND MONTH(created) = #{month}
+        </if>
+        GROUP BY YEAR(created), MONTH(created)
+        ORDER BY `year` DESC, `month` DESC
+    </select>
+
+    <!-- 按周统计已看完、正在看的影视数量 -->
+    <select id="selectStatisticsByWeek" resultType="java.util.Map">
+        SELECT
+            YEAR(created) AS `year`,
+            WEEK(created, 1) AS `week`,
+            CONCAT(YEAR(created), '-', LPAD(WEEK(created, 1), 2, '0')) AS year_week,
+            SUM(CASE WHEN watch_status = 2 THEN 1 ELSE 0 END) AS finished_count,
+            SUM(CASE WHEN watch_status = 1 THEN 1 ELSE 0 END) AS watching_count,
+            COUNT(*) AS total_count
+        FROM television_record
+        WHERE 1=1
+        <if test="userId != null and userId != ''">
+            AND created_by = #{userId}
+        </if>
+        <if test="year != null">
+            AND YEAR(created) = #{year}
+        </if>
+        <if test="week != null">
+            AND WEEK(created, 1) = #{week}
+        </if>
+        GROUP BY YEAR(created), WEEK(created, 1)
+        ORDER BY `year` DESC, `week` DESC
+    </select>
+
+</mapper>
+

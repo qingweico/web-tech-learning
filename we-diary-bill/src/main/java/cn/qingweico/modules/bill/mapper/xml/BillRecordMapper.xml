@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.qingweico.modules.bill.mapper.BillRecordMapper">
+
+    <!-- 统计近N天的收入和支出 -->
+    <select id="selectStatisticsByDays" resultType="java.util.Map">
+        SELECT
+            DATE_FORMAT(bill_time, '%Y-%m-%d') AS date,
+            SUM(CASE WHEN bill_type = 1 THEN amount ELSE 0 END) AS income,
+            SUM(CASE WHEN bill_type = 2 THEN amount ELSE 0 END) AS expense
+        FROM bill_record
+        WHERE bill_time >= DATE_SUB(CURDATE(), INTERVAL #{days} DAY)
+        <if test="userId != null and userId != ''">
+            AND user_id = #{userId}
+        </if>
+        GROUP BY DATE_FORMAT(bill_time, '%Y-%m-%d')
+        ORDER BY date ASC
+    </select>
+
+    <!-- 按分类统计收入和支出 -->
+    <select id="selectStatisticsByCategory" resultType="java.util.Map">
+        SELECT
+            bc.id AS categoryId,
+            bc.category_name AS categoryName,
+            bc.icon AS icon,
+            SUM(CASE WHEN br.bill_type = 1 THEN br.amount ELSE 0 END) AS income,
+            SUM(CASE WHEN br.bill_type = 2 THEN br.amount ELSE 0 END) AS expense,
+            SUM(CASE WHEN br.bill_type = 1 THEN br.amount ELSE -br.amount END) AS total
+        FROM bill_category bc
+        LEFT JOIN bill_record br ON bc.id = br.category_id
+        WHERE 1=1
+        <if test="userId != null and userId != ''">
+            AND br.user_id = #{userId}
+        </if>
+        <if test="billType != null">
+            AND br.bill_type = #{billType}
+        </if>
+        <if test="startDate != null">
+            AND br.bill_time >= #{startDate}
+        </if>
+        <if test="endDate != null">
+            AND br.bill_time &lt;= #{endDate}
+        </if>
+        GROUP BY bc.id, bc.category_name, bc.icon
+        HAVING total != 0
+        ORDER BY ABS(total) DESC
+    </select>
+
+    <!-- 统计今日收入 -->
+    <select id="selectTodayIncome" resultType="java.math.BigDecimal">
+        SELECT IFNULL(SUM(amount), 0)
+        FROM bill_record
+        WHERE bill_type = 1
+        AND DATE(bill_time) = CURDATE()
+        <if test="userId != null and userId != ''">
+            AND user_id = #{userId}
+        </if>
+    </select>
+
+    <!-- 统计今日支出 -->
+    <select id="selectTodayExpense" resultType="java.math.BigDecimal">
+        SELECT IFNULL(SUM(amount), 0)
+        FROM bill_record
+        WHERE bill_type = 2
+        AND DATE(bill_time) = CURDATE()
+        <if test="userId != null and userId != ''">
+            AND user_id = #{userId}
+        </if>
+    </select>
+
+    <!-- 统计总体收入 -->
+    <select id="selectTotalIncome" resultType="java.math.BigDecimal">
+        SELECT IFNULL(SUM(amount), 0)
+        FROM bill_record
+        WHERE bill_type = 1
+        <if test="userId != null and userId != ''">
+            AND user_id = #{userId}
+        </if>
+    </select>
+
+    <!-- 统计总体支出 -->
+    <select id="selectTotalExpense" resultType="java.math.BigDecimal">
+        SELECT IFNULL(SUM(amount), 0)
+        FROM bill_record
+        WHERE bill_type = 2
+        <if test="userId != null and userId != ''">
+            AND user_id = #{userId}
+        </if>
+    </select>
+
+    <!-- 近15天收入分析（按日期、分类、支付方式） -->
+    <select id="selectIncomeAnalysis" resultType="java.util.Map">
+        SELECT
+            DATE_FORMAT(br.bill_time, '%Y-%m-%d') AS date,
+            bc.category_name AS categoryName,
+            br.payment AS payment,
+            SUM(br.amount) AS amount
+        FROM bill_record br
+        LEFT JOIN bill_category bc ON br.category_id = bc.id
+        WHERE br.bill_type = 1
+        AND br.bill_time >= DATE_SUB(CURDATE(), INTERVAL 15 DAY)
+        <if test="userId != null and userId != ''">
+            AND br.user_id = #{userId}
+        </if>
+        GROUP BY DATE_FORMAT(br.bill_time, '%Y-%m-%d'), bc.category_name, br.payment
+        ORDER BY date ASC, amount DESC
+    </select>
+
+    <!-- 近15天支出分析（按日期、分类、支付方式） -->
+    <select id="selectExpenseAnalysis" resultType="java.util.Map">
+        SELECT
+            DATE_FORMAT(br.bill_time, '%Y-%m-%d') AS date,
+            bc.category_name AS categoryName,
+            br.payment AS payment,
+            SUM(br.amount) AS amount
+        FROM bill_record br
+        LEFT JOIN bill_category bc ON br.category_id = bc.id
+        WHERE br.bill_type = 2
+        AND br.bill_time >= DATE_SUB(CURDATE(), INTERVAL 15 DAY)
+        <if test="userId != null and userId != ''">
+            AND br.user_id = #{userId}
+        </if>
+        GROUP BY DATE_FORMAT(br.bill_time, '%Y-%m-%d'), bc.category_name, br.payment
+        ORDER BY date ASC, amount DESC
+    </select>
+
+    <!-- 查询最近的收入记录 -->
+    <select id="selectRecentIncomeRecords" resultType="cn.qingweico.modules.bill.entity.BillRecord">
+        SELECT br.*
+        FROM bill_record br
+        WHERE br.bill_type = 1
+        <if test="userId != null and userId != ''">
+            AND br.user_id = #{userId}
+        </if>
+        ORDER BY br.bill_time DESC, br.created DESC
+        LIMIT #{limit}
+    </select>
+
+    <!-- 查询最近的支出记录 -->
+    <select id="selectRecentExpenseRecords" resultType="cn.qingweico.modules.bill.entity.BillRecord">
+        SELECT br.*
+        FROM bill_record br
+        WHERE br.bill_type = 2
+        <if test="userId != null and userId != ''">
+            AND br.user_id = #{userId}
+        </if>
+        ORDER BY br.bill_time DESC, br.created DESC
+        LIMIT #{limit}
+    </select>
+
+    <!-- 按支付方式统计收入和支出 -->
+    <select id="selectStatisticsByPayment" resultType="java.util.Map">
+        SELECT
+            br.payment AS payment,
+            SUM(CASE WHEN br.bill_type = 1 THEN br.amount ELSE 0 END) AS income,
+            SUM(CASE WHEN br.bill_type = 2 THEN br.amount ELSE 0 END) AS expense,
+            SUM(CASE WHEN br.bill_type = 1 THEN br.amount ELSE -br.amount END) AS total
+        FROM bill_record br
+        WHERE 1=1
+        <if test="userId != null and userId != ''">
+            AND br.user_id = #{userId}
+        </if>
+        <if test="billType != null">
+            AND br.bill_type = #{billType}
+        </if>
+        <if test="startDate != null">
+            AND br.bill_time >= #{startDate}
+        </if>
+        <if test="endDate != null">
+            AND br.bill_time &lt;= #{endDate}
+        </if>
+        AND br.payment IS NOT NULL AND br.payment != ''
+        GROUP BY br.payment
+        HAVING total != 0
+        ORDER BY ABS(total) DESC
+    </select>
+
+</mapper>
+
+

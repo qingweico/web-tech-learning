@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.qingweico.modules.system.mapper.SysUserMapper">
+
+	<!-- 根据用户名查询 -->
+	<select id="getUserByName" resultType="cn.qingweico.modules.system.entity.SysUser">
+		select * from  sys_user  where username = #{username} and del_flag = '0'
+	</select>
+
+	<!-- 根据部门Id查询 -->
+	<select id="getUserByDepId" resultType="cn.qingweico.modules.system.entity.SysUser">
+		select * from sys_user where del_flag = '0' and id in (select user_id from sys_user_depart where dep_id=#{departId})
+		<if test="username!=null and username!=''">
+			and username = #{username}
+		</if>
+		order by created asc
+	</select>
+
+	<!-- 根据角色Id查询 -->
+	<select id="getUserByRoleId" resultType="cn.qingweico.modules.system.entity.SysUser">
+		select * from sys_user where del_flag = '0' and id in (select user_id from sys_user_role where role_id=#{roleId})
+		<if test="username!=null and username!=''">
+			and username = #{username}
+		</if>
+	</select>
+
+	<!--  修改用户部门code -->
+	<update id="updateUserDepart">
+		UPDATE sys_user SET org_code = #{orgCode} where username = #{username}
+	</update>
+
+	<!-- 根据手机号查询 -->
+	<select id="getUserByPhone"  resultType="cn.qingweico.modules.system.entity.SysUser">
+		select * from  sys_user  where phone = #{phone} and del_flag = '0'
+	</select>
+
+	<!-- 根据邮箱查询用户信息 -->
+	<select id="getUserByEmail" resultType="cn.qingweico.modules.system.entity.SysUser">
+		select *
+		from sys_user
+		where email = #{email}
+		  and del_flag = '0'
+	</select>
+
+	<select id="getGangTing" resultType="cn.qingweico.modules.system.entity.SysUser">
+		SELECT username, realname
+		FROM sys_user
+		where id in (SELECT user_id
+					 FROM sys_user_role
+					 where role_id in (SELECT id FROM sys_role WHERE role_name = '岗亭' or role_name = '管理员'))
+	</select>
+
+	<!--获取交接班操作员列表-->
+	<select id="getHandOverUserList" resultType="cn.qingweico.modules.system.entity.SysUser">
+		SELECT username, realname
+		FROM sys_user
+		where del_flag = '0'
+		  and id in (SELECT user_id
+					 FROM sys_user_role
+					 where role_id in (SELECT id FROM sys_role WHERE role_name = '岗亭' or role_name = '管理员'))
+		  and username not in
+			  (select operation_name from park_work_station where operation_name is not null and operation_name
+			!= ''
+		  and status = 1)
+	</select>
+</mapper>

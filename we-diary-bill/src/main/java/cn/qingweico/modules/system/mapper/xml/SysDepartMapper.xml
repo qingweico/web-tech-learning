@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.qingweico.modules.system.mapper.SysDepartMapper">
+
+    <select id="queryUserDeparts" parameterType="String" resultType="cn.qingweico.modules.system.entity.SysDepart">
+		select a.* from sys_depart a
+			join sys_user_depart b on a.id = b.dep_id
+			where b.user_id = #{userId}  ORDER BY org_type desc
+	</select>
+    <select id="queryUserDepartsFourHierarchy" resultType="map">
+   	 SELECT
+			t1.depart_name AS lev1,
+			t1.id lev1Id,
+			t2.depart_name AS lev2,
+			t2.id lev2Id,
+			t3.depart_name AS lev3,
+			t3.id lev3Id,
+			t4.depart_name AS lev4,
+			t4.id lev4Id,
+			t5.depart_name AS lev5,
+			t5.id lev5Id,
+			c.org_type orgType,
+			c.id orgId
+		FROM
+			sys_depart AS t1
+		LEFT JOIN sys_depart AS t2 ON t2.parent_id = t1.id
+		LEFT JOIN sys_depart AS t3 ON t3.parent_id = t2.id
+		LEFT JOIN sys_depart AS t4 ON t4.parent_id = t3.id
+		LEFT JOIN sys_depart AS t5 ON t5.parent_id = t4.id,
+		 sys_user_depart AS b,
+		 sys_depart AS c
+		WHERE
+        b.user_id = #{userId}
+        AND b.dep_id = c.id
+        AND
+        CASE
+                c.org_type
+            WHEN '1' THEN
+                t1.id = b.dep_id
+            WHEN '2' THEN
+                t2.id = b.dep_id
+            WHEN '3' THEN
+                t3.id = b.dep_id
+            WHEN '4' THEN
+                t4.id = b.dep_id
+            WHEN '5' THEN
+                t5.id = b.dep_id
+            ELSE 0 = 1
+        END
+        limit 1
+	</select>
+    <select id="queryDepartsByParentId" resultType="java.lang.String">
+		select id from sys_depart where parent_id=#{parentId}
+	</select>
+
+</mapper>

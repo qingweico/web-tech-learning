@@ -30,5 +30,6 @@
 		<module>webflux</module>
 		<module>kafka</module>
 		<module>jpa</module>
+        <module>we-diary-bill</module>
     </modules>
 </project>
